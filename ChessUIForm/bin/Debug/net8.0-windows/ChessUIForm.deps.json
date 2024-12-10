@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "ChessUIForm/1.0.0": {
+        "dependencies": {
+          "ChessLibrary": "1.0.0"
+        },
         "runtime": {
           "ChessUIForm.dll": {}
+        }
+      },
+      "ChessLibrary/1.0.0": {
+        "runtime": {
+          "ChessLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "ChessUIForm/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ChessLibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

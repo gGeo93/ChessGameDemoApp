@@ -1028,6 +1028,7 @@
             Controls.Add(f1);
             Controls.Add(g1);
             Controls.Add(h1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ChessboardForm";
             Text = "ChessboardForm";
             ResumeLayout(false);
