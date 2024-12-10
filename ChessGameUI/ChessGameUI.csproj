@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Pieces\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>
