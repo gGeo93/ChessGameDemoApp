@@ -121,6 +121,7 @@
             h1.Size = new Size(42, 38);
             h1.TabIndex = 0;
             h1.UseVisualStyleBackColor = false;
+            h1.Click += square_pressed;
             // 
             // g1
             // 
@@ -132,6 +133,7 @@
             g1.Size = new Size(42, 38);
             g1.TabIndex = 1;
             g1.UseVisualStyleBackColor = false;
+            g1.Click += square_pressed;
             // 
             // f1
             // 
@@ -143,6 +145,7 @@
             f1.Size = new Size(42, 38);
             f1.TabIndex = 2;
             f1.UseVisualStyleBackColor = false;
+            f1.Click += square_pressed;
             // 
             // e1
             // 
@@ -154,6 +157,7 @@
             e1.Size = new Size(42, 38);
             e1.TabIndex = 3;
             e1.UseVisualStyleBackColor = false;
+            e1.Click += square_pressed;
             // 
             // d1
             // 
@@ -165,6 +169,7 @@
             d1.Size = new Size(42, 38);
             d1.TabIndex = 4;
             d1.UseVisualStyleBackColor = false;
+            d1.Click += square_pressed;
             // 
             // c1
             // 
@@ -176,6 +181,7 @@
             c1.Size = new Size(42, 38);
             c1.TabIndex = 5;
             c1.UseVisualStyleBackColor = false;
+            c1.Click += square_pressed;
             // 
             // b1
             // 
@@ -187,6 +193,7 @@
             b1.Size = new Size(42, 38);
             b1.TabIndex = 6;
             b1.UseVisualStyleBackColor = false;
+            b1.Click += square_pressed;
             // 
             // a1
             // 
@@ -198,6 +205,7 @@
             a1.Size = new Size(42, 38);
             a1.TabIndex = 7;
             a1.UseVisualStyleBackColor = false;
+            a1.Click += square_pressed;
             // 
             // a2
             // 
@@ -209,6 +217,7 @@
             a2.Size = new Size(42, 38);
             a2.TabIndex = 15;
             a2.UseVisualStyleBackColor = false;
+            a2.Click += square_pressed;
             // 
             // b2
             // 
@@ -220,6 +229,7 @@
             b2.Size = new Size(42, 38);
             b2.TabIndex = 14;
             b2.UseVisualStyleBackColor = false;
+            b2.Click += square_pressed;
             // 
             // c2
             // 
@@ -231,6 +241,7 @@
             c2.Size = new Size(42, 38);
             c2.TabIndex = 13;
             c2.UseVisualStyleBackColor = false;
+            c2.Click += square_pressed;
             // 
             // d2
             // 
@@ -242,6 +253,7 @@
             d2.Size = new Size(42, 38);
             d2.TabIndex = 12;
             d2.UseVisualStyleBackColor = false;
+            d2.Click += square_pressed;
             // 
             // e2
             // 
@@ -253,6 +265,7 @@
             e2.Size = new Size(42, 38);
             e2.TabIndex = 11;
             e2.UseVisualStyleBackColor = false;
+            e2.Click += square_pressed;
             // 
             // f2
             // 
@@ -264,6 +277,7 @@
             f2.Size = new Size(42, 38);
             f2.TabIndex = 10;
             f2.UseVisualStyleBackColor = false;
+            f2.Click += square_pressed;
             // 
             // g2
             // 
@@ -275,6 +289,7 @@
             g2.Size = new Size(42, 38);
             g2.TabIndex = 9;
             g2.UseVisualStyleBackColor = false;
+            g2.Click += square_pressed;
             // 
             // h2
             // 
@@ -286,6 +301,7 @@
             h2.Size = new Size(42, 38);
             h2.TabIndex = 8;
             h2.UseVisualStyleBackColor = false;
+            h2.Click += square_pressed;
             // 
             // a3
             // 
@@ -296,6 +312,7 @@
             a3.Size = new Size(42, 38);
             a3.TabIndex = 23;
             a3.UseVisualStyleBackColor = false;
+            a3.Click += square_pressed;
             // 
             // b3
             // 
@@ -306,6 +323,7 @@
             b3.Size = new Size(42, 38);
             b3.TabIndex = 22;
             b3.UseVisualStyleBackColor = false;
+            b3.Click += square_pressed;
             // 
             // c3
             // 
@@ -316,6 +334,7 @@
             c3.Size = new Size(42, 38);
             c3.TabIndex = 21;
             c3.UseVisualStyleBackColor = false;
+            c3.Click += square_pressed;
             // 
             // d3
             // 
@@ -326,6 +345,7 @@
             d3.Size = new Size(42, 38);
             d3.TabIndex = 20;
             d3.UseVisualStyleBackColor = false;
+            d3.Click += square_pressed;
             // 
             // e3
             // 
@@ -336,6 +356,7 @@
             e3.Size = new Size(42, 38);
             e3.TabIndex = 19;
             e3.UseVisualStyleBackColor = false;
+            e3.Click += square_pressed;
             // 
             // f3
             // 
@@ -346,6 +367,7 @@
             f3.Size = new Size(42, 38);
             f3.TabIndex = 18;
             f3.UseVisualStyleBackColor = false;
+            f3.Click += square_pressed;
             // 
             // g3
             // 
@@ -356,6 +378,7 @@
             g3.Size = new Size(42, 38);
             g3.TabIndex = 17;
             g3.UseVisualStyleBackColor = false;
+            g3.Click += square_pressed;
             // 
             // h3
             // 
@@ -366,6 +389,7 @@
             h3.Size = new Size(42, 38);
             h3.TabIndex = 16;
             h3.UseVisualStyleBackColor = false;
+            h3.Click += square_pressed;
             // 
             // a4
             // 
@@ -376,6 +400,7 @@
             a4.Size = new Size(42, 38);
             a4.TabIndex = 31;
             a4.UseVisualStyleBackColor = false;
+            a4.Click += square_pressed;
             // 
             // b4
             // 
@@ -386,6 +411,7 @@
             b4.Size = new Size(42, 38);
             b4.TabIndex = 30;
             b4.UseVisualStyleBackColor = false;
+            b4.Click += square_pressed;
             // 
             // c4
             // 
@@ -396,6 +422,7 @@
             c4.Size = new Size(42, 38);
             c4.TabIndex = 29;
             c4.UseVisualStyleBackColor = false;
+            c4.Click += square_pressed;
             // 
             // d4
             // 
@@ -406,6 +433,7 @@
             d4.Size = new Size(42, 38);
             d4.TabIndex = 28;
             d4.UseVisualStyleBackColor = false;
+            d4.Click += square_pressed;
             // 
             // e4
             // 
@@ -416,6 +444,7 @@
             e4.Size = new Size(42, 38);
             e4.TabIndex = 27;
             e4.UseVisualStyleBackColor = false;
+            e4.Click += square_pressed;
             // 
             // f4
             // 
@@ -426,6 +455,7 @@
             f4.Size = new Size(42, 38);
             f4.TabIndex = 26;
             f4.UseVisualStyleBackColor = false;
+            f4.Click += square_pressed;
             // 
             // g4
             // 
@@ -436,6 +466,7 @@
             g4.Size = new Size(42, 38);
             g4.TabIndex = 25;
             g4.UseVisualStyleBackColor = false;
+            g4.Click += square_pressed;
             // 
             // h4
             // 
@@ -446,6 +477,7 @@
             h4.Size = new Size(42, 38);
             h4.TabIndex = 24;
             h4.UseVisualStyleBackColor = false;
+            h4.Click += square_pressed;
             // 
             // a5
             // 
@@ -456,6 +488,7 @@
             a5.Size = new Size(42, 38);
             a5.TabIndex = 39;
             a5.UseVisualStyleBackColor = false;
+            a5.Click += square_pressed;
             // 
             // b5
             // 
@@ -466,6 +499,7 @@
             b5.Size = new Size(42, 38);
             b5.TabIndex = 38;
             b5.UseVisualStyleBackColor = false;
+            b5.Click += square_pressed;
             // 
             // c5
             // 
@@ -476,6 +510,7 @@
             c5.Size = new Size(42, 38);
             c5.TabIndex = 37;
             c5.UseVisualStyleBackColor = false;
+            c5.Click += square_pressed;
             // 
             // d5
             // 
@@ -486,6 +521,7 @@
             d5.Size = new Size(42, 38);
             d5.TabIndex = 36;
             d5.UseVisualStyleBackColor = false;
+            d5.Click += square_pressed;
             // 
             // e5
             // 
@@ -496,6 +532,7 @@
             e5.Size = new Size(42, 38);
             e5.TabIndex = 35;
             e5.UseVisualStyleBackColor = false;
+            e5.Click += square_pressed;
             // 
             // f5
             // 
@@ -506,6 +543,7 @@
             f5.Size = new Size(42, 38);
             f5.TabIndex = 34;
             f5.UseVisualStyleBackColor = false;
+            f5.Click += square_pressed;
             // 
             // g5
             // 
@@ -516,6 +554,7 @@
             g5.Size = new Size(42, 38);
             g5.TabIndex = 33;
             g5.UseVisualStyleBackColor = false;
+            g5.Click += square_pressed;
             // 
             // h5
             // 
@@ -526,6 +565,7 @@
             h5.Size = new Size(42, 38);
             h5.TabIndex = 32;
             h5.UseVisualStyleBackColor = false;
+            h5.Click += square_pressed;
             // 
             // a6
             // 
@@ -536,6 +576,7 @@
             a6.Size = new Size(42, 38);
             a6.TabIndex = 47;
             a6.UseVisualStyleBackColor = false;
+            a6.Click += square_pressed;
             // 
             // b6
             // 
@@ -546,6 +587,7 @@
             b6.Size = new Size(42, 38);
             b6.TabIndex = 46;
             b6.UseVisualStyleBackColor = false;
+            b6.Click += square_pressed;
             // 
             // c6
             // 
@@ -556,6 +598,7 @@
             c6.Size = new Size(42, 38);
             c6.TabIndex = 45;
             c6.UseVisualStyleBackColor = false;
+            c6.Click += square_pressed;
             // 
             // d6
             // 
@@ -566,6 +609,7 @@
             d6.Size = new Size(42, 38);
             d6.TabIndex = 44;
             d6.UseVisualStyleBackColor = false;
+            d6.Click += square_pressed;
             // 
             // e6
             // 
@@ -576,6 +620,7 @@
             e6.Size = new Size(42, 38);
             e6.TabIndex = 43;
             e6.UseVisualStyleBackColor = false;
+            e6.Click += square_pressed;
             // 
             // f6
             // 
@@ -586,6 +631,7 @@
             f6.Size = new Size(42, 38);
             f6.TabIndex = 42;
             f6.UseVisualStyleBackColor = false;
+            f6.Click += square_pressed;
             // 
             // g6
             // 
@@ -596,6 +642,7 @@
             g6.Size = new Size(42, 38);
             g6.TabIndex = 41;
             g6.UseVisualStyleBackColor = false;
+            g6.Click += square_pressed;
             // 
             // h6
             // 
@@ -606,6 +653,7 @@
             h6.Size = new Size(42, 38);
             h6.TabIndex = 40;
             h6.UseVisualStyleBackColor = false;
+            h6.Click += square_pressed;
             // 
             // a7
             // 
@@ -617,6 +665,7 @@
             a7.Size = new Size(42, 38);
             a7.TabIndex = 55;
             a7.UseVisualStyleBackColor = false;
+            a7.Click += square_pressed;
             // 
             // b7
             // 
@@ -628,6 +677,7 @@
             b7.Size = new Size(42, 38);
             b7.TabIndex = 54;
             b7.UseVisualStyleBackColor = false;
+            b7.Click += square_pressed;
             // 
             // c7
             // 
@@ -639,6 +689,7 @@
             c7.Size = new Size(42, 38);
             c7.TabIndex = 53;
             c7.UseVisualStyleBackColor = false;
+            c7.Click += square_pressed;
             // 
             // d7
             // 
@@ -650,6 +701,7 @@
             d7.Size = new Size(42, 38);
             d7.TabIndex = 52;
             d7.UseVisualStyleBackColor = false;
+            d7.Click += square_pressed;
             // 
             // e7
             // 
@@ -661,6 +713,7 @@
             e7.Size = new Size(42, 38);
             e7.TabIndex = 51;
             e7.UseVisualStyleBackColor = false;
+            e7.Click += square_pressed;
             // 
             // f7
             // 
@@ -672,6 +725,7 @@
             f7.Size = new Size(42, 38);
             f7.TabIndex = 50;
             f7.UseVisualStyleBackColor = false;
+            f7.Click += square_pressed;
             // 
             // g7
             // 
@@ -683,6 +737,7 @@
             g7.Size = new Size(42, 38);
             g7.TabIndex = 49;
             g7.UseVisualStyleBackColor = false;
+            g7.Click += square_pressed;
             // 
             // h7
             // 
@@ -694,6 +749,7 @@
             h7.Size = new Size(42, 38);
             h7.TabIndex = 48;
             h7.UseVisualStyleBackColor = false;
+            h7.Click += square_pressed;
             // 
             // a8
             // 
@@ -705,6 +761,7 @@
             a8.Size = new Size(42, 38);
             a8.TabIndex = 63;
             a8.UseVisualStyleBackColor = false;
+            a8.Click += square_pressed;
             // 
             // b8
             // 
@@ -716,6 +773,7 @@
             b8.Size = new Size(42, 38);
             b8.TabIndex = 62;
             b8.UseVisualStyleBackColor = false;
+            b8.Click += square_pressed;
             // 
             // c8
             // 
@@ -727,6 +785,7 @@
             c8.Size = new Size(42, 38);
             c8.TabIndex = 61;
             c8.UseVisualStyleBackColor = false;
+            c8.Click += square_pressed;
             // 
             // d8
             // 
@@ -738,6 +797,7 @@
             d8.Size = new Size(42, 38);
             d8.TabIndex = 60;
             d8.UseVisualStyleBackColor = false;
+            d8.Click += square_pressed;
             // 
             // e8
             // 
@@ -749,6 +809,7 @@
             e8.Size = new Size(42, 38);
             e8.TabIndex = 59;
             e8.UseVisualStyleBackColor = false;
+            e8.Click += square_pressed;
             // 
             // f8
             // 
@@ -760,6 +821,7 @@
             f8.Size = new Size(42, 38);
             f8.TabIndex = 58;
             f8.UseVisualStyleBackColor = false;
+            f8.Click += square_pressed;
             // 
             // g8
             // 
@@ -771,6 +833,7 @@
             g8.Size = new Size(42, 38);
             g8.TabIndex = 57;
             g8.UseVisualStyleBackColor = false;
+            g8.Click += square_pressed;
             // 
             // h8
             // 
@@ -782,6 +845,7 @@
             h8.Size = new Size(42, 38);
             h8.TabIndex = 56;
             h8.UseVisualStyleBackColor = false;
+            h8.Click += square_pressed;
             // 
             // label1
             // 
@@ -947,6 +1011,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlDark;
             ClientSize = new Size(800, 450);
             Controls.Add(label16);
             Controls.Add(label15);

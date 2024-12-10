@@ -2,9 +2,9 @@
 
 namespace ChessLibrary.PieceRelated;
 
-public abstract class Piece
+public class Piece
 {
-    public abstract PieceName Name { get; set; }
-    public PieceColor Color { get; set; }
+    public PieceName Name { get; set; }
+    public PieceInfo Color { get; set; }
     public bool IsStillOnBoard { get; set; }
 }

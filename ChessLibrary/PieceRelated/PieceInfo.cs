@@ -1,6 +1,6 @@
 ﻿namespace ChessLibrary.PieceRelated;
 
-public enum PieceColor
+public enum PieceInfo
 {
     WHITE, BLACK
 }
@@ -10,5 +10,5 @@ public enum SquareColor
 }
 public enum PieceName
 {
-    PAWN,KNIGHT,BISHOP,ROOK,QUEEN,KING
+    PAWN,KNIGHT,BISHOP,ROOK,QUEEN,KING,NONE
 }

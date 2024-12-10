@@ -4,5 +4,5 @@ namespace ChessLibrary.PieceRelated;
 
 public interface IMove
 {
-    void Move(Square to);
+    void Movement(Square to);
 }

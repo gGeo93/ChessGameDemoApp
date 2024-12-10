@@ -9,3 +9,4 @@ C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessL
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\refint\ChessLibrary.dll
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.pdb
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ref\ChessLibrary.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.sourcelink.json

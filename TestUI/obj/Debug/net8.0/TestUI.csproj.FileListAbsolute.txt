@@ -16,3 +16,4 @@ C:\Users\USER\source\repos\ChessGameDemoApp\TestUI\obj\Debug\net8.0\refint\TestU
 C:\Users\USER\source\repos\ChessGameDemoApp\TestUI\obj\Debug\net8.0\TestUI.pdb
 C:\Users\USER\source\repos\ChessGameDemoApp\TestUI\obj\Debug\net8.0\TestUI.genruntimeconfig.cache
 C:\Users\USER\source\repos\ChessGameDemoApp\TestUI\obj\Debug\net8.0\ref\TestUI.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\TestUI\obj\Debug\net8.0\TestUI.sourcelink.json
