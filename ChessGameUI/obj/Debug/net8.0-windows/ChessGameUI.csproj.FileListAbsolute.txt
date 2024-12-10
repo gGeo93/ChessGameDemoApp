@@ -1,0 +1,16 @@
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\bin\Debug\net8.0-windows\ChessGameUI.exe
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\bin\Debug\net8.0-windows\ChessGameUI.deps.json
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\bin\Debug\net8.0-windows\ChessGameUI.runtimeconfig.json
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\bin\Debug\net8.0-windows\ChessGameUI.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\bin\Debug\net8.0-windows\ChessGameUI.pdb
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.ChessUIForm.resources
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.AssemblyInfo.cs
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\refint\ChessGameUI.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.pdb
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ChessGameUI.genruntimeconfig.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessGameUI\obj\Debug\net8.0-windows\ref\ChessGameUI.dll
