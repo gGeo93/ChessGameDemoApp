@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChessboardForm));
             h1 = new Button();
             g1 = new Button();
             f1 = new Button();
@@ -114,6 +115,7 @@
             // 
             h1.BackColor = Color.White;
             h1.FlatAppearance.BorderColor = Color.White;
+            h1.Image = (Image)resources.GetObject("h1.Image");
             h1.Location = new Point(509, 290);
             h1.Name = "h1";
             h1.Size = new Size(42, 38);
@@ -124,6 +126,7 @@
             // 
             g1.BackColor = Color.DimGray;
             g1.FlatAppearance.BorderColor = Color.White;
+            g1.Image = (Image)resources.GetObject("g1.Image");
             g1.Location = new Point(470, 290);
             g1.Name = "g1";
             g1.Size = new Size(42, 38);
@@ -134,6 +137,7 @@
             // 
             f1.BackColor = Color.White;
             f1.FlatAppearance.BorderColor = Color.White;
+            f1.Image = (Image)resources.GetObject("f1.Image");
             f1.Location = new Point(431, 290);
             f1.Name = "f1";
             f1.Size = new Size(42, 38);
@@ -144,6 +148,7 @@
             // 
             e1.BackColor = Color.DimGray;
             e1.FlatAppearance.BorderColor = Color.White;
+            e1.Image = (Image)resources.GetObject("e1.Image");
             e1.Location = new Point(392, 290);
             e1.Name = "e1";
             e1.Size = new Size(42, 38);
@@ -154,6 +159,7 @@
             // 
             d1.BackColor = Color.White;
             d1.FlatAppearance.BorderColor = Color.White;
+            d1.Image = (Image)resources.GetObject("d1.Image");
             d1.Location = new Point(353, 290);
             d1.Name = "d1";
             d1.Size = new Size(42, 38);
@@ -164,6 +170,7 @@
             // 
             c1.BackColor = Color.DimGray;
             c1.FlatAppearance.BorderColor = Color.White;
+            c1.Image = (Image)resources.GetObject("c1.Image");
             c1.Location = new Point(314, 290);
             c1.Name = "c1";
             c1.Size = new Size(42, 38);
@@ -174,6 +181,7 @@
             // 
             b1.BackColor = Color.White;
             b1.FlatAppearance.BorderColor = Color.White;
+            b1.Image = (Image)resources.GetObject("b1.Image");
             b1.Location = new Point(276, 290);
             b1.Name = "b1";
             b1.Size = new Size(42, 38);
@@ -184,6 +192,7 @@
             // 
             a1.BackColor = Color.DimGray;
             a1.FlatAppearance.BorderColor = Color.White;
+            a1.Image = (Image)resources.GetObject("a1.Image");
             a1.Location = new Point(238, 290);
             a1.Name = "a1";
             a1.Size = new Size(42, 38);
@@ -194,6 +203,7 @@
             // 
             a2.BackColor = Color.White;
             a2.FlatAppearance.BorderColor = Color.White;
+            a2.Image = (Image)resources.GetObject("a2.Image");
             a2.Location = new Point(238, 255);
             a2.Name = "a2";
             a2.Size = new Size(42, 38);
@@ -204,6 +214,7 @@
             // 
             b2.BackColor = Color.DimGray;
             b2.FlatAppearance.BorderColor = Color.White;
+            b2.Image = (Image)resources.GetObject("b2.Image");
             b2.Location = new Point(276, 255);
             b2.Name = "b2";
             b2.Size = new Size(42, 38);
@@ -214,6 +225,7 @@
             // 
             c2.BackColor = Color.White;
             c2.FlatAppearance.BorderColor = Color.White;
+            c2.Image = (Image)resources.GetObject("c2.Image");
             c2.Location = new Point(314, 255);
             c2.Name = "c2";
             c2.Size = new Size(42, 38);
@@ -224,6 +236,7 @@
             // 
             d2.BackColor = Color.DimGray;
             d2.FlatAppearance.BorderColor = Color.White;
+            d2.Image = (Image)resources.GetObject("d2.Image");
             d2.Location = new Point(353, 255);
             d2.Name = "d2";
             d2.Size = new Size(42, 38);
@@ -234,6 +247,7 @@
             // 
             e2.BackColor = Color.White;
             e2.FlatAppearance.BorderColor = Color.White;
+            e2.Image = (Image)resources.GetObject("e2.Image");
             e2.Location = new Point(392, 255);
             e2.Name = "e2";
             e2.Size = new Size(42, 38);
@@ -244,6 +258,7 @@
             // 
             f2.BackColor = Color.DimGray;
             f2.FlatAppearance.BorderColor = Color.White;
+            f2.Image = (Image)resources.GetObject("f2.Image");
             f2.Location = new Point(431, 255);
             f2.Name = "f2";
             f2.Size = new Size(42, 38);
@@ -254,6 +269,7 @@
             // 
             g2.BackColor = Color.White;
             g2.FlatAppearance.BorderColor = Color.White;
+            g2.Image = (Image)resources.GetObject("g2.Image");
             g2.Location = new Point(470, 255);
             g2.Name = "g2";
             g2.Size = new Size(42, 38);
@@ -264,6 +280,7 @@
             // 
             h2.BackColor = Color.DimGray;
             h2.FlatAppearance.BorderColor = Color.White;
+            h2.Image = (Image)resources.GetObject("h2.Image");
             h2.Location = new Point(509, 255);
             h2.Name = "h2";
             h2.Size = new Size(42, 38);
@@ -594,6 +611,7 @@
             // 
             a7.BackColor = Color.DimGray;
             a7.FlatAppearance.BorderColor = Color.White;
+            a7.Image = (Image)resources.GetObject("a7.Image");
             a7.Location = new Point(238, 83);
             a7.Name = "a7";
             a7.Size = new Size(42, 38);
@@ -604,6 +622,7 @@
             // 
             b7.BackColor = Color.White;
             b7.FlatAppearance.BorderColor = Color.White;
+            b7.Image = (Image)resources.GetObject("b7.Image");
             b7.Location = new Point(276, 83);
             b7.Name = "b7";
             b7.Size = new Size(42, 38);
@@ -614,6 +633,7 @@
             // 
             c7.BackColor = Color.DimGray;
             c7.FlatAppearance.BorderColor = Color.White;
+            c7.Image = (Image)resources.GetObject("c7.Image");
             c7.Location = new Point(314, 83);
             c7.Name = "c7";
             c7.Size = new Size(42, 38);
@@ -624,6 +644,7 @@
             // 
             d7.BackColor = Color.White;
             d7.FlatAppearance.BorderColor = Color.White;
+            d7.Image = (Image)resources.GetObject("d7.Image");
             d7.Location = new Point(353, 83);
             d7.Name = "d7";
             d7.Size = new Size(42, 38);
@@ -634,6 +655,7 @@
             // 
             e7.BackColor = Color.DimGray;
             e7.FlatAppearance.BorderColor = Color.White;
+            e7.Image = (Image)resources.GetObject("e7.Image");
             e7.Location = new Point(392, 83);
             e7.Name = "e7";
             e7.Size = new Size(42, 38);
@@ -644,6 +666,7 @@
             // 
             f7.BackColor = Color.White;
             f7.FlatAppearance.BorderColor = Color.White;
+            f7.Image = (Image)resources.GetObject("f7.Image");
             f7.Location = new Point(431, 83);
             f7.Name = "f7";
             f7.Size = new Size(42, 38);
@@ -654,6 +677,7 @@
             // 
             g7.BackColor = Color.DimGray;
             g7.FlatAppearance.BorderColor = Color.White;
+            g7.Image = (Image)resources.GetObject("g7.Image");
             g7.Location = new Point(470, 83);
             g7.Name = "g7";
             g7.Size = new Size(42, 38);
@@ -664,6 +688,7 @@
             // 
             h7.BackColor = Color.White;
             h7.FlatAppearance.BorderColor = Color.White;
+            h7.Image = (Image)resources.GetObject("h7.Image");
             h7.Location = new Point(509, 83);
             h7.Name = "h7";
             h7.Size = new Size(42, 38);
@@ -674,6 +699,7 @@
             // 
             a8.BackColor = Color.White;
             a8.FlatAppearance.BorderColor = Color.White;
+            a8.Image = (Image)resources.GetObject("a8.Image");
             a8.Location = new Point(238, 49);
             a8.Name = "a8";
             a8.Size = new Size(42, 38);
@@ -684,6 +710,7 @@
             // 
             b8.BackColor = Color.DimGray;
             b8.FlatAppearance.BorderColor = Color.White;
+            b8.Image = (Image)resources.GetObject("b8.Image");
             b8.Location = new Point(276, 49);
             b8.Name = "b8";
             b8.Size = new Size(42, 38);
@@ -694,6 +721,7 @@
             // 
             c8.BackColor = Color.White;
             c8.FlatAppearance.BorderColor = Color.White;
+            c8.Image = (Image)resources.GetObject("c8.Image");
             c8.Location = new Point(314, 49);
             c8.Name = "c8";
             c8.Size = new Size(42, 38);
@@ -704,6 +732,7 @@
             // 
             d8.BackColor = Color.DimGray;
             d8.FlatAppearance.BorderColor = Color.White;
+            d8.Image = (Image)resources.GetObject("d8.Image");
             d8.Location = new Point(353, 49);
             d8.Name = "d8";
             d8.Size = new Size(42, 38);
@@ -714,6 +743,7 @@
             // 
             e8.BackColor = Color.White;
             e8.FlatAppearance.BorderColor = Color.White;
+            e8.Image = (Image)resources.GetObject("e8.Image");
             e8.Location = new Point(392, 49);
             e8.Name = "e8";
             e8.Size = new Size(42, 38);
@@ -724,6 +754,7 @@
             // 
             f8.BackColor = Color.DimGray;
             f8.FlatAppearance.BorderColor = Color.White;
+            f8.Image = (Image)resources.GetObject("f8.Image");
             f8.Location = new Point(431, 49);
             f8.Name = "f8";
             f8.Size = new Size(42, 38);
@@ -734,6 +765,7 @@
             // 
             g8.BackColor = Color.White;
             g8.FlatAppearance.BorderColor = Color.White;
+            g8.Image = (Image)resources.GetObject("g8.Image");
             g8.Location = new Point(470, 49);
             g8.Name = "g8";
             g8.Size = new Size(42, 38);
@@ -744,6 +776,7 @@
             // 
             h8.BackColor = Color.DimGray;
             h8.FlatAppearance.BorderColor = Color.White;
+            h8.Image = (Image)resources.GetObject("h8.Image");
             h8.Location = new Point(509, 49);
             h8.Name = "h8";
             h8.Size = new Size(42, 38);
