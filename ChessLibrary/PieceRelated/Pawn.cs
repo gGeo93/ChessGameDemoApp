@@ -6,7 +6,7 @@ public class Pawn : Piece, IMove
 {
     public bool HasMovedOnceAtLeast { get; set; }
 
-    public void Movement(Square to)
+    public bool Movement(Square from, Square to)
     {
         throw new NotImplementedException();
     }

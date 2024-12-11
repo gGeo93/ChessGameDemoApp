@@ -118,6 +118,11 @@ public static class HelpingMethods
         }
         return board;
     }
+    public static void InternalCoordinatesOperation(this Square from, Square to, out (int xFrom, int yFrom) pseudoCoorFrom, out (int xTo, int yTo) pseudoCoorTo)
+    {
+        pseudoCoorFrom = (from.Letter + from.Number.ToString()).FromRealToProgrammingCoordinates();
+        pseudoCoorTo = (to.Letter + to.Number.ToString()).FromRealToProgrammingCoordinates();
+    }
     public static char ColumnConverter(this int y)
     {
         switch (y)

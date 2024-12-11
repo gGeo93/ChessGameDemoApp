@@ -4,7 +4,7 @@ namespace ChessLibrary.PieceRelated;
 
 public class Knight : Piece, IMove
 {
-    public void Movement(Square to)
+    public bool Movement(Square from, Square to)
     {
         throw new NotImplementedException();
     }

@@ -4,8 +4,10 @@ namespace ChessLibrary.PieceRelated;
 
 public class Rook : Piece, IMove
 {
-    public void Movement(Square to)
+    public bool Movement(Square from, Square to)
     {
-        throw new NotImplementedException();
+        if (from.Letter == to.Letter || from.Number == to.Number)
+            return true;
+        return false;
     }
 }
