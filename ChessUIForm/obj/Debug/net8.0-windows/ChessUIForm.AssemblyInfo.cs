@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChessUIForm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40347f86dc39e6ca9839c576128c8970c3fa3504")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6726e201d726bf4f721e2812c7cb7a0092b968dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChessUIForm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChessUIForm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

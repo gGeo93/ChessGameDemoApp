@@ -9,14 +9,13 @@ public partial class ChessboardForm : Form
 {
     #region [BackendFields]
     GamingProcess gameManager;
-    BoardRelatedInfo? boardRelatedInfo;
+    BoardRelatedInfo currentBoardRelatedInfo;
+    BoardRelatedInfo[] boardRelatedInfoMove;
     #endregion
 
     #region [UIFields]
     Button[] moveParts;
     Color squareColor;
-    Image? initPlace;
-    Image? futurePlace;
     #endregion
 
     #region [Init]
@@ -26,6 +25,7 @@ public partial class ChessboardForm : Form
         gameManager = new GamingProcess();
         moveParts = new Button[2];
         gameManager.WhoPlays = WhoseTurn.White;
+        boardRelatedInfoMove = new BoardRelatedInfo[2];
     }
     #endregion
 
@@ -41,7 +41,7 @@ public partial class ChessboardForm : Form
         
         ChessBoard chessBoard = gameManager.ChessBoard;
 
-        gameManager.Move[gameManager.MoveCompletionCounter - 1] = new Square { Letter = square[0], Number = int.Parse(square[1].ToString()), Color = SquareColor.WHITE};
+        gameManager.Move[gameManager.MoveCompletionCounter - 1] = new Square { Letter = square[0], Number = int.Parse(square[1].ToString()), Color = chessBoard.Board[x, y].ASquare.Color };
         #endregion
 
         #region[MovementConstraints]
@@ -59,7 +59,8 @@ public partial class ChessboardForm : Form
         #region [FirstHalfOfTheMove]
         else if (chessBoard.Board[x, y].Apiece is not null && gameManager.MoveCompletionCounter == 1)
         {
-            boardRelatedInfo = new BoardRelatedInfo() { Apiece = new Piece { Name = chessBoard.Board[x, y].Apiece.Name }, ASquare = chessBoard.Board[x, y].ASquare };
+            currentBoardRelatedInfo = new BoardRelatedInfo() { Apiece = new Piece { Name = chessBoard.Board[x, y].Apiece.Name }, ASquare = chessBoard.Board[x, y].ASquare };
+            boardRelatedInfoMove[0] = currentBoardRelatedInfo;
             if (moveParts[1] != null)
                 moveParts[1].Image = null;
             moveParts[0] = ((Button)sender);
@@ -71,9 +72,21 @@ public partial class ChessboardForm : Form
         #region [SecondHalfOfTheMove]
         else if (gameManager.MoveCompletionCounter == 2)
         {
-            boardRelatedInfo = new BoardRelatedInfo() { Apiece = new Piece { Name = chessBoard.Board[x, y].Apiece.Name }, ASquare = chessBoard.Board[x, y].ASquare };
+            currentBoardRelatedInfo = new BoardRelatedInfo() { Apiece = new Piece { Name = boardRelatedInfoMove[0].Apiece.Name }, ASquare = chessBoard.Board[x, y].ASquare  };
+            boardRelatedInfoMove[1] = currentBoardRelatedInfo;
             moveParts[1] = ((Button)sender);
             moveParts[0].BackColor = squareColor;
+
+            bool canMoveChosenWay = gameManager.Constraints.CanPerfomeThisMove(currentBoardRelatedInfo.Apiece.Name, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare);
+            if (!canMoveChosenWay)
+            {
+                gameManager.MoveCompletionCounter = 0;
+                moveParts = new Button[2];
+                boardRelatedInfoMove = new BoardRelatedInfo[2];
+                gameManager.Move = new Square[2];
+                return;
+            }
+            
             ((Button)sender).Image = moveParts[0].Image;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
@@ -81,9 +94,10 @@ public partial class ChessboardForm : Form
             moveParts = new Button[2];
         }
         #endregion
+
         #region[UpdateBackendBoard]
-        chessBoard.Board[x, y].Apiece = boardRelatedInfo.Apiece;
-        chessBoard.Board[x, y].ASquare = boardRelatedInfo.ASquare;
+        chessBoard.Board[x, y].Apiece = currentBoardRelatedInfo.Apiece;
+        chessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
         #endregion
     }
     #endregion

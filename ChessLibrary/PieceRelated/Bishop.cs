@@ -14,9 +14,9 @@ public class Bishop : Piece, IMove
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
 
-        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorFrom.yFrom) != MathF.Abs(pseudoCoorTo.xTo - pseudoCoorTo.yTo))
-            return false;
+        if (Math.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) == Math.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo))     
+            return true;
 
-        return true;
+        return false;
     }
 }

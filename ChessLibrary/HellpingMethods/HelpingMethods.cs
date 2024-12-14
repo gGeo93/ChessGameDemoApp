@@ -112,7 +112,7 @@ public static class HelpingMethods
                 }
                 else
                 {
-                    board[i, j] = new BoardRelatedInfo() { Apiece = new Piece { Name = PieceName.NONE }, ASquare = new Square() };
+                    board[i, j] = new BoardRelatedInfo() { Apiece = null! , ASquare = new Square() { Letter = j.ColumnConverter(), Number = i.RowConverter(), Color = (i + j) % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK } };
                 }
             }
         }
