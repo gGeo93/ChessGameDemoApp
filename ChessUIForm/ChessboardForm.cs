@@ -77,7 +77,12 @@ public partial class ChessboardForm : Form
             moveParts[1] = ((Button)sender);
             moveParts[0].BackColor = squareColor;
 
-            bool canMoveChosenWay = gameManager.Constraints.CanPerfomeThisMove(currentBoardRelatedInfo.Apiece.Name, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare);
+            bool canMoveChosenWay = gameManager.Constraints.
+                CanPerfomeThisMove(
+                currentBoardRelatedInfo.Apiece.Name, 
+                boardRelatedInfoMove[0].ASquare, 
+                boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays
+                );
             if (!canMoveChosenWay)
             {
                 gameManager.MoveCompletionCounter = 0;

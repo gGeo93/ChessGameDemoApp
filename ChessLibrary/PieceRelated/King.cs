@@ -12,11 +12,9 @@ public class King : Piece, IMove
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
 
-        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) != 1 || MathF.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo) != 1)
-            return false;
-        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorFrom.yFrom) != 1 || MathF.Abs(pseudoCoorTo.xTo - pseudoCoorTo.yTo) != 1)
-            return false;
-        
+        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) != 1 && MathF.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo) != 1)
+             return false;
+       
         return true;
     }
 }

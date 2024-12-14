@@ -58,13 +58,13 @@ public static class HelpingMethods
                 else if (i == 6)
                     board[i, j] = new BoardRelatedInfo
                     {
-                        Apiece = new Pawn { Color = PieceInfo.WHITE, Name = PieceName.PAWN },
+                        Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.WHITE, Name = PieceName.PAWN, IsOnInitialSquare = true },
                         ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
                 else if (i == 1)
                     board[i, j] = new BoardRelatedInfo
                     {
-                        Apiece = new Pawn { Color = PieceInfo.BLACK, Name = PieceName.PAWN },
+                        Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.BLACK, Name = PieceName.PAWN, IsOnInitialSquare = true },
                         ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
                 else if (i == 0)
