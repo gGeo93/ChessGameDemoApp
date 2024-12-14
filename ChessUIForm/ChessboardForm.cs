@@ -81,7 +81,8 @@ public partial class ChessboardForm : Form
                 CanPerfomeThisMove(
                 currentBoardRelatedInfo.Apiece.Name, 
                 boardRelatedInfoMove[0].ASquare, 
-                boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays
+                boardRelatedInfoMove[1].ASquare, 
+                gameManager.WhoPlays
                 );
             if (!canMoveChosenWay)
             {
