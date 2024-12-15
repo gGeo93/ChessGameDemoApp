@@ -2,6 +2,7 @@
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
+using ChessLibrary.RulesRelated;
 
 namespace ChessUIForm;
 
@@ -77,14 +78,11 @@ public partial class ChessboardForm : Form
             moveParts[1] = ((Button)sender);
             moveParts[0].BackColor = squareColor;
 
-            bool canMoveChosenWay = gameManager.Constraints.
-                CanPerfomeThisMove(
-                currentBoardRelatedInfo.Apiece.Name, 
-                boardRelatedInfoMove[0].ASquare, 
-                boardRelatedInfoMove[1].ASquare, 
-                gameManager.WhoPlays
-                );
-            if (!canMoveChosenWay)
+            bool canMoveChosenWay = currentBoardRelatedInfo.Apiece.Name.CanPerfomeThisMove(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays);
+              
+            bool isThereNoObstacle = currentBoardRelatedInfo.Apiece.Name.ThereIsNoObstacle(boardRelatedInfoMove[0].ASquare,boardRelatedInfoMove[1].ASquare, chessBoard, gameManager.WhoPlays);
+            
+            if (!canMoveChosenWay || !isThereNoObstacle)
             {
                 gameManager.MoveCompletionCounter = 0;
                 moveParts = new Button[2];

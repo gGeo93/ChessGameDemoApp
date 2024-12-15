@@ -10,7 +10,6 @@ public class GamingProcess
     public WhoseTurn WhoPlays { get; set; }
     public int MoveCompletionCounter { get; set; }
     public Square[] Move { get; set; }
-    public Constraints Constraints { get; set; }
     public GamingProcess()
     {
         ChessBoard = new ChessBoard();
@@ -18,6 +17,5 @@ public class GamingProcess
         WhoPlays = WhoseTurn.White;
         Move = new Square[2];
         MoveCompletionCounter = 0;
-        Constraints = new Constraints();
     }
 }
