@@ -119,6 +119,8 @@ public partial class ChessboardForm : Form
             }
             ((Button)sender).Image = moveParts[0].Image;
             chessBoard.Board[x, y].ApieceOccupySqsuare = true;
+            chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
+            chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
