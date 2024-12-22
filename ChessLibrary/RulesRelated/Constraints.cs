@@ -40,13 +40,18 @@ public static class Constraints
         {
             if (whoPlays == WhoseTurn.White && pieceColorInit == PieceInfo.WHITE && pieceColorFinal == PieceInfo.BLACK)
             {
-                if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom - 1 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
+                if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom + 1 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
                     return true;
             }
             else if (whoPlays == WhoseTurn.Black && pieceColorInit == PieceInfo.BLACK && pieceColorFinal == PieceInfo.WHITE)
             {
                 if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom + 1 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
                     return true;
+            }
+            else if (pieceColorFinal == null)
+            {
+                if ((pseudoCoorTo.xTo - pseudoCoorFrom.xFrom == 1 || pseudoCoorTo.xTo - pseudoCoorFrom.xFrom == -1) && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
+                    return false;
             }
         }
 
