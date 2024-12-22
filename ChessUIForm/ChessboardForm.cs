@@ -86,7 +86,14 @@ public partial class ChessboardForm : Form
         #region [SecondHalfOfTheMove]
         else if (gameManager.MoveCompletionCounter == 2)
         {
-            currentBoardRelatedInfo = new BoardRelatedInfo() { Apiece = new Piece { Name = boardRelatedInfoMove[0].Apiece.Name }, ASquare = chessBoard.Board[x, y].ASquare  };
+            currentBoardRelatedInfo = new BoardRelatedInfo() { 
+                Apiece = new Piece 
+                { 
+                    Name = boardRelatedInfoMove[0].Apiece.Name,
+                    Color = boardRelatedInfoMove[0].Apiece.Color
+                }, 
+                ASquare = chessBoard.Board[x, y].ASquare  
+            };
             boardRelatedInfoMove[1] = currentBoardRelatedInfo;
             moveParts[1] = ((Button)sender);
             moveParts[0].BackColor = squareColor;
