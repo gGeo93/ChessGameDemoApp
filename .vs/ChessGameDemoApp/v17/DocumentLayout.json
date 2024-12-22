@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\rulesrelated\\constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\rulesrelated\\constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|solutionrelative:chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\piecerelated\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\piecerelated\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|solutionrelative:chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\boardrelated\\square.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,32 +38,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Pawn.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\PieceRelated\\Pawn.cs",
-              "RelativeDocumentMoniker": "ChessLibrary\\PieceRelated\\Pawn.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\PieceRelated\\Pawn.cs",
-              "RelativeToolTip": "ChessLibrary\\PieceRelated\\Pawn.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAIwAsAAAALAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ChessboardForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
+              "RelativeDocumentMoniker": "ChessUIForm\\ChessboardForm.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs [Design]",
+              "RelativeToolTip": "ChessUIForm\\ChessboardForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T15:47:13.646Z"
+              "WhenOpened": "2024-12-22T12:56:20.83Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Constraints.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\RulesRelated\\Constraints.cs",
-              "RelativeDocumentMoniker": "ChessLibrary\\RulesRelated\\Constraints.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\RulesRelated\\Constraints.cs",
-              "RelativeToolTip": "ChessLibrary\\RulesRelated\\Constraints.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAtwCEAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T18:45:28.461Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "GamingProcess.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\GamingProcessRelated\\GamingProcess.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\GamingProcessRelated\\GamingProcess.cs",
@@ -79,20 +62,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ChessboardForm.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
               "RelativeDocumentMoniker": "ChessUIForm\\ChessboardForm.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
               "RelativeToolTip": "ChessUIForm\\ChessboardForm.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAD4vyUAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAqwHwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T19:21:28.478Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Square.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\BoardRelated\\Square.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\BoardRelated\\Square.cs",

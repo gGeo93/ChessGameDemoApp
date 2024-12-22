@@ -109,6 +109,7 @@
             label14 = new Label();
             label15 = new Label();
             label16 = new Label();
+            whoPlaysLabel = new Label();
             SuspendLayout();
             // 
             // h1
@@ -1007,12 +1008,24 @@
             label16.TabIndex = 79;
             label16.Text = "h";
             // 
+            // whoPlaysLabel
+            // 
+            whoPlaysLabel.Anchor = AnchorStyles.Left;
+            whoPlaysLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic);
+            whoPlaysLabel.Location = new Point(591, 159);
+            whoPlaysLabel.Name = "whoPlaysLabel";
+            whoPlaysLabel.Size = new Size(66, 55);
+            whoPlaysLabel.TabIndex = 80;
+            whoPlaysLabel.Text = "Who Plays";
+            whoPlaysLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // ChessboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(800, 450);
+            Controls.Add(whoPlaysLabel);
             Controls.Add(label16);
             Controls.Add(label15);
             Controls.Add(label14);
@@ -1182,5 +1195,6 @@
         private Label label14;
         private Label label15;
         private Label label16;
+        private Label whoPlaysLabel;
     }
 }
