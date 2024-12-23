@@ -62,10 +62,10 @@ public static class Constraints
     {
         bool goStraightX = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom >= 0;
         bool goStraightY = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom >= 0;
-        int xtoResult = goStraightX ? pseudoCoorTo.xTo : pseudoCoorTo.xTo;
-        int ytoResult = goStraightY ? pseudoCoorTo.yTo : pseudoCoorTo.yTo;
-        int xfromResult = goStraightX ? pseudoCoorFrom.xFrom : pseudoCoorFrom.xFrom;
-        int yfromResult = goStraightY ? pseudoCoorFrom.yFrom : pseudoCoorFrom.yFrom;
+        int xtoResult = pseudoCoorTo.xTo;
+        int ytoResult = pseudoCoorTo.yTo;
+        int xfromResult = pseudoCoorFrom.xFrom;
+        int yfromResult = pseudoCoorFrom.yFrom;
         if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom)
         {
             if (goStraightY)

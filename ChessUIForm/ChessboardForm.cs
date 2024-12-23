@@ -1,4 +1,5 @@
 ﻿using ChessLibrary.BoardRelated;
+using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
@@ -106,6 +107,8 @@ public partial class ChessboardForm : Form
 
             bool isThereNoObstacle = currentBoardRelatedInfo.Apiece.Name.ThereIsNoObstacle(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, chessBoard, gameManager.WhoPlays);
 
+            bool canCutEnPass = chessBoard.Board.CanTakeEnPassant(gameManager.WhoPlays, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, true);
+            
             if (!canMoveChosenWay || !isThereNoObstacle)
             {
                 chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = true;
@@ -116,6 +119,13 @@ public partial class ChessboardForm : Form
                 gameManager.Move = new Square[2];
                 coordinates = new (int x, int y)[2];
                 return;
+            }
+            if (canCutEnPass)
+            {
+                ((Button)sender).Image = moveParts[0].Image;
+                chessBoard.Board[x, y].ApieceOccupySqsuare = true;
+                chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
+                chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             }
             ((Button)sender).Image = moveParts[0].Image;
             chessBoard.Board[x, y].ApieceOccupySqsuare = true;

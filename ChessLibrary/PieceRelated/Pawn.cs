@@ -6,6 +6,7 @@ namespace ChessLibrary.PieceRelated;
 
 public class Pawn : Piece, IMove, IPawn
 {
+    public bool PawnIntentsToMoveTwice { get; set; }
     public bool IsOnInitialSquare { get; set; }
     public WhoseTurn WhoPlays { get; set; }
 
@@ -20,7 +21,7 @@ public class Pawn : Piece, IMove, IPawn
         (int xFrom, int yFrom) pseudoCoorFrom;
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
-
+        
         if (WhoPlays == WhoseTurn.White)
         {
             if (pseudoCoorTo.xTo >= pseudoCoorFrom.xFrom)
@@ -31,9 +32,9 @@ public class Pawn : Piece, IMove, IPawn
             if (pseudoCoorTo.xTo <= pseudoCoorFrom.xFrom)
                 return false;
         }
-        
+
         int xDistance = Math.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo);
-        
+
         if (xDistance > 2)
             return false;
         if (xDistance == 2 && IsOnInitialSquare)
@@ -46,7 +47,7 @@ public class Pawn : Piece, IMove, IPawn
             this.IsOnInitialSquare = false;
             return true;
         }
-        
+
         return false;
     }
 }
