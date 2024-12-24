@@ -27,7 +27,7 @@ public static class Constraints
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
 
-        PieceInfo pieceColorInit = chessBoard.Board[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece.Color;
+        PieceInfo? pieceColorInit = chessBoard.Board[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece?.Color;
         PieceInfo? pieceColorFinal = chessBoard.Board[pseudoCoorTo.xTo, pseudoCoorTo.yTo].Apiece?.Color;
 
         if (pieceColorInit == pieceColorFinal)
@@ -38,6 +38,8 @@ public static class Constraints
 
         if (pieceName == PieceName.PAWN)
         {
+            if (pieceColorFinal != null && pieceColorInit != pieceColorFinal && (pseudoCoorFrom.yFrom == pseudoCoorTo.yTo))
+                return false;
             if (whoPlays == WhoseTurn.White && pieceColorInit == PieceInfo.WHITE && pieceColorFinal == PieceInfo.BLACK)
             {
                 if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom + 1 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)

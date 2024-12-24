@@ -114,6 +114,7 @@
             // 
             // h1
             // 
+            h1.AccessibleName = "";
             h1.BackColor = Color.White;
             h1.FlatAppearance.BorderColor = Color.White;
             h1.Image = (Image)resources.GetObject("h1.Image");
@@ -126,6 +127,7 @@
             // 
             // g1
             // 
+            g1.AccessibleName = "";
             g1.BackColor = Color.DimGray;
             g1.FlatAppearance.BorderColor = Color.White;
             g1.Image = (Image)resources.GetObject("g1.Image");
@@ -138,6 +140,7 @@
             // 
             // f1
             // 
+            f1.AccessibleName = "";
             f1.BackColor = Color.White;
             f1.FlatAppearance.BorderColor = Color.White;
             f1.Image = (Image)resources.GetObject("f1.Image");
@@ -150,6 +153,7 @@
             // 
             // e1
             // 
+            e1.AccessibleName = "";
             e1.BackColor = Color.DimGray;
             e1.FlatAppearance.BorderColor = Color.White;
             e1.Image = (Image)resources.GetObject("e1.Image");
@@ -162,6 +166,7 @@
             // 
             // d1
             // 
+            d1.AccessibleName = "";
             d1.BackColor = Color.White;
             d1.FlatAppearance.BorderColor = Color.White;
             d1.Image = (Image)resources.GetObject("d1.Image");
@@ -174,6 +179,7 @@
             // 
             // c1
             // 
+            c1.AccessibleName = "";
             c1.BackColor = Color.DimGray;
             c1.FlatAppearance.BorderColor = Color.White;
             c1.Image = (Image)resources.GetObject("c1.Image");
@@ -186,6 +192,7 @@
             // 
             // b1
             // 
+            b1.AccessibleName = "";
             b1.BackColor = Color.White;
             b1.FlatAppearance.BorderColor = Color.White;
             b1.Image = (Image)resources.GetObject("b1.Image");
@@ -198,6 +205,7 @@
             // 
             // a1
             // 
+            a1.AccessibleName = "";
             a1.BackColor = Color.DimGray;
             a1.FlatAppearance.BorderColor = Color.White;
             a1.Image = (Image)resources.GetObject("a1.Image");
@@ -210,6 +218,7 @@
             // 
             // a2
             // 
+            a2.AccessibleName = "";
             a2.BackColor = Color.White;
             a2.FlatAppearance.BorderColor = Color.White;
             a2.Image = (Image)resources.GetObject("a2.Image");
@@ -222,6 +231,7 @@
             // 
             // b2
             // 
+            b2.AccessibleName = "";
             b2.BackColor = Color.DimGray;
             b2.FlatAppearance.BorderColor = Color.White;
             b2.Image = (Image)resources.GetObject("b2.Image");
@@ -234,6 +244,7 @@
             // 
             // c2
             // 
+            c2.AccessibleName = "";
             c2.BackColor = Color.White;
             c2.FlatAppearance.BorderColor = Color.White;
             c2.Image = (Image)resources.GetObject("c2.Image");
@@ -246,6 +257,7 @@
             // 
             // d2
             // 
+            d2.AccessibleName = "";
             d2.BackColor = Color.DimGray;
             d2.FlatAppearance.BorderColor = Color.White;
             d2.Image = (Image)resources.GetObject("d2.Image");
@@ -258,6 +270,7 @@
             // 
             // e2
             // 
+            e2.AccessibleName = "";
             e2.BackColor = Color.White;
             e2.FlatAppearance.BorderColor = Color.White;
             e2.Image = (Image)resources.GetObject("e2.Image");
@@ -270,6 +283,7 @@
             // 
             // f2
             // 
+            f2.AccessibleName = "";
             f2.BackColor = Color.DimGray;
             f2.FlatAppearance.BorderColor = Color.White;
             f2.Image = (Image)resources.GetObject("f2.Image");
@@ -282,6 +296,7 @@
             // 
             // g2
             // 
+            g2.AccessibleName = "";
             g2.BackColor = Color.White;
             g2.FlatAppearance.BorderColor = Color.White;
             g2.Image = (Image)resources.GetObject("g2.Image");
@@ -294,6 +309,7 @@
             // 
             // h2
             // 
+            h2.AccessibleName = "";
             h2.BackColor = Color.DimGray;
             h2.FlatAppearance.BorderColor = Color.White;
             h2.Image = (Image)resources.GetObject("h2.Image");
@@ -306,6 +322,7 @@
             // 
             // a3
             // 
+            a3.AccessibleName = "";
             a3.BackColor = Color.DimGray;
             a3.FlatAppearance.BorderColor = Color.White;
             a3.Location = new Point(238, 220);
@@ -317,6 +334,7 @@
             // 
             // b3
             // 
+            b3.AccessibleName = "";
             b3.BackColor = Color.White;
             b3.FlatAppearance.BorderColor = Color.White;
             b3.Location = new Point(276, 220);
@@ -328,6 +346,7 @@
             // 
             // c3
             // 
+            c3.AccessibleName = "";
             c3.BackColor = Color.DimGray;
             c3.FlatAppearance.BorderColor = Color.White;
             c3.Location = new Point(314, 220);
@@ -339,6 +358,7 @@
             // 
             // d3
             // 
+            d3.AccessibleName = "";
             d3.BackColor = Color.White;
             d3.FlatAppearance.BorderColor = Color.White;
             d3.Location = new Point(353, 220);
@@ -350,6 +370,7 @@
             // 
             // e3
             // 
+            e3.AccessibleName = "";
             e3.BackColor = Color.DimGray;
             e3.FlatAppearance.BorderColor = Color.White;
             e3.Location = new Point(392, 220);
@@ -361,6 +382,7 @@
             // 
             // f3
             // 
+            f3.AccessibleName = "";
             f3.BackColor = Color.White;
             f3.FlatAppearance.BorderColor = Color.White;
             f3.Location = new Point(431, 220);
@@ -372,6 +394,7 @@
             // 
             // g3
             // 
+            g3.AccessibleName = "";
             g3.BackColor = Color.DimGray;
             g3.FlatAppearance.BorderColor = Color.White;
             g3.Location = new Point(470, 220);
@@ -383,6 +406,7 @@
             // 
             // h3
             // 
+            h3.AccessibleName = "";
             h3.BackColor = Color.White;
             h3.FlatAppearance.BorderColor = Color.White;
             h3.Location = new Point(509, 220);
@@ -394,6 +418,7 @@
             // 
             // a4
             // 
+            a4.AccessibleName = "";
             a4.BackColor = Color.White;
             a4.FlatAppearance.BorderColor = Color.White;
             a4.Location = new Point(238, 186);
@@ -405,6 +430,7 @@
             // 
             // b4
             // 
+            b4.AccessibleName = "";
             b4.BackColor = Color.DimGray;
             b4.FlatAppearance.BorderColor = Color.White;
             b4.Location = new Point(276, 186);
@@ -416,6 +442,7 @@
             // 
             // c4
             // 
+            c4.AccessibleName = "";
             c4.BackColor = Color.White;
             c4.FlatAppearance.BorderColor = Color.White;
             c4.Location = new Point(314, 186);
@@ -427,6 +454,7 @@
             // 
             // d4
             // 
+            d4.AccessibleName = "";
             d4.BackColor = Color.DimGray;
             d4.FlatAppearance.BorderColor = Color.White;
             d4.Location = new Point(353, 186);
@@ -438,6 +466,7 @@
             // 
             // e4
             // 
+            e4.AccessibleName = "";
             e4.BackColor = Color.White;
             e4.FlatAppearance.BorderColor = Color.White;
             e4.Location = new Point(392, 186);
@@ -449,6 +478,7 @@
             // 
             // f4
             // 
+            f4.AccessibleName = "";
             f4.BackColor = Color.DimGray;
             f4.FlatAppearance.BorderColor = Color.White;
             f4.Location = new Point(431, 186);
@@ -460,6 +490,7 @@
             // 
             // g4
             // 
+            g4.AccessibleName = "";
             g4.BackColor = Color.White;
             g4.FlatAppearance.BorderColor = Color.White;
             g4.Location = new Point(470, 186);
@@ -471,6 +502,7 @@
             // 
             // h4
             // 
+            h4.AccessibleName = "";
             h4.BackColor = Color.DimGray;
             h4.FlatAppearance.BorderColor = Color.White;
             h4.Location = new Point(509, 186);
@@ -482,6 +514,7 @@
             // 
             // a5
             // 
+            a5.AccessibleName = "";
             a5.BackColor = Color.DimGray;
             a5.FlatAppearance.BorderColor = Color.White;
             a5.Location = new Point(238, 151);
@@ -493,6 +526,7 @@
             // 
             // b5
             // 
+            b5.AccessibleName = "";
             b5.BackColor = Color.White;
             b5.FlatAppearance.BorderColor = Color.White;
             b5.Location = new Point(276, 151);
@@ -504,6 +538,7 @@
             // 
             // c5
             // 
+            c5.AccessibleName = "";
             c5.BackColor = Color.DimGray;
             c5.FlatAppearance.BorderColor = Color.White;
             c5.Location = new Point(314, 151);
@@ -515,6 +550,7 @@
             // 
             // d5
             // 
+            d5.AccessibleName = "";
             d5.BackColor = Color.White;
             d5.FlatAppearance.BorderColor = Color.White;
             d5.Location = new Point(353, 151);
@@ -526,6 +562,7 @@
             // 
             // e5
             // 
+            e5.AccessibleName = "";
             e5.BackColor = Color.DimGray;
             e5.FlatAppearance.BorderColor = Color.White;
             e5.Location = new Point(392, 151);
@@ -537,6 +574,7 @@
             // 
             // f5
             // 
+            f5.AccessibleName = "";
             f5.BackColor = Color.White;
             f5.FlatAppearance.BorderColor = Color.White;
             f5.Location = new Point(431, 151);
@@ -548,6 +586,7 @@
             // 
             // g5
             // 
+            g5.AccessibleName = "";
             g5.BackColor = Color.DimGray;
             g5.FlatAppearance.BorderColor = Color.White;
             g5.Location = new Point(470, 151);
@@ -559,6 +598,7 @@
             // 
             // h5
             // 
+            h5.AccessibleName = "";
             h5.BackColor = Color.White;
             h5.FlatAppearance.BorderColor = Color.White;
             h5.Location = new Point(509, 151);
@@ -570,6 +610,7 @@
             // 
             // a6
             // 
+            a6.AccessibleName = "";
             a6.BackColor = Color.White;
             a6.FlatAppearance.BorderColor = Color.White;
             a6.Location = new Point(238, 118);
@@ -581,6 +622,7 @@
             // 
             // b6
             // 
+            b6.AccessibleName = "";
             b6.BackColor = Color.DimGray;
             b6.FlatAppearance.BorderColor = Color.White;
             b6.Location = new Point(276, 118);
@@ -592,6 +634,7 @@
             // 
             // c6
             // 
+            c6.AccessibleName = "";
             c6.BackColor = Color.White;
             c6.FlatAppearance.BorderColor = Color.White;
             c6.Location = new Point(314, 118);
@@ -603,6 +646,7 @@
             // 
             // d6
             // 
+            d6.AccessibleName = "";
             d6.BackColor = Color.DimGray;
             d6.FlatAppearance.BorderColor = Color.White;
             d6.Location = new Point(353, 118);
@@ -614,6 +658,7 @@
             // 
             // e6
             // 
+            e6.AccessibleName = "";
             e6.BackColor = Color.White;
             e6.FlatAppearance.BorderColor = Color.White;
             e6.Location = new Point(392, 118);
@@ -625,6 +670,7 @@
             // 
             // f6
             // 
+            f6.AccessibleName = "";
             f6.BackColor = Color.DimGray;
             f6.FlatAppearance.BorderColor = Color.White;
             f6.Location = new Point(431, 118);
@@ -636,6 +682,7 @@
             // 
             // g6
             // 
+            g6.AccessibleName = "";
             g6.BackColor = Color.White;
             g6.FlatAppearance.BorderColor = Color.White;
             g6.Location = new Point(470, 118);
@@ -647,6 +694,7 @@
             // 
             // h6
             // 
+            h6.AccessibleName = "";
             h6.BackColor = Color.DimGray;
             h6.FlatAppearance.BorderColor = Color.White;
             h6.Location = new Point(509, 118);
@@ -658,6 +706,7 @@
             // 
             // a7
             // 
+            a7.AccessibleName = "";
             a7.BackColor = Color.DimGray;
             a7.FlatAppearance.BorderColor = Color.White;
             a7.Image = (Image)resources.GetObject("a7.Image");
@@ -670,6 +719,7 @@
             // 
             // b7
             // 
+            b7.AccessibleName = "";
             b7.BackColor = Color.White;
             b7.FlatAppearance.BorderColor = Color.White;
             b7.Image = (Image)resources.GetObject("b7.Image");
@@ -682,6 +732,7 @@
             // 
             // c7
             // 
+            c7.AccessibleName = "";
             c7.BackColor = Color.DimGray;
             c7.FlatAppearance.BorderColor = Color.White;
             c7.Image = (Image)resources.GetObject("c7.Image");
@@ -694,6 +745,7 @@
             // 
             // d7
             // 
+            d7.AccessibleName = "";
             d7.BackColor = Color.White;
             d7.FlatAppearance.BorderColor = Color.White;
             d7.Image = (Image)resources.GetObject("d7.Image");
@@ -706,6 +758,7 @@
             // 
             // e7
             // 
+            e7.AccessibleName = "";
             e7.BackColor = Color.DimGray;
             e7.FlatAppearance.BorderColor = Color.White;
             e7.Image = (Image)resources.GetObject("e7.Image");
@@ -718,6 +771,7 @@
             // 
             // f7
             // 
+            f7.AccessibleName = "";
             f7.BackColor = Color.White;
             f7.FlatAppearance.BorderColor = Color.White;
             f7.Image = (Image)resources.GetObject("f7.Image");
@@ -730,6 +784,7 @@
             // 
             // g7
             // 
+            g7.AccessibleName = "";
             g7.BackColor = Color.DimGray;
             g7.FlatAppearance.BorderColor = Color.White;
             g7.Image = (Image)resources.GetObject("g7.Image");
@@ -742,6 +797,7 @@
             // 
             // h7
             // 
+            h7.AccessibleName = "";
             h7.BackColor = Color.White;
             h7.FlatAppearance.BorderColor = Color.White;
             h7.Image = (Image)resources.GetObject("h7.Image");
@@ -754,6 +810,7 @@
             // 
             // a8
             // 
+            a8.AccessibleName = "";
             a8.BackColor = Color.White;
             a8.FlatAppearance.BorderColor = Color.White;
             a8.Image = (Image)resources.GetObject("a8.Image");
@@ -766,6 +823,7 @@
             // 
             // b8
             // 
+            b8.AccessibleName = "";
             b8.BackColor = Color.DimGray;
             b8.FlatAppearance.BorderColor = Color.White;
             b8.Image = (Image)resources.GetObject("b8.Image");
@@ -778,6 +836,7 @@
             // 
             // c8
             // 
+            c8.AccessibleName = "";
             c8.BackColor = Color.White;
             c8.FlatAppearance.BorderColor = Color.White;
             c8.Image = (Image)resources.GetObject("c8.Image");
@@ -790,6 +849,7 @@
             // 
             // d8
             // 
+            d8.AccessibleName = "";
             d8.BackColor = Color.DimGray;
             d8.FlatAppearance.BorderColor = Color.White;
             d8.Image = (Image)resources.GetObject("d8.Image");
@@ -802,6 +862,7 @@
             // 
             // e8
             // 
+            e8.AccessibleName = "";
             e8.BackColor = Color.White;
             e8.FlatAppearance.BorderColor = Color.White;
             e8.Image = (Image)resources.GetObject("e8.Image");
@@ -814,6 +875,7 @@
             // 
             // f8
             // 
+            f8.AccessibleName = "";
             f8.BackColor = Color.DimGray;
             f8.FlatAppearance.BorderColor = Color.White;
             f8.Image = (Image)resources.GetObject("f8.Image");
@@ -826,6 +888,7 @@
             // 
             // g8
             // 
+            g8.AccessibleName = "";
             g8.BackColor = Color.White;
             g8.FlatAppearance.BorderColor = Color.White;
             g8.Image = (Image)resources.GetObject("g8.Image");
@@ -838,6 +901,7 @@
             // 
             // h8
             // 
+            h8.AccessibleName = "";
             h8.BackColor = Color.DimGray;
             h8.FlatAppearance.BorderColor = Color.White;
             h8.Image = (Image)resources.GetObject("h8.Image");
