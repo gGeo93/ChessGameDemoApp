@@ -5,12 +5,15 @@ using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
 using ChessLibrary.RulesRelated;
 using ChessLibrary.EventsRelated;
+using System;
+using System.Collections;
+using System.Linq;
 
 namespace ChessUIForm;
 
 public partial class ChessboardForm : Form
 {
-    #region [BackendFields]
+    #region [LibraryFields]
     GamingProcess gameManager;
     BoardRelatedInfo currentBoardRelatedInfo;
     BoardRelatedInfo[] boardRelatedInfoMove;
@@ -145,6 +148,8 @@ public partial class ChessboardForm : Form
             chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
+            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, chessBoard.Board[x, y].ASquare, gameManager.WhoPlays) && gameManager.WhoPlays == WhoseTurn.Black)
+                frontBoard[7, 4].BackColor = Color.DarkOrange;
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
             moveParts = new Button[2];

@@ -48,4 +48,8 @@ public static class SpecialOccasions
         }
         return false;
     }
+    public static bool KingCanCastleShort(this BoardRelatedInfo[,] board, WhoseTurn whoPlays)
+    {
+        return true;
+    }
 }
