@@ -1,20 +1,28 @@
 ﻿using ChessLibrary.BoardRelated;
+using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
 
-namespace ChessLibrary.EventsRelated;
+namespace ChessLibrary.SpecialOccasionsRelated;
 
 public static class SpecialOccasions
 {
-    public static bool CanTakeEnPassant(this BoardRelatedInfo[,] board, WhoseTurn whoPlays, Square from, Square to, bool pawnHasJustMoveTwice)
+    public static bool CanTakeEnPassant(this BoardRelatedInfo[,] board, WhoseTurn whoPlays, Square from, Square to)
     {
-        if(pawnHasJustMoveTwice == false)
+        from.InternalCoordinatesOperation(to, out (int xFrom, int yFrom) pseudoCoorFrom, out (int xTo, int yTo) pseudoCoorTo);
+        
+        (int? xpass, int? ypass)? specialCoor = SpecialEvents.pawnHasJustMovedTwice?.Invoke();
+        
+        if (specialCoor?.xpass == null || 
+            specialCoor?.ypass == null || 
+            specialCoor?.ypass != pseudoCoorTo.yTo || 
+            Math.Abs((int)specialCoor?.ypass - pseudoCoorFrom.yFrom) != 1 ||
+            Math.Abs((int)specialCoor?.xpass - pseudoCoorFrom.xFrom) != 0)
             return false;
         
-        from.InternalCoordinatesOperation(to, out (int xFrom, int yFrom) pseudoCoorFrom, out (int xTo, int yTo) pseudoCoorTo);
         PieceName? piece = board[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece?.Name;
-        if (pawnHasJustMoveTwice && whoPlays == WhoseTurn.White)
+        if (SpecialEvents.pawnHasJustMovedTwice != null && whoPlays == WhoseTurn.White)
         {
             if (pseudoCoorFrom.xFrom == 3 && pseudoCoorTo.xTo == 2 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
             {
@@ -26,7 +34,7 @@ public static class SpecialOccasions
                 }
             }
         }
-        else if (pawnHasJustMoveTwice && whoPlays == WhoseTurn.Black)
+        else if (SpecialEvents.pawnHasJustMovedTwice != null && whoPlays == WhoseTurn.Black)
         {
             if (pseudoCoorFrom.xFrom == 4 && pseudoCoorTo.xTo == 5 && Math.Abs(pseudoCoorTo.yTo - pseudoCoorFrom.yFrom) == 1)
             {

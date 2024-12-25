@@ -1,9 +1,10 @@
 ﻿using ChessLibrary.BoardRelated;
-using ChessLibrary.EventsRelated;
+using ChessLibrary.SpecialOccasionsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
 using ChessLibrary.RulesRelated;
+using ChessLibrary.EventsRelated;
 
 namespace ChessUIForm;
 
@@ -105,7 +106,7 @@ public partial class ChessboardForm : Form
 
             bool isThereNoObstacle = currentBoardRelatedInfo.Apiece.Name.ThereIsNoObstacle(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, chessBoard, gameManager.WhoPlays);
 
-            bool canCutEnPass = chessBoard.Board.CanTakeEnPassant(gameManager.WhoPlays, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, true);
+            bool canCutEnPass = chessBoard.Board.CanTakeEnPassant(gameManager.WhoPlays, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare);
             
             if (canCutEnPass)
             {
@@ -124,6 +125,7 @@ public partial class ChessboardForm : Form
                 coordinates = new (int x, int y)[2];
                 gameManager.ChessBoard.Board[x, y].Apiece = currentBoardRelatedInfo.Apiece;
                 gameManager.ChessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
+                SpecialEvents.pawnHasJustMovedTwice = () => (-1, -1);
                 return;
             }
             else if (!canMoveChosenWay || !isThereNoObstacle)

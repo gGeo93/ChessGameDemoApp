@@ -1,6 +1,8 @@
 ﻿using ChessLibrary.BoardRelated;
+using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ChessLibrary.PieceRelated;
 
@@ -39,6 +41,7 @@ public class Pawn : Piece, IMove, IPawn
             return false;
         if (xDistance == 2 && IsOnInitialSquare)
         {
+            SpecialEvents.pawnHasJustMovedTwice = () => (pseudoCoorTo.xTo, pseudoCoorTo.yTo); 
             this.IsOnInitialSquare = false;
             return true;
         }
