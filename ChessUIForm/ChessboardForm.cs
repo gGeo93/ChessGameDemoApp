@@ -143,13 +143,19 @@ public partial class ChessboardForm : Form
                 return;
             }
             ((Button)sender).Image = moveParts[0].Image;
+            chessBoard.Board[x, y].Apiece = currentBoardRelatedInfo.Apiece;
+            chessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
             chessBoard.Board[x, y].ApieceOccupySqsuare = true;
             chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
             chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
-            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, chessBoard.Board[x, y].ASquare, gameManager.WhoPlays) && gameManager.WhoPlays == WhoseTurn.Black)
-                frontBoard[7, 4].BackColor = Color.DarkOrange;
+            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, gameManager.WhiteKingPosition, gameManager.WhoPlays))
+            {
+                String kingSquare = gameManager.WhiteKingPosition.Letter.ToString() + gameManager.WhiteKingPosition.Number.ToString();
+                (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
+                frontBoard[kx, ky].BackColor = Color.DarkOrange;
+            }
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
             moveParts = new Button[2];

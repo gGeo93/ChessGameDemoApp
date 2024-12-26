@@ -10,6 +10,8 @@ public class GamingProcess
     public WhoseTurn WhoPlays { get; set; }
     public int MoveCompletionCounter { get; set; }
     public Square[] Move { get; set; }
+    public Square WhiteKingPosition { get; set; }
+    public Square BlackKingPosition { get; set; }
     public GamingProcess()
     {
         ChessBoard = new ChessBoard();
@@ -17,5 +19,7 @@ public class GamingProcess
         WhoPlays = WhoseTurn.White;
         Move = new Square[2];
         MoveCompletionCounter = 0;
+        WhiteKingPosition = new Square { Color = PieceRelated.SquareColor.BLACK, Letter = 'e', Number = 1 };
+        BlackKingPosition = new Square { Color = PieceRelated.SquareColor.WHITE, Letter = 'e', Number = 8 };
     }
 }

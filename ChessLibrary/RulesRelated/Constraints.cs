@@ -61,13 +61,18 @@ public static class Constraints
 
     private static bool HasNoObstacles(this ChessBoard chessBoard, WhoseTurn whoPlays, (int xFrom, int yFrom) pseudoCoorFrom, (int xTo, int yTo) pseudoCoorTo)
     {
-        bool goStraightX = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom >= 0;
-        bool goStraightY = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom >= 0;
+        bool goStraightX = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom > 0;
+        bool goStraightY = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom > 0;
+        bool xEqual = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom == 0;
+        bool yEqual = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom == 0;
+        bool notGoStraightX = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom < 0;
+        bool notGoStraightY = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom < 0;
+
         int xtoResult = pseudoCoorTo.xTo;
         int ytoResult = pseudoCoorTo.yTo;
         int xfromResult = pseudoCoorFrom.xFrom;
         int yfromResult = pseudoCoorFrom.yFrom;
-        if (pseudoCoorTo.xTo == pseudoCoorFrom.xFrom)
+        if (xEqual)
         {
             if (goStraightY)
             {
@@ -77,7 +82,7 @@ public static class Constraints
                         return false;
                 }
             }
-            else if (!goStraightY)
+            else if (notGoStraightY)
             {
                 for (int y = pseudoCoorFrom.yFrom - 1; y > pseudoCoorTo.yTo; y--)
                 {
@@ -86,7 +91,7 @@ public static class Constraints
                 }
             }
         }
-        else if (pseudoCoorTo.yTo == pseudoCoorFrom.yFrom)
+        else if (yEqual)
         {
             if (goStraightX)
             {
@@ -96,7 +101,7 @@ public static class Constraints
                         return false;
                 }
             }
-            else if (!goStraightX)
+            else if (notGoStraightX)
             {
                 for (int x = pseudoCoorFrom.xFrom - 1; x > pseudoCoorTo.xTo; x--)
                 {
@@ -110,37 +115,37 @@ public static class Constraints
             int y = yfromResult + 1;
             for (int x = xfromResult + 1; x < xtoResult; x++)
             {
-                if (chessBoard.Board[x, y].ApieceOccupySqsuare)
+                 if (y < 8 && chessBoard.Board[x, y].ApieceOccupySqsuare)
                     return false;
                 y++;
             }
         }
-        else if (goStraightX && !goStraightY)
+        else if (goStraightX && notGoStraightY)
         {
             int x = xfromResult + 1;
             for (int y = yfromResult - 1; y > ytoResult; y--)
             {
-                if (chessBoard.Board[x, y].ApieceOccupySqsuare)
+                if (x < 8 && chessBoard.Board[x, y].ApieceOccupySqsuare)
                     return false;
                 x++;
             }
         }
-        else if (!goStraightX && goStraightY)
+        else if (notGoStraightX && goStraightY)
         {
             int x = xfromResult - 1;
             for (int y = yfromResult + 1; y < ytoResult; y++)
             {
-                if (chessBoard.Board[x, y].ApieceOccupySqsuare)
+                if (x >= 0 && chessBoard.Board[x, y].ApieceOccupySqsuare)
                     return false;
                 x--;
             }
         }
-        else if (!goStraightX && !goStraightY)
+        else if (notGoStraightX && notGoStraightY)
         {
             int y = yfromResult - 1;
             for (int x = xfromResult - 1; x > xtoResult; x--)
             {
-                if (chessBoard.Board[x, y].ApieceOccupySqsuare)
+                if (y >= 0 && chessBoard.Board[x, y].ApieceOccupySqsuare)
                     return false;
                 y--;
             }

@@ -46,13 +46,13 @@ public class King : Piece, IMove
             {
                 Piece? piece = chessBoard.Board[x, y]?.Apiece;
 
-                if (chessBoard.Board[x, y].Apiece is null || piece!.Color == PieceInfo.WHITE || turn == WhoseTurn.White || piece.Name == PieceName.PAWN) 
+                if (piece is null || piece!.Color == PieceInfo.WHITE) 
                     continue;
                 
                 PieceName pieceName = piece.Name;
-                Square rSquare = chessBoard.Board[x, y].ASquare;
-                canPerformMove = pieceName.CanPerfomeThisMove(rSquare, chessBoard.Board[kx, ky].ASquare, WhoseTurn.Black);
-                thereAreNoObstacles = pieceName.ThereIsNoObstacle(rSquare, chessBoard.Board[kx, ky].ASquare, chessBoard, WhoseTurn.Black);
+                Square pSquare = chessBoard.Board[x, y].ASquare;
+                canPerformMove = pieceName.CanPerfomeThisMove(pSquare, chessBoard.Board[kx, ky].ASquare, turn);
+                thereAreNoObstacles = pieceName.ThereIsNoObstacle(pSquare, chessBoard.Board[kx, ky].ASquare, chessBoard, turn);
                 if (canPerformMove && thereAreNoObstacles)
                     return true;
             }
