@@ -59,7 +59,7 @@ public partial class ChessboardForm : Form
         #endregion
 
         #region [FutureConstraints]
-        if (!chessBoard.Board[x, y].ApieceOccupySqsuare && gameManager.MoveCompletionCounter == 1)
+        if (!chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
             gameManager.MoveCompletionCounter = 0;
             return;
@@ -67,7 +67,7 @@ public partial class ChessboardForm : Form
         #endregion
 
         #region [FirstHalfOfTheMove]
-        else if (chessBoard.Board[x, y].ApieceOccupySqsuare && gameManager.MoveCompletionCounter == 1)
+        else if (chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
             currentBoardRelatedInfo = new BoardRelatedInfo()
             {
@@ -76,7 +76,7 @@ public partial class ChessboardForm : Form
                     Name = chessBoard.Board[x, y].Apiece.Name,
                     Color = chessBoard.Board[x, y].Apiece.Color
                 },
-                ApieceOccupySqsuare = true,
+                ApieceOccupySquare = true,
                 ASquare = chessBoard.Board[x, y].ASquare,
             };
             boardRelatedInfoMove[0] = currentBoardRelatedInfo;
@@ -103,7 +103,7 @@ public partial class ChessboardForm : Form
             boardRelatedInfoMove[1] = currentBoardRelatedInfo;
             frontBoard[x, y] = ((Button)sender);
             moveParts[0].BackColor = squareColor;
-            chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
+            chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = false;
 
             bool canMoveChosenWay = currentBoardRelatedInfo.Apiece.Name.CanPerfomeThisMove(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays);
 
@@ -114,8 +114,8 @@ public partial class ChessboardForm : Form
             if (canCutEnPass)
             {
                 ((Button)sender).Image = moveParts[0].Image;
-                chessBoard.Board[x, y].ApieceOccupySqsuare = true;
-                chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
+                chessBoard.Board[x, y].ApieceOccupySquare = true;
+                chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = false;
                 chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
                 moveParts[0].Image = null;
                 frontBoard[gameManager.WhoPlays == WhoseTurn.White ? x + 1 : x - 1, y].Image = null;
@@ -133,7 +133,7 @@ public partial class ChessboardForm : Form
             }
             else if (!canMoveChosenWay || !isThereNoObstacle)
             {
-                chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = true;
+                chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = true;
                 chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = boardRelatedInfoMove[0].Apiece;
                 gameManager.MoveCompletionCounter = 0;
                 moveParts = new Button[2];
@@ -145,8 +145,8 @@ public partial class ChessboardForm : Form
             ((Button)sender).Image = moveParts[0].Image;
             chessBoard.Board[x, y].Apiece = currentBoardRelatedInfo.Apiece;
             chessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
-            chessBoard.Board[x, y].ApieceOccupySqsuare = true;
-            chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySqsuare = false;
+            chessBoard.Board[x, y].ApieceOccupySquare = true;
+            chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = false;
             chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;

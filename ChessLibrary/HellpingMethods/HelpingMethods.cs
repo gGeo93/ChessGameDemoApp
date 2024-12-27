@@ -18,7 +18,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Rook { Color = PieceInfo.WHITE, Name = PieceName.ROOK },
                             ASquare = new Square { Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -27,7 +27,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Knight { Color = PieceInfo.WHITE, Name = PieceName.KNIGHT },
                             ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -36,7 +36,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Bishop { Color = PieceInfo.WHITE, Name = PieceName.BISHOP },
                             ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -45,7 +45,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Queen { Color = PieceInfo.WHITE, Name = PieceName.QUEEN },
                             ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -54,7 +54,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new King { Color = PieceInfo.WHITE, Name = PieceName.KING },
                             ASquare = new Square { Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -63,14 +63,14 @@ public static class HelpingMethods
                 else if (i == 6)
                     board[i, j] = new BoardRelatedInfo
                     {
-                        ApieceOccupySqsuare = true,
+                        ApieceOccupySquare = true,
                         Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.WHITE, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
                         ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
                 else if (i == 1)
                     board[i, j] = new BoardRelatedInfo
                     {
-                        ApieceOccupySqsuare = true,
+                        ApieceOccupySquare = true,
                         Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.BLACK, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
                         ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
@@ -80,7 +80,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Rook { Color = PieceInfo.BLACK, Name = PieceName.ROOK },
                             ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -89,7 +89,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Knight { Color = PieceInfo.BLACK, Name = PieceName.KNIGHT },
                             ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -98,7 +98,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Bishop { Color = PieceInfo.BLACK, Name = PieceName.BISHOP },
                             ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -107,7 +107,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new Queen { Color = PieceInfo.BLACK, Name = PieceName.QUEEN },
                             ASquare = new Square { Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -116,7 +116,7 @@ public static class HelpingMethods
                     {
                         board[i, j] = new BoardRelatedInfo
                         {
-                            ApieceOccupySqsuare = true,
+                            ApieceOccupySquare = true,
                             Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING },
                             ASquare = new Square { Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                         };
@@ -124,7 +124,7 @@ public static class HelpingMethods
                 }
                 else
                 {
-                    board[i, j] = new BoardRelatedInfo() { ApieceOccupySqsuare = false, Apiece = null , ASquare = new Square() { Letter = j.ColumnConverter(), Number = i.RowConverter(), Color = (i + j) % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK } };
+                    board[i, j] = new BoardRelatedInfo() { ApieceOccupySquare = false, Apiece = null , ASquare = new Square() { Letter = j.ColumnConverter(), Number = i.RowConverter(), Color = (i + j) % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK } };
                 }
             }
         }

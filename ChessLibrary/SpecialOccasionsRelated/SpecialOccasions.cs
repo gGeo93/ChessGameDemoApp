@@ -29,7 +29,7 @@ public static class SpecialOccasions
                 if (piece == PieceName.PAWN && board[3, pseudoCoorTo.yTo].Apiece?.Name == PieceName.PAWN && board[3, pseudoCoorTo.yTo].Apiece?.Color == PieceInfo.BLACK)
                 {
                     board[3, pseudoCoorTo.yTo].Apiece = null;
-                    board[3, pseudoCoorTo.yTo].ApieceOccupySqsuare = false;
+                    board[3, pseudoCoorTo.yTo].ApieceOccupySquare = false;
                     return true;
                 }
             }
@@ -41,7 +41,7 @@ public static class SpecialOccasions
                 if (piece == PieceName.PAWN && board[4, pseudoCoorTo.yTo].Apiece?.Name == PieceName.PAWN && board[4, pseudoCoorTo.yTo].Apiece?.Color == PieceInfo.WHITE)
                 {
                     board[4, pseudoCoorTo.yTo].Apiece = null;
-                    board[4, pseudoCoorTo.yTo].ApieceOccupySqsuare = false;
+                    board[4, pseudoCoorTo.yTo].ApieceOccupySquare = false;
                     return true;
                 }
             }
