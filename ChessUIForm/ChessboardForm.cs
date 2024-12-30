@@ -154,7 +154,9 @@ public partial class ChessboardForm : Form
             {
                 String kingSquare = gameManager.WhiteKingPosition.Letter.ToString() + gameManager.WhiteKingPosition.Number.ToString();
                 (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
-                frontBoard[kx, ky].BackColor = Color.DarkOrange;
+                frontBoard[kx, ky].BackColor = 
+                    SpecialEvents.whiteKingIsMate.Invoke(chessBoard, gameManager.WhiteKingPosition, chessBoard.Board[x, y].ASquare ,true, gameManager.WhoPlays)
+                    ? Color.Red : Color.DarkOrange;
             }
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
