@@ -5,6 +5,7 @@ namespace ChessLibrary.GamingProcessRelated;
 
 public class GamingProcess
 {
+    public static GamingProcess Instance{ get; private set; }
     public ChessBoard ChessBoard { get; set; }
     public MaterialLeft Material { get; set; }
     public WhoseTurn WhoPlays { get; set; }
@@ -14,6 +15,7 @@ public class GamingProcess
     public Square BlackKingPosition { get; set; }
     public GamingProcess()
     {
+        Instance = this;
         ChessBoard = new ChessBoard();
         Material = new MaterialLeft();
         WhoPlays = WhoseTurn.White;

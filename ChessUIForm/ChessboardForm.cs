@@ -58,17 +58,16 @@ public partial class ChessboardForm : Form
         chessBoard = gameManager.ChessBoard;
         #endregion
 
-        #region [FutureConstraints]
+        
         if (!chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
             gameManager.MoveCompletionCounter = 0;
             return;
         }
-        #endregion
-
         #region [FirstHalfOfTheMove]
         else if (chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
+            var kings = GetKingsPosition();
             currentBoardRelatedInfo = new BoardRelatedInfo()
             {
                 Apiece = new Piece
@@ -150,12 +149,13 @@ public partial class ChessboardForm : Form
             chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = null;
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
-            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, gameManager.WhiteKingPosition, gameManager.WhoPlays))
+            var kingPosition = gameManager.WhoPlays == WhoseTurn.White ? gameManager.BlackKingPosition : gameManager.WhiteKingPosition;
+            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, kingPosition, gameManager.WhoPlays))
             {
-                String kingSquare = gameManager.WhiteKingPosition.Letter.ToString() + gameManager.WhiteKingPosition.Number.ToString();
+                String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
                 (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
                 frontBoard[kx, ky].BackColor = 
-                    SpecialEvents.whiteKingIsMate.Invoke(chessBoard, gameManager.WhiteKingPosition, chessBoard.Board[x, y].ASquare ,true, gameManager.WhoPlays)
+                    SpecialEvents.whiteKingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[x, y].ASquare ,true, gameManager.WhoPlays)
                     ? Color.Red : Color.DarkOrange;
             }
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
@@ -169,7 +169,21 @@ public partial class ChessboardForm : Form
         gameManager.ChessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
         #endregion
     }
-
+    private (Piece whiteKing, Piece blackKing ) GetKingsPosition()
+    {
+        Piece white = new King();
+        Piece black = new King();
+        for (int i = 0; i < 8; i++) 
+            for (int j = 0; j < 8; j++)
+                if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece?.Name == PieceName.KING)
+                {
+                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.WHITE)
+                        white = GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece;
+                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.BLACK)
+                        black = GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece;
+                }
+        return (white!, black!);
+    }
     private void ColorsRender()
     {
         this.whoPlaysLabel.ForeColor = gameManager.WhoPlays == WhoseTurn.White ? Color.White : Color.Black;

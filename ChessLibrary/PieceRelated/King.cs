@@ -14,11 +14,11 @@ public class King : Piece, IMove
         if (SpecialEvents.whiteKingIsChecked != null && SpecialEvents.whiteKingIsMate != null)
             return;
         
-        if (Color == PieceInfo.WHITE && SpecialEvents.whiteKingIsChecked == null)
-            SpecialEvents.whiteKingIsChecked = WhiteKingIsChecked;
+        if (SpecialEvents.whiteKingIsChecked == null)
+            SpecialEvents.whiteKingIsChecked = KingIsChecked;
 
-        if (Color == PieceInfo.WHITE && SpecialEvents.whiteKingIsMate == null)
-            SpecialEvents.whiteKingIsMate = WhiteKingIsMate;
+        if (SpecialEvents.whiteKingIsMate == null)
+            SpecialEvents.whiteKingIsMate = KingIsMate;
     }
     
     public bool Movement(Square from, Square to)
@@ -29,10 +29,10 @@ public class King : Piece, IMove
 
         if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) != 1 && MathF.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo) != 1)
              return false;
-       
+
         return true;
     }
-    private bool WhiteKingIsChecked(ChessBoard chessBoard, Square whiteKingPosition, WhoseTurn turn)
+    private bool KingIsChecked(ChessBoard chessBoard, Square whiteKingPosition, WhoseTurn turn)
     {
         String kingSquare = whiteKingPosition.Letter.ToString() + whiteKingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
@@ -45,7 +45,7 @@ public class King : Piece, IMove
             {
                 Piece? piece = chessBoard.Board[x, y]?.Apiece;
 
-                if (piece is null || piece!.Color == PieceInfo.WHITE) 
+                if (piece is null) 
                     continue;
                 
                 PieceName pieceName = piece.Name;
@@ -64,12 +64,12 @@ public class King : Piece, IMove
             default: return false;
         }
     }
-    private bool WhiteKingIsMate(ChessBoard chessBoard, Square whiteKingPosition, Square attackingPiecePosition, bool isChecked, WhoseTurn turn)
+    private bool KingIsMate(ChessBoard chessBoard, Square threatedKingPosition, Square attackingPiecePosition, bool isChecked, WhoseTurn turn)
     {
         if (!isChecked)
             return false;
         
-        bool kingCannotMove = KingCannotMove(chessBoard, whiteKingPosition);
+        bool kingCannotMove = KingCannotMove(chessBoard, threatedKingPosition, turn);
         
         if (kingCannotMove && _doubleCheck)
             return true;
@@ -77,27 +77,27 @@ public class King : Piece, IMove
             return false;
         if(!AttackingPieceCannotBeCaptured(chessBoard, attackingPiecePosition, turn))
             return false;
-        if(!BetweenAttackingPieceAndKingNopieceCanBlock(chessBoard, whiteKingPosition, attackingPiecePosition, turn))
+        if(!BetweenAttackingPieceAndKingNopieceCanBlock(chessBoard, threatedKingPosition, attackingPiecePosition, turn))
             return false;
         
         return true;
     }
-    private bool KingCannotMove(ChessBoard chessBoard, Square whiteKingPosition)
+    private bool KingCannotMove(ChessBoard chessBoard, Square threatedKingPosition, WhoseTurn turn)
     {
-        String kpos = whiteKingPosition.Letter + whiteKingPosition.Number.ToString();
+        String kpos = threatedKingPosition.Letter + threatedKingPosition.Number.ToString();
         (int kx, int ky) = kpos.FromRealToProgrammingCoordinates();
      
-        if((kx + 1 <= 7) && !chessBoard.Board[kx + 1, ky].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky].ASquare, WhoseTurn.White))
+        if((kx + 1 <= 7) && !chessBoard.Board[kx + 1, ky].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky].ASquare, turn))
             return false;
-        if((kx - 1 >= 0) && !chessBoard.Board[kx - 1, ky].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky].ASquare, WhoseTurn.White))
+        if((kx - 1 >= 0) && !chessBoard.Board[kx - 1, ky].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky].ASquare, turn))
             return false;
-        if((ky + 1 <= 7) && !chessBoard.Board[kx, ky + 1].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx, ky + 1].ASquare, WhoseTurn.White))
+        if((ky + 1 <= 7) && !chessBoard.Board[kx, ky + 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky + 1].ASquare, turn))
             return false;
-        if((ky - 1 >= 0) && !chessBoard.Board[kx, ky - 1].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx, ky - 1].ASquare, WhoseTurn.White))
+        if((ky - 1 >= 0) && !chessBoard.Board[kx, ky - 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky - 1].ASquare, turn))
             return false;
-        if((kx + 1 <= 7) && (ky + 1 <= 7) && !chessBoard.Board[kx + 1, ky + 1].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky + 1].ASquare, WhoseTurn.White))
+        if((kx + 1 <= 7) && (ky + 1 <= 7) && !chessBoard.Board[kx + 1, ky + 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky + 1].ASquare, turn))
             return false;
-        if((kx - 1 >= 0) && (ky - 1 >= 0) && !chessBoard.Board[kx - 1, ky - 1].ApieceOccupySquare && !WhiteKingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky - 1].ASquare, WhoseTurn.White))
+        if((kx - 1 >= 0) && (ky - 1 >= 0) && !chessBoard.Board[kx - 1, ky - 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky - 1].ASquare, turn))
             return false;
 
         return true;
@@ -106,7 +106,6 @@ public class King : Piece, IMove
     {
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
         (int ax, int ay) = apos.FromRealToProgrammingCoordinates();
-
         for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
         {
             for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
@@ -116,8 +115,8 @@ public class King : Piece, IMove
                 if (ax == i && ay == j)
                     continue;
                 PieceName pieceName = chessBoard.Board[i, j].Apiece!.Name;
-                if (pieceName.CanPerfomeThisMove(chessBoard.Board[i, j].ASquare, attackingPiecePosition, WhoseTurn.White))
-                    if (pieceName.ThereIsNoObstacle(chessBoard.Board[i, j].ASquare, attackingPiecePosition, chessBoard, WhoseTurn.White))
+                if (pieceName.CanPerfomeThisMove(chessBoard.Board[i, j].ASquare, attackingPiecePosition, turn))
+                    if (pieceName.ThereIsNoObstacle(chessBoard.Board[i, j].ASquare, attackingPiecePosition, chessBoard, turn))
                         return false;
             }
         }
