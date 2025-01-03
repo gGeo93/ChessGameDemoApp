@@ -67,7 +67,7 @@ public partial class ChessboardForm : Form
         #region [FirstHalfOfTheMove]
         else if (chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
-            var kings = GetKingsPosition();
+            var kings = GetKingsPositions();
             currentBoardRelatedInfo = new BoardRelatedInfo()
             {
                 Apiece = new Piece
@@ -75,7 +75,7 @@ public partial class ChessboardForm : Form
                     Name = chessBoard.Board[x, y].Apiece.Name,
                     Color = chessBoard.Board[x, y].Apiece.Color
                 },
-                ApieceOccupySquare = true,
+                ApieceOccupySquare = chessBoard.Board[x, y].ApieceOccupySquare,
                 ASquare = chessBoard.Board[x, y].ASquare,
             };
             boardRelatedInfoMove[0] = currentBoardRelatedInfo;
@@ -104,7 +104,7 @@ public partial class ChessboardForm : Form
             moveParts[0].BackColor = squareColor;
             chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = false;
 
-            bool canMoveChosenWay = currentBoardRelatedInfo.Apiece.Name.CanPerfomeThisMove(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays);
+            bool canMoveChosenWay = currentBoardRelatedInfo.Apiece.Name.CanPerfomeThisMove(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, gameManager.WhoPlays, currentBoardRelatedInfo.Apiece.Color);
 
             bool isThereNoObstacle = currentBoardRelatedInfo.Apiece.Name.ThereIsNoObstacle(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, chessBoard, gameManager.WhoPlays);
 
@@ -130,7 +130,7 @@ public partial class ChessboardForm : Form
                 SpecialEvents.pawnHasJustMovedTwice = () => (-1, -1);
                 return;
             }
-            else if (!canMoveChosenWay || !isThereNoObstacle)
+            else if (canMoveChosenWay == false || isThereNoObstacle == false)
             {
                 chessBoard.Board[coordinates[0].x, coordinates[0].y].ApieceOccupySquare = true;
                 chessBoard.Board[coordinates[0].x, coordinates[0].y].Apiece = boardRelatedInfoMove[0].Apiece;
@@ -169,7 +169,7 @@ public partial class ChessboardForm : Form
         gameManager.ChessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
         #endregion
     }
-    private (Piece whiteKing, Piece blackKing ) GetKingsPosition()
+    private (King whiteKing, King blackKing ) GetKingsPositions()
     {
         Piece white = new King();
         Piece black = new King();
@@ -182,7 +182,7 @@ public partial class ChessboardForm : Form
                     if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.BLACK)
                         black = GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece;
                 }
-        return (white!, black!);
+        return ((King)white!, (King)black!);
     }
     private void ColorsRender()
     {

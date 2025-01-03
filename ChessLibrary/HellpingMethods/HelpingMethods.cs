@@ -64,14 +64,14 @@ public static class HelpingMethods
                     board[i, j] = new BoardRelatedInfo
                     {
                         ApieceOccupySquare = true,
-                        Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.WHITE, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
+                        Apiece = new Pawn(PieceInfo.WHITE) { Color = PieceInfo.WHITE, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
                         ASquare = new Square {Color = j % 2 == 0 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
                 else if (i == 1)
                     board[i, j] = new BoardRelatedInfo
                     {
                         ApieceOccupySquare = true,
-                        Apiece = new Pawn(GamingProcessRelated.WhoseTurn.White) { Color = PieceInfo.BLACK, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
+                        Apiece = new Pawn(PieceInfo.BLACK) { Color = PieceInfo.BLACK, Name = PieceName.PAWN, IsOnInitialSquare = true, PawnIntentsToMoveTwice = false },
                         ASquare = new Square {Color = j % 2 == 1 ? SquareColor.WHITE : SquareColor.BLACK, Letter = j.ColumnConverter(), Number = i.RowConverter() }
                     };
                 else if (i == 0)

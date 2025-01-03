@@ -10,12 +10,12 @@ public class Pawn : Piece, IMove, IPawn
 {
     public bool PawnIntentsToMoveTwice { get; set; }
     public bool IsOnInitialSquare { get; set; }
-    public WhoseTurn WhoPlays { get; set; }
+    public PieceInfo? pieceinfo { get; set; }
 
-    public Pawn(WhoseTurn whoseTurn)
+    public Pawn(PieceInfo? pieceinfo)
     {
         this.IsOnInitialSquare = true;
-        this.WhoPlays = whoseTurn;
+        this.pieceinfo = pieceinfo;
     }
 
     public bool Movement(Square from, Square to)
@@ -24,19 +24,22 @@ public class Pawn : Piece, IMove, IPawn
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
         
-        if (WhoPlays == WhoseTurn.White)
+        if (pieceinfo == PieceInfo.WHITE)
         {
             if (pseudoCoorTo.xTo >= pseudoCoorFrom.xFrom)
                 return false;
         }
-        else
+        else if(pieceinfo == PieceInfo.BLACK)
         {
             if (pseudoCoorTo.xTo <= pseudoCoorFrom.xFrom)
                 return false;
         }
 
         int xDistance = Math.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo);
-
+        int yDistance = Math.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo);
+        
+        if(yDistance > 1)
+            return false;
         if (xDistance > 2)
             return false;
         if (xDistance == 2 && IsOnInitialSquare)

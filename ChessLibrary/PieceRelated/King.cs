@@ -27,7 +27,7 @@ public class King : Piece, IMove
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
 
-        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) != 1 && MathF.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo) != 1)
+        if (MathF.Abs(pseudoCoorFrom.xFrom - pseudoCoorTo.xTo) != 1 || MathF.Abs(pseudoCoorFrom.yFrom - pseudoCoorTo.yTo) != 1)
              return false;
 
         return true;
@@ -45,12 +45,13 @@ public class King : Piece, IMove
             for (int y = 0; y < chessBoard.Board.GetLength(1); y++)
             {
                 Piece? piece = chessBoard.Board[x, y]?.Apiece;
-                if (piece is null || piece.Color == colorToPass) 
+                
+                if (piece is null || piece.Color == colorToPass || piece.Name == PieceName.KING) 
                     continue;
                 
-                PieceName pieceName = piece.Name;
+                PieceName pieceName = piece!.Name;
                 Square pSquare = chessBoard.Board[x, y].ASquare;
-                canPerformMove = pieceName.CanPerfomeThisMove(pSquare, chessBoard.Board[kx, ky].ASquare, turn);
+                canPerformMove = pieceName.CanPerfomeThisMove(pSquare, chessBoard.Board[kx, ky].ASquare, turn, chessBoard.Board[kx, ky].Apiece?.Color);
                 thereAreNoObstacles = pieceName.ThereIsNoObstacle(pSquare, chessBoard.Board[kx, ky].ASquare, chessBoard, turn);
                 if (canPerformMove && thereAreNoObstacles)
                     howManyChecks++;
@@ -110,12 +111,16 @@ public class King : Piece, IMove
         {
             for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
             {
-                if (chessBoard.Board[i, j].Apiece == null)
+                if (chessBoard.Board[i, j].Apiece == null 
+                    ||
+                    (turn == WhoseTurn.Black && chessBoard.Board[i, j].Apiece!.Color == PieceInfo.WHITE)
+                    ||
+                    (turn == WhoseTurn.White && chessBoard.Board[i, j].Apiece!.Color == PieceInfo.BLACK))
                    continue;
                 if (ax == i && ay == j)
                     continue;
                 PieceName pieceName = chessBoard.Board[i, j].Apiece!.Name;
-                if (pieceName.CanPerfomeThisMove(chessBoard.Board[i, j].ASquare, attackingPiecePosition, turn))
+                if (pieceName.CanPerfomeThisMove(chessBoard.Board[i, j].ASquare, attackingPiecePosition, turn, chessBoard.Board[i, j].Apiece!.Color))
                     if (pieceName.ThereIsNoObstacle(chessBoard.Board[i, j].ASquare, attackingPiecePosition, chessBoard, turn))
                         return false;
             }
@@ -143,40 +148,37 @@ public class King : Piece, IMove
                 (ay - 1 >= 0 && chessBoard.Board[ax + 1, ay - 1].Apiece?.Name == PieceName.KING))
                 return true;
         }
-        else if(pieceName == PieceName.ROOK || pieceName == PieceName.QUEEN)
+        else if (pieceName == PieceName.ROOK || pieceName == PieceName.QUEEN || pieceName == PieceName.BISHOP)
         {
-            bool goStraightX = ax - kx > 0;
-            bool goStraightY = ay - ky > 0;
+            PieceInfo pieceInfo = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
+
+            bool goStraightX = kx - ax > 0;
+            bool goStraightY = ky - ay > 0;
             bool xEqual = kx - ax == 0;
             bool yEqual = ky - ay == 0;
-            bool notGoStraightX = ax - kx < 0;
-            bool notGoStraightY = ay - ky < 0;
+            bool notGoStraightX = kx - ax < 0;
+            bool notGoStraightY = ky - ay < 0;
+
             if (xEqual)
             {
                 if (goStraightY)
                 {
-                    for (int y = ky + 1; y < ay; y++)
+                    int x = 0;
+                    for (int y = ay + 1; y < ky; y++)
                     {
-                        for (int x = 0; x < 8; x++)
-                        {
-                            if (board[x, y].Apiece == null)
-                                continue;
-                            if (board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, board[kx, y].ASquare, chessBoard, turn))
-                                return true;
-                        }
+                        if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                            return false;
+                        x++;
                     }
                 }
                 else if (notGoStraightY)
                 {
-                    for (int y = ky - 1; y > ay; y--)
+                    int x = 0;
+                    for (int y = ay - 1; y > ky; y--)
                     {
-                        for (int x = 0; x < 8; x++)
-                        {
-                            if (board[x, y].Apiece == null)
-                                continue;
-                            if (board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, board[kx, y].ASquare, chessBoard, turn))
-                                return true;
-                        }
+                        if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                            return false;
+                        x++;
                     }
                 }
             }
@@ -184,140 +186,93 @@ public class King : Piece, IMove
             {
                 if (goStraightX)
                 {
-                    for (int x = kx + 1; x < ax; x++)
+                    int y = 0;
+                    for (int x = ax + 1; x < kx; x++)
                     {
-                        for (int y = 0; y < 8; y++)
-                        {
-                            if (board[x, y].Apiece == null)
-                                continue;
-                            if (board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, board[x, ky].ASquare, chessBoard, turn))
-                                return true;
-                        }
+                        if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                            return false;
+                        y++;
                     }
                 }
                 else if (notGoStraightX)
                 {
-                    for (int x = kx - 1; x > ax; x--)
+                    int y = 0;
+                    for (int x = ax - 1; x > kx; x--)
                     {
-                        for (int y = 0; y < 8; y++)
-                        {
-                            if (board[x, y].Apiece == null)
-                                continue;
-                            if (board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, board[x, ky].ASquare, chessBoard, turn))
-                                return true;
-                        }
+                        if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                            return false;
+                        y++;
                     }
                 }
             }
             else if (goStraightX && goStraightY)
             {
-                for (int x = kx + 1; x < ax; x++)
+                int y = ay + 1;
+                for (int x = ax + 1; x < kx; x++)
                 {
-                    for (int y = ky + 1; y < ay; y++)
-                    {
-                        for (int i = 0; i < 8; i++)
-                        {
-                            for (int j = 0; j < 8; j++)
-                            {
-                                if (board[i, j].Apiece == null)
-                                    continue;
-                                if (board[i, j].Apiece!.Name.ThereIsNoObstacle(board[i, j].ASquare, board[x, y].ASquare, chessBoard, turn))
-                                    return true;
-                            }
-                        }
-                    }
-                }
-            }
-            //else if (goStraightX && notGoStraightY)
-            //{
-            //    int x = xfromResult + 1;
-            //    for (int y = yfromResult - 1; y > ytoResult; y--)
-            //    {
-            //        if (x < 8 && chessBoard.Board[x, y].ApieceOccupySquare)
-            //            return false;
-            //        x++;
-            //    }
-            //}
-            //else if (notGoStraightX && goStraightY)
-            //{
-            //    int x = xfromResult - 1;
-            //    for (int y = yfromResult + 1; y < ytoResult; y++)
-            //    {
-            //        if (x >= 0 && chessBoard.Board[x, y].ApieceOccupySquare)
-            //            return false;
-            //        x--;
-            //    }
-            //}
-            //else if (notGoStraightX && notGoStraightY)
-            //{
-            //    int y = yfromResult - 1;
-            //    for (int x = xfromResult - 1; x > xtoResult; x--)
-            //    {
-            //        if (y >= 0 && chessBoard.Board[x, y].ApieceOccupySquare)
-            //            return false;
-            //        y--;
-            //    }
-            //}
-        }
-        else if (pieceName == PieceName.BISHOP || pieceName == PieceName.QUEEN)
-        {
-            //if (kx - ky == ax - ay)
-            //    return NoPieceCanBlockQueenOrBishop(chessBoard, turn, kx, ky, ax, ay, ay + 1 < );
-            //else if(-(kx-ky) == ax - ay)
-            //    return NoPieceCanBlockQueenOrBishop(chessBoard, turn, kx, ky, ax, ay, ay + 1 )
-
-
-        }
-        return true;
-    }
-    private bool QueenOrRookCannotBlock(ChessBoard chessBoard, WhoseTurn turn, int kx, int ky, int ax, BoardRelatedInfo[,] board, int j)
-    {
-        Square square = board[ax, j].ASquare;
-        for (int x = 0; x < board.GetLength(0); x++)
-        {
-            for (int y = 0; y < board.GetLength(1); y++)
-            {
-                if (board[x, y].ApieceOccupySquare && board[x, y].Apiece!.Color == board[kx, ky].Apiece!.Color)
-                {
-                    if
-                    (board[x, y].Apiece!.Name.CanPerfomeThisMove(board[x, y].ASquare, square, turn)
-                    &&
-                    board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, square, chessBoard, turn))
-                    {
+                    if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
                         return false;
-                    }
+                    y++;
                 }
             }
-        }
-        return true;
-    }
-    private bool QueenOrBishopCannotBlock(ChessBoard chessBoard, WhoseTurn turn, int kx, int ky, int ax, int ay)
-    {
-        var board = chessBoard.Board;
-        Square square = board[ax, ay].ASquare;
-        for (int x = 0; x < board.GetLength(0); x++)
-        {
-            for (int y = 0; y < board.GetLength(1); y++)
+            else if (goStraightX && notGoStraightY)
             {
-                if (board[x, y].ApieceOccupySquare && board[x, y].Apiece!.Color == board[kx, ky].Apiece!.Color)
+                int y = ay - 1;
+                for (int x = ax + 1; x < kx; x++)
                 {
-                    if 
-                    (board[x, y].Apiece!.Name.CanPerfomeThisMove(board[x, y].ASquare, square, turn)
-                    &&
-                    board[x, y].Apiece!.Name.ThereIsNoObstacle(board[x, y].ASquare, square, chessBoard, turn))
-                    {
+                    if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
                         return false;
-                    }
+                    y--;
+                }
+            }
+            else if (notGoStraightX && goStraightY)
+            {
+                int y = ay + 1;
+                for (int x = ax - 1; x > kx; x--)
+                {
+                    if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                        return false;
+                    y++;
+                }
+            }
+            else if (notGoStraightX && notGoStraightY)
+            {
+                int y = ay - 1;
+                for (int x = ax - 1; x > kx; x--)
+                {
+
+                    if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                        return false;
+                    y--;
                 }
             }
         }
         return true;
     }
-    private bool NoPieceCanBlockQueenOrBishop(ChessBoard chessBoard, WhoseTurn turn, int kx, int ky, int ax, int ay, bool condition)
+    private bool ApieceCanAccessSquare(ChessBoard chessBoard, WhoseTurn turn, BoardRelatedInfo[,] board, PieceInfo pieceInfo, int x, int y, int ax, int ay)
     {
-        for (int j = condition ? ay + 1 : ay - 1; condition ? j < ky : j > ky; j = condition ? j++ : j--)
-            return QueenOrBishopCannotBlock(chessBoard, turn, kx, ky, ax, j);
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (board[i, j].Apiece == null
+                    ||
+                    board[i, j].Apiece!.Color == pieceInfo
+                    ||
+                    board[i, j].Apiece!.Name == PieceName.KING
+                    ||
+                    (i == ax && j == ay)
+                    )
+                    continue;
 
-        return true;
+                if (
+                    board[i, j].Apiece!.Name.CanPerfomeThisMove(board[i, j].ASquare, board[x, y].ASquare, turn, board[i, j].Apiece!.Color)
+                    &&
+                    board[i, j].Apiece!.Name.ThereIsNoObstacle(board[i, j].ASquare, board[x, y].ASquare, chessBoard, turn)
+                    )
+                    return true;
+            }
+        }
+        return false;
     }
 }

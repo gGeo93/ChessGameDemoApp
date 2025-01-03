@@ -7,11 +7,11 @@ namespace ChessLibrary.RulesRelated;
 
 public static class Constraints
 {
-    public static bool CanPerfomeThisMove(this PieceName pieceName, Square from, Square to, WhoseTurn whoPlays)
+    public static bool CanPerfomeThisMove(this PieceName pieceName, Square from, Square to, WhoseTurn whoPlays, PieceInfo? pieceInfo)
     {
         switch (pieceName)
         {
-            case PieceName.PAWN: return new Pawn(whoPlays).Movement(from, to);
+            case PieceName.PAWN: return new Pawn(pieceInfo).Movement(from, to);
             case PieceName.KNIGHT: return new Knight().Movement(from, to);
             case PieceName.BISHOP: return new Bishop().Movement(from, to);
             case PieceName.ROOK: return new Rook().Movement(from, to);
