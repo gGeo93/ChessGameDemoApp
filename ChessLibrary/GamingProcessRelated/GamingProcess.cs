@@ -23,5 +23,6 @@ public class GamingProcess
         MoveCompletionCounter = 0;
         WhiteKingPosition = new Square { Color = PieceRelated.SquareColor.BLACK, Letter = 'e', Number = 1 };
         BlackKingPosition = new Square { Color = PieceRelated.SquareColor.WHITE, Letter = 'e', Number = 8 };
+        KingsSafety kingsSafety = new KingsSafety();
     }
 }

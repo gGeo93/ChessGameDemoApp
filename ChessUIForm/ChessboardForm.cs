@@ -150,12 +150,12 @@ public partial class ChessboardForm : Form
             moveParts[0].Image = null;
             gameManager.MoveCompletionCounter = 0;
             var kingPosition = gameManager.WhoPlays == WhoseTurn.White ? gameManager.BlackKingPosition : gameManager.WhiteKingPosition;
-            if (SpecialEvents.whiteKingIsChecked.Invoke(chessBoard, kingPosition, gameManager.WhoPlays))
+            if (SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, gameManager.WhoPlays))
             {
                 String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
                 (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
                 frontBoard[kx, ky].BackColor = 
-                    SpecialEvents.whiteKingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[x, y].ASquare ,true, gameManager.WhoPlays)
+                    SpecialEvents.kingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[x, y].ASquare ,true, gameManager.WhoPlays)
                     ? Color.Red : Color.DarkOrange;
             }
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
