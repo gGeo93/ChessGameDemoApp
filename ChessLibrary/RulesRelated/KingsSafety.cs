@@ -14,15 +14,22 @@ public class KingsSafety
             return;
         
         if(SpecialEvents.kingIsChecked == null)
-            SpecialEvents.kingIsChecked = KingIsChecked;
+            SpecialEvents.kingIsChecked += KingIsChecked;
 
         if (SpecialEvents.kingIsMate == null)
-            SpecialEvents.kingIsMate = KingIsMate;
+            SpecialEvents.kingIsMate += KingIsMate;
+    }
+    ~KingsSafety()
+    {
+        if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
+            SpecialEvents.kingIsChecked -= KingIsChecked;
+        if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
+            SpecialEvents.kingIsMate -= KingIsMate!;
     }
     private bool _doubleCheck = false;
-    private bool KingIsChecked(ChessBoard chessBoard, Square whiteKingPosition, WhoseTurn turn)
+    private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
     {
-        String kingSquare = whiteKingPosition.Letter.ToString() + whiteKingPosition.Number.ToString();
+        String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
         bool canPerformMove = false;
         bool thereAreNoObstacles = false;
@@ -34,7 +41,7 @@ public class KingsSafety
             {
                 Piece? piece = chessBoard.Board[x, y]?.Apiece;
 
-                if (piece is null || piece.Color == colorToPass || piece.Name == PieceName.KING)
+                if (piece is null || piece.Color == colorToPass || (x == kx && y == ky)/* || piece.Name == PieceName.KING*/)
                     continue;
 
                 PieceName pieceName = piece!.Name;
@@ -64,7 +71,7 @@ public class KingsSafety
             return true;
         if (!kingCannotMove)
             return false;
-        if (!AttackingPieceCannotBeCaptured(chessBoard, attackingPiecePosition, turn))
+       if (!AttackingPieceCannotBeCaptured(chessBoard, attackingPiecePosition, turn))
             return false;
         if (!BetweenAttackingPieceAndKingNopieceCanBlock(chessBoard, threatedKingPosition, attackingPiecePosition, turn))
             return false;
@@ -73,20 +80,21 @@ public class KingsSafety
     }
     private bool KingCannotMove(ChessBoard chessBoard, Square threatedKingPosition, WhoseTurn turn)
     {
+        PieceInfo pieceInfoToIgnore = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
         String kpos = threatedKingPosition.Letter + threatedKingPosition.Number.ToString();
         (int kx, int ky) = kpos.FromRealToProgrammingCoordinates();
-
-        if ((kx + 1 <= 7) && !chessBoard.Board[kx + 1, ky].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky].ASquare, turn))
+        
+        if ((kx + 1 <= 7) && (chessBoard.Board[kx + 1, ky].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx + 1, ky].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky].ASquare, turn))
             return false;
-        if ((kx - 1 >= 0) && !chessBoard.Board[kx - 1, ky].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky].ASquare, turn))
+        if ((kx - 1 >= 0) && (chessBoard.Board[kx - 1, ky].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx - 1, ky].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky].ASquare, turn))
             return false;
-        if ((ky + 1 <= 7) && !chessBoard.Board[kx, ky + 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky + 1].ASquare, turn))
+        if ((ky + 1 <= 7) && (chessBoard.Board[kx, ky + 1].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx, ky + 1].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky + 1].ASquare, turn))
             return false;
-        if ((ky - 1 >= 0) && !chessBoard.Board[kx, ky - 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky - 1].ASquare, turn))
+        if ((ky - 1 >= 0) && (chessBoard.Board[kx, ky - 1].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx, ky - 1].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx, ky - 1].ASquare, turn))
             return false;
-        if ((kx + 1 <= 7) && (ky + 1 <= 7) && !chessBoard.Board[kx + 1, ky + 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky + 1].ASquare, turn))
+        if ((kx + 1 <= 7) && (ky + 1 <= 7) && (chessBoard.Board[kx + 1, ky + 1].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx + 1, ky + 1].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx + 1, ky + 1].ASquare, turn))
             return false;
-        if ((kx - 1 >= 0) && (ky - 1 >= 0) && !chessBoard.Board[kx - 1, ky - 1].ApieceOccupySquare && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky - 1].ASquare, turn))
+        if ((kx - 1 >= 0) && (ky - 1 >= 0) && (chessBoard.Board[kx - 1, ky - 1].ApieceOccupySquare && pieceInfoToIgnore != chessBoard.Board[kx - 1, ky - 1].Apiece?.Color) && !KingIsChecked(chessBoard, chessBoard.Board[kx - 1, ky - 1].ASquare, turn))
             return false;
 
         return true;
