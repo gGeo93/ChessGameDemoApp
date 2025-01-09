@@ -29,8 +29,8 @@ public static class Constraints
         PieceInfo? pieceColorInit = chessBoard.Board[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece?.Color;
         PieceInfo? pieceColorFinal = chessBoard.Board[pseudoCoorTo.xTo, pseudoCoorTo.yTo].Apiece?.Color;
 
-        //if (pieceColorInit == pieceColorFinal)
-        //    return false;
+        if (pieceColorInit == pieceColorFinal)
+            return false;
 
         if (pieceName == PieceName.KNIGHT)
             return true;

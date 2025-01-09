@@ -67,15 +67,12 @@ public partial class ChessboardForm : Form
         #region [FirstHalfOfTheMove]
         else if (chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
-            var kings = GetKingsPositions();
-            gameManager.WhiteKingPosition = kings.whiteKing;
-            gameManager.BlackKingPosition = kings.blackKing;
             currentBoardRelatedInfo = new BoardRelatedInfo()
             {
                 Apiece = new Piece
                 {
-                    Name = chessBoard.Board[x, y].Apiece.Name,
-                    Color = chessBoard.Board[x, y].Apiece.Color
+                    Name = chessBoard.Board[x, y].Apiece!.Name,
+                    Color = chessBoard.Board[x, y].Apiece!.Color
                 },
                 ApieceOccupySquare = chessBoard.Board[x, y].ApieceOccupySquare,
                 ASquare = chessBoard.Board[x, y].ASquare,
@@ -92,12 +89,13 @@ public partial class ChessboardForm : Form
         #region [SecondHalfOfTheMove]
         else if (gameManager.MoveCompletionCounter == 2)
         {
+            ReColoringKingsSquare();
             currentBoardRelatedInfo = new BoardRelatedInfo()
             {
                 Apiece = new Piece
                 {
-                    Name = boardRelatedInfoMove[0].Apiece.Name,
-                    Color = boardRelatedInfoMove[0].Apiece.Color
+                    Name = boardRelatedInfoMove[0].Apiece!.Name,
+                    Color = boardRelatedInfoMove[0].Apiece!.Color
                 },
                 ASquare = chessBoard.Board[x, y].ASquare
             };
@@ -111,7 +109,7 @@ public partial class ChessboardForm : Form
             bool isThereNoObstacle = currentBoardRelatedInfo.Apiece.Name.ThereIsNoObstacle(boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare, chessBoard, gameManager.WhoPlays);
 
             bool canCutEnPass = chessBoard.Board.CanTakeEnPassant(gameManager.WhoPlays, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare);
-            
+
             if (canCutEnPass)
             {
                 ((Button)sender).Image = moveParts[0].Image;
@@ -157,12 +155,13 @@ public partial class ChessboardForm : Form
                 String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
                 (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
                 (int xc, int yc) = ThePieceGivingCheckCoordinates(chessBoard, kingPosition);
-                frontBoard[kx, ky].BackColor = 
-                    SpecialEvents.kingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[xc, yc].ASquare ,true, gameManager.WhoPlays)
+                frontBoard[kx, ky].BackColor =
+                    SpecialEvents.kingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[xc, yc].ASquare, true, gameManager.WhoPlays)
                     ? Color.Red : Color.DarkOrange;
             }
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
+            chessBoard.WholeGameChessBoard.Add(chessBoard.Board);
             moveParts = new Button[2];
         }
         #endregion
@@ -172,6 +171,20 @@ public partial class ChessboardForm : Form
         gameManager.ChessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
         #endregion
     }
+
+    private void ReColoringKingsSquare()
+    {
+        var kings = GetKingsPositions();
+        String whiteKingSquare = kings.whiteKing.Letter + kings.whiteKing.Number.ToString();
+        String blackKingSquare = kings.blackKing.Letter + kings.blackKing.Number.ToString();
+        (int wkx, int wky) = whiteKingSquare.FromRealToProgrammingCoordinates();
+        (int bkx, int bky) = blackKingSquare.FromRealToProgrammingCoordinates();
+        gameManager.WhiteKingPosition.Color = kings.whiteKing.Color;
+        gameManager.BlackKingPosition.Color = kings.blackKing.Color;
+        frontBoard[wkx, wky].BackColor = gameManager.WhiteKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
+        frontBoard[bkx, bky].BackColor = gameManager.BlackKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
+    }
+
     private (int xc, int yc) ThePieceGivingCheckCoordinates(ChessBoard chessBoard, Square kingPosition)
     {
         BoardRelatedInfo[,] board = (BoardRelatedInfo[,])chessBoard.Board.Clone();
