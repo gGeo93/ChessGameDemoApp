@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessLibrary", "ChessLibrar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUI", "TestUI\TestUI.csproj", "{965B2896-C246-45FF-86A0-D8339C217E66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessUIForm", "ChessUIForm\ChessUIForm.csproj", "{E7357176-132F-45C4-9D77-4FA20AEEAFBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessUIForm", "ChessUIForm\ChessUIForm.csproj", "{E7357176-132F-45C4-9D77-4FA20AEEAFBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{FF64542E-112D-4D8E-A156-787FFBDC8682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E7357176-132F-45C4-9D77-4FA20AEEAFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7357176-132F-45C4-9D77-4FA20AEEAFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7357176-132F-45C4-9D77-4FA20AEEAFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF64542E-112D-4D8E-A156-787FFBDC8682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF64542E-112D-4D8E-A156-787FFBDC8682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF64542E-112D-4D8E-A156-787FFBDC8682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF64542E-112D-4D8E-A156-787FFBDC8682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

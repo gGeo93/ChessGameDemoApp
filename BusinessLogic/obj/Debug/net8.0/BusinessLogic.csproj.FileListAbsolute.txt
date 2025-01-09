@@ -1,0 +1,16 @@
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\bin\Debug\net8.0\BusinessLogic.deps.json
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\bin\Debug\net8.0\BusinessLogic.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\bin\Debug\net8.0\BusinessLogic.pdb
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\bin\Debug\net8.0\ChessLibrary.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\bin\Debug\net8.0\ChessLibrary.pdb
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.AssemblyInfo.cs
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.sourcelink.json
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\Business.CF5D6E35.Up2Date
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\refint\BusinessLogic.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\BusinessLogic.pdb
+C:\Users\USER\source\repos\ChessGameDemoApp\BusinessLogic\obj\Debug\net8.0\ref\BusinessLogic.dll

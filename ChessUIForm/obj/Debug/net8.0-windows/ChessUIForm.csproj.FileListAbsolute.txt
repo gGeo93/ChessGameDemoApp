@@ -20,3 +20,5 @@ C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\bin\Debug\net8.0-windows
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\bin\Debug\net8.0-windows\ChessLibrary.pdb
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\obj\Debug\net8.0-windows\ChessUIForm.csproj.AssemblyReference.cache
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\obj\Debug\net8.0-windows\ChessUIF.57F61D03.Up2Date
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\bin\Debug\net8.0-windows\BusinessLogic.dll
+C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\bin\Debug\net8.0-windows\BusinessLogic.pdb

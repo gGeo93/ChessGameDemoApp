@@ -8,10 +8,22 @@
     ".NETCoreApp,Version=v8.0": {
       "ChessUIForm/1.0.0": {
         "dependencies": {
+          "BusinessLogic": "1.0.0",
           "ChessLibrary": "1.0.0"
         },
         "runtime": {
           "ChessUIForm.dll": {}
+        }
+      },
+      "BusinessLogic/1.0.0": {
+        "dependencies": {
+          "ChessLibrary": "1.0.0"
+        },
+        "runtime": {
+          "BusinessLogic.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ChessLibrary/1.0.0": {
@@ -26,6 +38,11 @@
   },
   "libraries": {
     "ChessUIForm/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BusinessLogic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
