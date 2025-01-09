@@ -89,11 +89,10 @@ public class KingsSafety
             kingBoard[1,1] = false;
         if (kx + 1 <= 7)
         {
-            if ((board[kx + 1, ky].ApieceOccupySquare && board[kx + 1, ky].Apiece?.Color == sameColorAsKing) || (KingIsChecked(chessBoard, board[kx + 1, ky].ASquare, turn)))
-            {
+            if ((board[kx + 1, ky].ApieceOccupySquare && board[kx + 1, ky].Apiece?.Color == sameColorAsKing))
                 kingBoard[2, 1] = false;
-            }
-            else
+            
+            else if (KingIsChecked(chessBoard, board[kx + 1, ky].ASquare, turn))
                 return true;
         }
        
