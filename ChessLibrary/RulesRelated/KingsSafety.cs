@@ -12,8 +12,8 @@ public class KingsSafety
     {
         if (SpecialEvents.kingIsChecked != null && SpecialEvents.kingIsMate != null)
             return;
-        
-        if(SpecialEvents.kingIsChecked == null)
+
+        if (SpecialEvents.kingIsChecked == null)
             SpecialEvents.kingIsChecked += KingIsChecked;
 
         if (SpecialEvents.kingIsMate == null)
@@ -31,7 +31,8 @@ public class KingsSafety
     {
         String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
-        
+        var _piece = chessBoard.Board[kx, ky].Apiece;
+        chessBoard.Board[kx, ky].Apiece = null;
         bool canPerformMove = false;
         bool thereAreNoObstacles = false;
         int howManyChecks = 0;
@@ -53,6 +54,7 @@ public class KingsSafety
                     howManyChecks++;
             }
         }
+        chessBoard.Board[kx, ky].Apiece = _piece;
         switch (howManyChecks)
         {
             case 0: return false;
@@ -65,10 +67,10 @@ public class KingsSafety
     {
         if (!isChecked)
             return false;
-        bool kingCannotMove = IllegalKingMovement(chessBoard, threatedKingPosition, turn);
-        if (kingCannotMove && _doubleCheck)
+        bool kingCanMove = KingMovementIsLegal(chessBoard, threatedKingPosition, turn);
+        if (!kingCanMove && _doubleCheck)
             return true;
-        if (!kingCannotMove)
+        if (kingCanMove)
             return false;
         if (!AttackingPieceCannotBeCaptured(chessBoard, attackingPiecePosition, turn))
             return false;
@@ -77,78 +79,104 @@ public class KingsSafety
 
         return true;
     }
-    private bool IllegalKingMovement(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
+    private bool KingMovementIsLegal(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
     {
-        PieceInfo sameColorAsKing = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;  
+        PieceInfo sameColorAsKing = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
         bool[,] kingBoard = new bool[3, 3];
-        
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                kingBoard[i, j] = true;
+            }
+        }
         String kpos = kingPosition.Letter + kingPosition.Number.ToString();
         (int kx, int ky) = kpos.FromRealToProgrammingCoordinates();
         var board = chessBoard.Board;
-        if(KingIsChecked(chessBoard, board[kx, ky].ASquare, turn))
-            kingBoard[1,1] = false;
+        kingBoard[1, 1] = false;
         if (kx + 1 <= 7)
         {
             if ((board[kx + 1, ky].ApieceOccupySquare && board[kx + 1, ky].Apiece?.Color == sameColorAsKing))
                 kingBoard[2, 1] = false;
-            
-            else if (KingIsChecked(chessBoard, board[kx + 1, ky].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx + 1, ky].ASquare, turn))
+                kingBoard[2, 1] = false;
         }
-       
+        else
+            kingBoard[2, 1] = false;
         if (kx - 1 >= 0)
         {
             if ((board[kx - 1, ky].ApieceOccupySquare && board[kx - 1, ky].Apiece?.Color == sameColorAsKing))
                 kingBoard[0, 1] = false;
-            else if (KingIsChecked(chessBoard, board[kx - 1, ky].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx - 1, ky].ASquare, turn))
+                kingBoard[0, 1] = false;
         }
-
+        else
+            kingBoard[0, 1] = false;
         if (ky + 1 <= 7)
         {
             if ((board[kx, ky + 1].ApieceOccupySquare && board[kx, ky + 1].Apiece?.Color == sameColorAsKing))
                 kingBoard[1, 2] = false;
-            else if(KingIsChecked(chessBoard, board[kx, ky + 1].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx, ky + 1].ASquare, turn))
+                kingBoard[1, 2] = false;
         }
+        else
+            kingBoard[1, 2] = false;
         if (ky - 1 >= 0)
         {
             if ((board[kx, ky - 1].ApieceOccupySquare && board[kx, ky - 1].Apiece?.Color == sameColorAsKing))
                 kingBoard[1, 0] = false;
-            else if(KingIsChecked(chessBoard, board[kx, ky - 1].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx, ky - 1].ASquare, turn))
+                kingBoard[1, 0] = false;
         }
+        else
+            kingBoard[1, 0] = false;
         if (kx + 1 <= 7 && ky + 1 <= 7)
         {
             if ((board[kx + 1, ky + 1].ApieceOccupySquare && board[kx + 1, ky + 1].Apiece?.Color == sameColorAsKing))
                 kingBoard[2, 2] = false;
-            else if(KingIsChecked(chessBoard, board[kx + 1, ky + 1].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx + 1, ky + 1].ASquare, turn))
+                kingBoard[2, 2] = false;
         }
+        else
+            kingBoard[2, 2] = false;
         if (kx + 1 <= 7 && ky - 1 >= 0)
         {
             if ((board[kx + 1, ky - 1].ApieceOccupySquare && board[kx + 1, ky - 1].Apiece?.Color == sameColorAsKing))
                 kingBoard[2, 0] = false;
-            else if(KingIsChecked(chessBoard, board[kx + 1, ky - 1].ASquare, turn))
-                return true;
+            else if (KingIsChecked(chessBoard, board[kx + 1, ky - 1].ASquare, turn))
+                kingBoard[2, 0] = false;
         }
+        else
+            kingBoard[2, 0] = false;
         if (kx - 1 >= 0 && ky + 1 <= 7)
         {
             if (board[kx - 1, ky + 1].ApieceOccupySquare && board[kx - 1, ky + 1].Apiece?.Color == sameColorAsKing)
                 kingBoard[0, 2] = false;
-            else if(KingIsChecked(chessBoard, board[kx - 1, ky + 1].ASquare, turn))
-                return true;
+            if (KingIsChecked(chessBoard, board[kx - 1, ky + 1].ASquare, turn))
+                kingBoard[0, 2] = false;
         }
+        else
+            kingBoard[0, 2] = false;
         if (kx - 1 >= 0 && ky - 1 >= 0)
         {
             if ((board[kx - 1, ky - 1].ApieceOccupySquare && board[kx - 1, ky - 1].Apiece?.Color == sameColorAsKing))
                 kingBoard[0, 0] = false;
-            else if(KingIsChecked(chessBoard, board[kx - 1, ky - 1].ASquare, turn))
+            if (KingIsChecked(chessBoard, board[kx - 1, ky - 1].ASquare, turn))
+                kingBoard[0, 0] = false;
+        }
+        else
+            kingBoard[0, 0] = false;
+
+        foreach (var k in kingBoard)
+        {
+            if (k == true)
                 return true;
         }
+
         return false;
     }
-    
+
     private bool AttackingPieceCannotBeCaptured(ChessBoard chessBoard, Square attackingPiecePosition, WhoseTurn turn)
     {
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
@@ -159,11 +187,7 @@ public class KingsSafety
             {
                 if (chessBoard.Board[i, j].Apiece == null
                     ||
-                    //(turn == WhoseTurn.Black && chessBoard.Board[i, j].Apiece!.Color == PieceInfo.WHITE)
-                    //||
-                    //(turn == WhoseTurn.White && chessBoard.Board[i, j].Apiece!.Color == PieceInfo.BLACK)
-                    //||
-                    (chessBoard.Board[i, j].Apiece!.Name == PieceName.QUEEN))
+                    chessBoard.Board[i, j].Apiece!.Name == PieceName.KING)
                     continue;
 
                 PieceName pieceName = chessBoard.Board[i, j].Apiece!.Name;
