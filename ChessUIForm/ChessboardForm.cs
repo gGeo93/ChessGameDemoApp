@@ -195,9 +195,7 @@ public partial class ChessboardForm : Form
             {
                 var checkingCandidateSquare = board[i, j].ApieceOccupySquare;
                 var checkingCandidatePiece = board[i, j].Apiece;
-                chessBoard.Board[i, j].Apiece = null;
-                chessBoard.Board[i, j].ApieceOccupySquare = false;
-                
+                chessBoard.Board[i, j].Apiece = null;               
                 if (checkingCandidatePiece?.Color != pieceColorToAvoid && 
                     SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, gameManager.WhoPlays) == false)
                 {

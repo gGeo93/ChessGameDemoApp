@@ -168,11 +168,9 @@ public class KingsSafety
         else
             kingBoard[0, 0] = false;
 
-        foreach (var k in kingBoard)
-        {
-            if (k == true)
+        foreach (bool k in kingBoard)
+            if (k)
                 return true;
-        }
 
         return false;
     }
