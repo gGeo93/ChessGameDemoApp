@@ -3,6 +3,7 @@ using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ChessLibrary.RulesRelated;
 
@@ -10,8 +11,15 @@ public class KingsSafety
 {
     public KingsSafety()
     {
-        if (SpecialEvents.kingIsChecked != null && SpecialEvents.kingIsMate != null)
+        if (SpecialEvents.kingIsChecked != null && SpecialEvents.kingIsMate != null && 
+            SpecialEvents.WhiteKingHasMoved != null && SpecialEvents.BlackKingHasMoved != null)
             return;
+        
+        if (SpecialEvents.WhiteKingHasMoved == null)
+            SpecialEvents.WhiteKingHasMoved = () => false;
+       
+        if (SpecialEvents.BlackKingHasMoved == null)
+            SpecialEvents.BlackKingHasMoved = () => false;
 
         if (SpecialEvents.kingIsChecked == null)
             SpecialEvents.kingIsChecked += KingIsChecked;
