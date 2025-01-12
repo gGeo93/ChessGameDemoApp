@@ -70,7 +70,7 @@ public static class SpecialOccasions
            || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
             return false;
-        if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays))
+        if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays, false))
             return false;
         if (whoPlays == WhoseTurn.White && SpecialEvents.BlackKingHasMoved.Invoke())
             return false;
@@ -103,7 +103,7 @@ public static class SpecialOccasions
            || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
             return false;
-        if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays))
+        if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays, false))
             return false;
         if (whoPlays == WhoseTurn.White && SpecialEvents.BlackKingHasMoved.Invoke())
             return false;

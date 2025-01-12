@@ -207,7 +207,7 @@ public static class HelpingMethods
                 var checkingCandidatePiece = board[i, j].Apiece;
                 chessBoard.Board[i, j].Apiece = null;
                 if (checkingCandidatePiece?.Color != pieceColorToAvoid &&
-                    SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, turn) == false)
+                    SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, turn, false) == false)
                 {
                     chessBoard.Board[i, j].Apiece = checkingCandidatePiece;
                     chessBoard.Board[i, j].ApieceOccupySquare = checkingCandidateSquare;

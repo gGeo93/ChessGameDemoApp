@@ -22,20 +22,20 @@ public class KingsSafety
             SpecialEvents.BlackKingHasMoved = () => false;
 
         if (SpecialEvents.kingIsChecked == null)
-            SpecialEvents.kingIsChecked += KingIsChecked;
+            SpecialEvents.kingIsChecked = KingIsChecked;
 
         if (SpecialEvents.kingIsMate == null)
-            SpecialEvents.kingIsMate += KingIsMate;
+            SpecialEvents.kingIsMate = KingIsMate;
     }
-    ~KingsSafety()
-    {
-        if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
-            SpecialEvents.kingIsChecked -= KingIsChecked;
-        if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
-            SpecialEvents.kingIsMate -= KingIsMate!;
-    }
+    //~KingsSafety()
+    //{
+    //    if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
+    //        SpecialEvents.kingIsChecked -= KingIsChecked;
+    //    if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
+    //        SpecialEvents.kingIsMate -= KingIsMate!;
+    //}
     private bool _doubleCheck = false;
-    private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
+    private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn, bool checkForPin = false)
     {
         String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
@@ -44,7 +44,11 @@ public class KingsSafety
         bool canPerformMove = false;
         bool thereAreNoObstacles = false;
         int howManyChecks = 0;
-        var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
+        
+        var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;//modification
+        if(checkForPin)
+            colorToPass = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
+        
         for (int x = 0; x < chessBoard.Board.GetLength(0); x++)
         {
             for (int y = 0; y < chessBoard.Board.GetLength(1); y++)
