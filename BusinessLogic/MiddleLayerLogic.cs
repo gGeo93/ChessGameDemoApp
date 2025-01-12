@@ -7,10 +7,10 @@ namespace BusinessLogic;
 public class MiddleLayerLogic
 {
     public GamingProcess gameManager { get; set; }
-    public BoardRelatedInfo currentBoardRelatedInfo;
-    public BoardRelatedInfo[] boardRelatedInfoMove;
-    public ChessBoard chessBoard;
-    public (int x, int y)[] coordinates;
+    public BoardRelatedInfo currentBoardRelatedInfo { get; set; }
+    public BoardRelatedInfo[] boardRelatedInfoMove  { get; set; }
+    public ChessBoard chessBoard { get; set; }
+    public (int x, int y)[] coordinates { get; set; }
     public MiddleLayerLogic()
     {
         gameManager = new GamingProcess();

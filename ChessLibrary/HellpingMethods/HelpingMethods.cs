@@ -1,4 +1,6 @@
 ﻿using ChessLibrary.BoardRelated;
+using ChessLibrary.EventsRelated;
+using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.PieceRelated;
 using System.Diagnostics;
 
@@ -192,5 +194,44 @@ public static class HelpingMethods
             case 8: x = 0; break;
         }
         return (x, y);
+    }
+    public static (int xc, int yc) ThePieceGivingCheckCoordinates(this ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
+    {
+        BoardRelatedInfo[,] board = (BoardRelatedInfo[,])chessBoard.Board.Clone();
+        PieceInfo pieceColorToAvoid = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
+        for (int i = 0; i < board.GetLength(0); i++)
+        {
+            for (int j = 0; j < board.GetLength(1); j++)
+            {
+                var checkingCandidateSquare = board[i, j].ApieceOccupySquare;
+                var checkingCandidatePiece = board[i, j].Apiece;
+                chessBoard.Board[i, j].Apiece = null;
+                if (checkingCandidatePiece?.Color != pieceColorToAvoid &&
+                    SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, turn) == false)
+                {
+                    chessBoard.Board[i, j].Apiece = checkingCandidatePiece;
+                    chessBoard.Board[i, j].ApieceOccupySquare = checkingCandidateSquare;
+                    return (i, j);
+                }
+                chessBoard.Board[i, j].Apiece = checkingCandidatePiece;
+                chessBoard.Board[i, j].ApieceOccupySquare = checkingCandidateSquare;
+            }
+        }
+        return (-1, -1);
+    }
+    public static (Square whiteKing, Square blackKing) GetKingsPositions(this ChessBoard chessBoard)
+    {
+        Square white = new Square();
+        Square black = new Square();
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece?.Name == PieceName.KING)
+                {
+                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.WHITE)
+                        white = GamingProcess.Instance.ChessBoard.Board[i, j]?.ASquare;
+                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.BLACK)
+                        black = GamingProcess.Instance.ChessBoard.Board[i, j]?.ASquare;
+                }
+        return (white!, black!);
     }
 }
