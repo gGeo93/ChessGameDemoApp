@@ -11,10 +11,6 @@
       "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\specialoccasionsrelated\\specialoccasions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|solutionrelative:chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FF64542E-112D-4D8E-A156-787FFBDC8682}|BusinessLogic\\BusinessLogic.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\businesslogic\\middlelayerlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FF64542E-112D-4D8E-A156-787FFBDC8682}|BusinessLogic\\BusinessLogic.csproj|solutionrelative:businesslogic\\middlelayerlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -38,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,18 +47,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ChessboardForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
-              "RelativeDocumentMoniker": "ChessUIForm\\ChessboardForm.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs [Design]",
-              "RelativeToolTip": "ChessUIForm\\ChessboardForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T13:57:05.316Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "MiddleLayerLogic.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\MiddleLayerLogic.cs",
               "RelativeDocumentMoniker": "BusinessLogic\\MiddleLayerLogic.cs",
@@ -70,12 +54,11 @@
               "RelativeToolTip": "BusinessLogic\\MiddleLayerLogic.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T13:56:50.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T13:56:50.348Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "SpecialEvents.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\EventsRelated\\SpecialEvents.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\EventsRelated\\SpecialEvents.cs",
@@ -83,8 +66,7 @@
               "RelativeToolTip": "ChessLibrary\\EventsRelated\\SpecialEvents.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T11:55:57.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T11:55:57.769Z"
             },
             {
               "$type": "Document",
@@ -94,14 +76,14 @@
               "RelativeDocumentMoniker": "ChessLibrary\\SpecialOccasionsRelated\\SpecialOccasions.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\SpecialOccasionsRelated\\SpecialOccasions.cs",
               "RelativeToolTip": "ChessLibrary\\SpecialOccasionsRelated\\SpecialOccasions.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAFAAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAcwGIAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-11T11:54:17.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "KingsSafety.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\RulesRelated\\KingsSafety.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\RulesRelated\\KingsSafety.cs",
@@ -109,8 +91,7 @@
               "RelativeToolTip": "ChessLibrary\\RulesRelated\\KingsSafety.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAnwA8AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T11:54:04.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-03T11:54:04.723Z"
             },
             {
               "$type": "Document",
@@ -120,14 +101,14 @@
               "RelativeDocumentMoniker": "ChessUIForm\\ChessboardForm.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
               "RelativeToolTip": "ChessUIForm\\ChessboardForm.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAawIsAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAswHIAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-27T17:16:01.066Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "ChessBoard.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\BoardRelated\\ChessBoard.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\BoardRelated\\ChessBoard.cs",

@@ -58,7 +58,7 @@ public partial class ChessboardForm : Form
         chessBoard = gameManager.ChessBoard;
         #endregion
 
-        
+
         if (!chessBoard.Board[x, y].ApieceOccupySquare && gameManager.MoveCompletionCounter == 1)
         {
             gameManager.MoveCompletionCounter = 0;
@@ -111,18 +111,21 @@ public partial class ChessboardForm : Form
             bool canCutEnPass = chessBoard.Board.CanTakeEnPassant(gameManager.WhoPlays, boardRelatedInfoMove[0].ASquare, boardRelatedInfoMove[1].ASquare);
 
             bool canCastleShort = chessBoard.KingCanCastleShort(gameManager.WhoPlays);
-            if (canCastleShort && boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING)
+
+            bool canCastleLong = chessBoard.KingCanCastleLong(gameManager.WhoPlays);
+
+            if (canCastleShort && boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING && boardRelatedInfoMove[1].ASquare.Letter == 'g')
             {
-                if (boardRelatedInfoMove[1].ASquare.Letter == 'g' && boardRelatedInfoMove[1].ASquare.Number == 1)
+                if (boardRelatedInfoMove[1].ASquare.Number == 1)
                 {
-                    frontBoard[7, 6].Image = frontBoard[7,4].Image;
+                    frontBoard[7, 6].Image = frontBoard[7, 4].Image;
                     frontBoard[7, 4].Image = null;
                     frontBoard[7, 5].Image = frontBoard[7, 7].Image;
                     frontBoard[7, 7].Image = null;
                     chessBoard.Board[7, 5].Apiece = chessBoard.Board[7, 7].Apiece;
                     chessBoard.Board[7, 5].ApieceOccupySquare = true;
                     chessBoard.Board[7, 6].Apiece = chessBoard.Board[7, 4].Apiece;
-                    chessBoard.Board[7, 5].ApieceOccupySquare = true;
+                    chessBoard.Board[7, 6].ApieceOccupySquare = true;
                     chessBoard.Board[7, 4].Apiece = null;
                     chessBoard.Board[7, 4].ApieceOccupySquare = false;
                     chessBoard.Board[7, 7].Apiece = null;
@@ -136,7 +139,7 @@ public partial class ChessboardForm : Form
                     gameManager.MoveCompletionCounter = 0;
                     return;
                 }
-                else if (boardRelatedInfoMove[1].ASquare.Letter == 'g' && boardRelatedInfoMove[1].ASquare.Number == 8)
+                else if (boardRelatedInfoMove[1].ASquare.Number == 8)
                 {
                     frontBoard[0, 6].Image = frontBoard[0, 4].Image;
                     frontBoard[0, 4].Image = null;
@@ -150,6 +153,55 @@ public partial class ChessboardForm : Form
                     chessBoard.Board[0, 4].ApieceOccupySquare = false;
                     chessBoard.Board[0, 7].Apiece = null;
                     chessBoard.Board[0, 7].ApieceOccupySquare = false;
+                    gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
+                    ColorsRender();
+                    moveParts = new Button[2];
+                    boardRelatedInfoMove = new BoardRelatedInfo[2];
+                    gameManager.Move = new Square[2];
+                    coordinates = new (int x, int y)[2];
+                    gameManager.MoveCompletionCounter = 0;
+                    return;
+                }
+            }
+            else if (canCastleLong && boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING && boardRelatedInfoMove[1].ASquare.Letter == 'c')
+            {
+                if (boardRelatedInfoMove[1].ASquare.Number == 1)
+                {
+                    frontBoard[7, 2].Image = frontBoard[7, 4].Image;
+                    frontBoard[7, 4].Image = null;
+                    frontBoard[7, 3].Image = frontBoard[7, 0].Image;
+                    frontBoard[7, 0].Image = null;
+                    chessBoard.Board[7, 3].Apiece = chessBoard.Board[7, 0].Apiece;
+                    chessBoard.Board[7, 3].ApieceOccupySquare = true;
+                    chessBoard.Board[7, 2].Apiece = chessBoard.Board[7, 4].Apiece;
+                    chessBoard.Board[7, 2].ApieceOccupySquare = true;
+                    chessBoard.Board[7, 4].Apiece = null;
+                    chessBoard.Board[7, 4].ApieceOccupySquare = false;
+                    chessBoard.Board[7, 0].Apiece = null;
+                    chessBoard.Board[7, 0].ApieceOccupySquare = false;
+                    gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
+                    ColorsRender();
+                    moveParts = new Button[2];
+                    boardRelatedInfoMove = new BoardRelatedInfo[2];
+                    gameManager.Move = new Square[2];
+                    coordinates = new (int x, int y)[2];
+                    gameManager.MoveCompletionCounter = 0;
+                    return;
+                }
+                else if (boardRelatedInfoMove[1].ASquare.Number == 8)
+                {
+                    frontBoard[0, 2].Image = frontBoard[0, 4].Image;
+                    frontBoard[0, 4].Image = null;
+                    frontBoard[0, 3].Image = frontBoard[0, 0].Image;
+                    frontBoard[0, 0].Image = null;
+                    chessBoard.Board[0, 3].Apiece = chessBoard.Board[0, 0].Apiece;
+                    chessBoard.Board[0, 3].ApieceOccupySquare = true;
+                    chessBoard.Board[0, 2].Apiece = chessBoard.Board[0, 4].Apiece;
+                    chessBoard.Board[0, 2].ApieceOccupySquare = true;
+                    chessBoard.Board[0, 4].Apiece = null;
+                    chessBoard.Board[0, 4].ApieceOccupySquare = false;
+                    chessBoard.Board[0, 0].Apiece = null;
+                    chessBoard.Board[0, 0].ApieceOccupySquare = false;
                     gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
                     ColorsRender();
                     moveParts = new Button[2];
@@ -192,12 +244,14 @@ public partial class ChessboardForm : Form
                 coordinates = new (int x, int y)[2];
                 return;
             }
-            
+
+
+
             if (chessBoard.Board[x, y].Apiece?.Name == PieceName.KING && gameManager.WhoPlays == WhoseTurn.White)
                 SpecialEvents.BlackKingHasMoved = () => true;
             if (chessBoard.Board[x, y].Apiece?.Name == PieceName.KING && gameManager.WhoPlays == WhoseTurn.Black)
                 SpecialEvents.WhiteKingHasMoved = () => true;
-            
+
             ((Button)sender).Image = moveParts[0].Image;
             chessBoard.Board[x, y].Apiece = currentBoardRelatedInfo.Apiece;
             chessBoard.Board[x, y].ASquare = currentBoardRelatedInfo.ASquare;
@@ -216,7 +270,7 @@ public partial class ChessboardForm : Form
                     SpecialEvents.kingIsMate.Invoke(chessBoard, kingPosition, chessBoard.Board[xc, yc].ASquare, true, gameManager.WhoPlays)
                     ? Color.Red : Color.DarkOrange;
             }
-            
+
             gameManager.WhoPlays = gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
 
@@ -358,3 +412,5 @@ public partial class ChessboardForm : Form
     }
     #endregion
 }
+
+
