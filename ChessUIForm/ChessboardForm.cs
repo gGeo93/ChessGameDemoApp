@@ -91,7 +91,7 @@ public partial class ChessboardForm : Form
         else if (layerLogic.gameManager.MoveCompletionCounter == 2)
         {
             String previousSquare = layerLogic.boardRelatedInfoMove[0].ASquare.Letter + layerLogic.boardRelatedInfoMove[0].ASquare.Number.ToString();
-            (int xfrom,int yfrom) = previousSquare.FromRealToProgrammingCoordinates();
+            (int xfrom, int yfrom) = previousSquare.FromRealToProgrammingCoordinates();
             if (PieceIsPinned(chessBoard, xfrom, yfrom, x, y))
             {
                 frontBoard[xfrom, yfrom].BackColor = chessBoard.Board[xfrom, yfrom].ASquare.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
@@ -125,7 +125,7 @@ public partial class ChessboardForm : Form
 
             if (canCastleShort && layerLogic.boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING && layerLogic.boardRelatedInfoMove[1].ASquare.Letter == 'g')
             {
-                if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1)
+                if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1 && layerLogic.RooksMovingState[3])
                 {
                     frontBoard[7, 6].Image = frontBoard[7, 4].Image;
                     frontBoard[7, 4].Image = null;
@@ -148,7 +148,7 @@ public partial class ChessboardForm : Form
                     layerLogic.gameManager.MoveCompletionCounter = 0;
                     return;
                 }
-                else if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8)
+                else if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8 && layerLogic.RooksMovingState[1])
                 {
                     frontBoard[0, 6].Image = frontBoard[0, 4].Image;
                     frontBoard[0, 4].Image = null;
@@ -174,7 +174,7 @@ public partial class ChessboardForm : Form
             }
             else if (canCastleLong && layerLogic.boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING && layerLogic.boardRelatedInfoMove[1].ASquare.Letter == 'c')
             {
-                if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1)
+                if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1 && layerLogic.RooksMovingState[2])
                 {
                     frontBoard[7, 2].Image = frontBoard[7, 4].Image;
                     frontBoard[7, 4].Image = null;
@@ -197,7 +197,7 @@ public partial class ChessboardForm : Form
                     layerLogic.gameManager.MoveCompletionCounter = 0;
                     return;
                 }
-                else if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8)
+                else if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8 && layerLogic.RooksMovingState[0])
                 {
                     frontBoard[0, 2].Image = frontBoard[0, 4].Image;
                     frontBoard[0, 4].Image = null;
@@ -290,9 +290,11 @@ public partial class ChessboardForm : Form
         #region[UpdateBackendBoard]
         layerLogic.gameManager.ChessBoard.Board[x, y].Apiece = layerLogic.currentBoardRelatedInfo.Apiece;
         layerLogic.gameManager.ChessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
+        layerLogic.RooksMovingState = chessBoard.RooksCheck(layerLogic.RooksMovingState);
         #endregion
     }
     #endregion
+
     #region [HelpingMethods]
     private bool PieceIsPinned(ChessBoard chessBoard,int xfrom, int yfrom, int xto, int yto)
     {
@@ -326,6 +328,7 @@ public partial class ChessboardForm : Form
         }
     }
     #endregion
+    
     #region [OtherUiRelatedMethods]
     private void ReColoringKingsSquare()
     {

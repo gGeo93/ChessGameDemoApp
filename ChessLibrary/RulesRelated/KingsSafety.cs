@@ -27,13 +27,13 @@ public class KingsSafety
         if (SpecialEvents.kingIsMate == null)
             SpecialEvents.kingIsMate = KingIsMate;
     }
-    //~KingsSafety()
-    //{
-    //    if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
-    //        SpecialEvents.kingIsChecked -= KingIsChecked;
-    //    if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
-    //        SpecialEvents.kingIsMate -= KingIsMate!;
-    //}
+    ~KingsSafety()
+    {
+        if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
+            SpecialEvents.kingIsChecked -= KingIsChecked;
+        if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
+            SpecialEvents.kingIsMate -= KingIsMate!;
+    }
     private bool _doubleCheck = false;
     private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn, bool checkForPin = false)
     {

@@ -112,4 +112,16 @@ public static class SpecialOccasions
 
         return true;
     }
+    public static bool[] RooksCheck(this ChessBoard chessBoard,bool[] rooksMovingStates)
+    {
+        if (chessBoard.Board[0, 0].Apiece?.Name != PieceName.ROOK)
+            rooksMovingStates[0] = false;
+        if (chessBoard.Board[0, 7].Apiece?.Name != PieceName.ROOK)
+            rooksMovingStates[1] = false;
+        if (chessBoard.Board[7, 0].Apiece?.Name != PieceName.ROOK)
+            rooksMovingStates[2] = false;
+        if (chessBoard.Board[7, 7].Apiece?.Name != PieceName.ROOK)
+            rooksMovingStates[3] = false;
+        return rooksMovingStates;
+    }
 }
