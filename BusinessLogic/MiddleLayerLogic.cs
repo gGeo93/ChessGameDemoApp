@@ -20,4 +20,6 @@ public class MiddleLayerLogic
         coordinates = new (int x, int y)[2];
         RooksMovingState = [true, true, true, true];
     }
+    public string PreviousSquare() => boardRelatedInfoMove[0].ASquare.Letter + boardRelatedInfoMove[0].ASquare.Number.ToString();
+    
 }

@@ -52,7 +52,8 @@ public partial class ChessboardForm : Form
         #endregion
 
         #region [SecondHalfOfTheMove]
-        SecondHalfMove(sender, x, y, chessBoard);
+        if (SecondHalfMove(sender, x, y, chessBoard))
+            return;
         #endregion
 
         #region[LastUpdate]
@@ -75,16 +76,16 @@ public partial class ChessboardForm : Form
         chessBoard = BackChessBoard();
     }
 
-    private void SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
+    private bool SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
     {
         if (layerLogic.gameManager.MoveCompletionCounter == 2)
         {
-            string previousSquare = PreviousSquare();
+            string previousSquare = layerLogic.PreviousSquare();
 
             (int xfrom, int yfrom) = previousSquare.FromVisualToProgrammingCoordinates();
 
             if (AbsolutePinCase(x, y, chessBoard, xfrom, yfrom))
-                return;
+                return true;
 
             ReColoringKingsSquare();
 
@@ -105,16 +106,16 @@ public partial class ChessboardForm : Form
             bool canCastleLong = CanCastleLong(chessBoard);
 
             if (CastlingShortCase(chessBoard, canCastleShort))
-                return;
+                return true;
 
             if (CastlingLongCase(chessBoard, canCastleLong))
-                return;
+                return true;
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
-                return;
+                return true;
 
             if (LastMovementContraints(chessBoard, canMoveChosenWay, isThereNoObstacle))
-                return;
+                return true;
 
             KingHasMovedChecking(x, y, chessBoard);
 
@@ -136,6 +137,7 @@ public partial class ChessboardForm : Form
 
             GamingProcessUpdate(chessBoard);
         }
+        return false;
     }
 
     private void UpdateRooksPossibleMove(ChessBoard chessBoard)
@@ -158,7 +160,7 @@ public partial class ChessboardForm : Form
         moveParts = new Button[2];
     }
 
-    private static void GamingProcessUpdate(ChessBoard chessBoard)
+    private void GamingProcessUpdate(ChessBoard chessBoard)
     {
         chessBoard.WholeGameChessBoard.Add(chessBoard.Board);
     }
@@ -458,11 +460,6 @@ public partial class ChessboardForm : Form
         return false;
     }
 
-    private string PreviousSquare()
-    {
-        return layerLogic.boardRelatedInfoMove[0].ASquare.Letter + layerLogic.boardRelatedInfoMove[0].ASquare.Number.ToString();
-    }
-
     private void FirstHalfMove(object sender, int x, int y, ChessBoard chessBoard)
     {
         if (chessBoard.Board[x, y].ApieceOccupySquare && layerLogic.gameManager.MoveCompletionCounter == 1)
@@ -488,14 +485,14 @@ public partial class ChessboardForm : Form
 
     private bool FirstConstraints(int x, int y, ChessBoard chessBoard)
     {
-        if (layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK
-            ||
-            layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE)
-        {
-            layerLogic.gameManager.MoveCompletionCounter = 0;
-            return true;
-        }
-        else if (!chessBoard.Board[x, y].ApieceOccupySquare && layerLogic.gameManager.MoveCompletionCounter == 1)
+        //if (layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE
+        //    ||
+        //    layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK)
+        //{
+        //    layerLogic.gameManager.MoveCompletionCounter = 0;
+        //    return true;
+        //}
+        if (!chessBoard.Board[x, y].ApieceOccupySquare && layerLogic.gameManager.MoveCompletionCounter == 1)
         {
             layerLogic.gameManager.MoveCompletionCounter = 0;
             return true;
@@ -513,7 +510,7 @@ public partial class ChessboardForm : Form
         layerLogic.coordinates[layerLogic.gameManager.MoveCompletionCounter - 1] = (x, y);
     }
 
-    private static string SquarePrtessed(object sender)
+    private string SquarePrtessed(object sender)
     {
         return ((Button)sender).Name;
     }
