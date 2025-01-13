@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{E7357176-132F-45C4-9D77-4FA20AEEAFBF}|ChessUIForm\\ChessUIForm.csproj|solutionrelative:chessuiform\\chessboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\specialoccasionsrelated\\specialoccasions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\specialoccasionsrelated\\specialoccasions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\hellpingmethods\\helpingmethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\hellpingmethods\\helpingmethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\piecerelated\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\piecerelated\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FF64542E-112D-4D8E-A156-787FFBDC8682}|BusinessLogic\\BusinessLogic.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\businesslogic\\middlelayerlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FF64542E-112D-4D8E-A156-787FFBDC8682}|BusinessLogic\\BusinessLogic.csproj|solutionrelative:businesslogic\\middlelayerlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\specialoccasionsrelated\\specialoccasions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\specialoccasionsrelated\\specialoccasions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\piecerelated\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|solutionrelative:chesslibrary\\piecerelated\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FC26A791-DE45-40D1-BD61-219DDBA8F944}|ChessLibrary\\ChessLibrary.csproj|c:\\users\\user\\source\\repos\\chessgamedemoapp\\chesslibrary\\rulesrelated\\kingssafety.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Rook.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\PieceRelated\\Rook.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\PieceRelated\\Rook.cs",
@@ -66,19 +66,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "HelpingMethods.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\HellpingMethods\\HelpingMethods.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\HellpingMethods\\HelpingMethods.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\HellpingMethods\\HelpingMethods.cs",
               "RelativeToolTip": "ChessLibrary\\HellpingMethods\\HelpingMethods.cs",
-              "ViewState": "AgIAAMkAAAAAAAAAAAAswM0AAABNAAAAAAAAAA==",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAWwKkAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T10:50:09.507Z"
+              "WhenOpened": "2025-01-12T10:50:09.507Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "MiddleLayerLogic.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\MiddleLayerLogic.cs",
               "RelativeDocumentMoniker": "BusinessLogic\\MiddleLayerLogic.cs",
@@ -86,7 +87,8 @@
               "RelativeToolTip": "BusinessLogic\\MiddleLayerLogic.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T13:56:50.348Z"
+              "WhenOpened": "2025-01-11T13:56:50.348Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -102,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SpecialOccasions.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\SpecialOccasionsRelated\\SpecialOccasions.cs",
               "RelativeDocumentMoniker": "ChessLibrary\\SpecialOccasionsRelated\\SpecialOccasions.cs",
@@ -122,7 +124,8 @@
               "RelativeToolTip": "ChessLibrary\\RulesRelated\\KingsSafety.cs",
               "ViewState": "AgIAANQAAAAAAAAAAAAAwCAAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T11:54:04.723Z"
+              "WhenOpened": "2025-01-03T11:54:04.723Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -132,7 +135,7 @@
               "RelativeDocumentMoniker": "ChessUIForm\\ChessboardForm.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessboardForm.cs",
               "RelativeToolTip": "ChessUIForm\\ChessboardForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAN0AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAWwD0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-27T17:16:01.066Z",
               "EditorCaption": ""

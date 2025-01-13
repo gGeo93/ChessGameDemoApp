@@ -134,8 +134,8 @@ public static class HelpingMethods
     }
     public static void InternalCoordinatesOperation(this Square from, Square to, out (int xFrom, int yFrom) pseudoCoorFrom, out (int xTo, int yTo) pseudoCoorTo)
     {
-        pseudoCoorFrom = (from.Letter + from.Number.ToString()).FromRealToProgrammingCoordinates();
-        pseudoCoorTo = (to.Letter + to.Number.ToString()).FromRealToProgrammingCoordinates();
+        pseudoCoorFrom = (from.Letter + from.Number.ToString()).FromVisualToProgrammingCoordinates();
+        pseudoCoorTo = (to.Letter + to.Number.ToString()).FromVisualToProgrammingCoordinates();
     }
     public static char ColumnConverter(this int y)
     {
@@ -167,7 +167,7 @@ public static class HelpingMethods
             default: return 0;
         }
     }
-    public static (int x, int y) FromRealToProgrammingCoordinates(this String real)
+    public static (int x, int y) FromVisualToProgrammingCoordinates(this String real)
     {
         int y = -1;
         switch (real[0])

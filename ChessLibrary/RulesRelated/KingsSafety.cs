@@ -38,7 +38,7 @@ public class KingsSafety
     private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn, bool checkForPin = false)
     {
         String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
-        (int kx, int ky) = kingSquare.FromRealToProgrammingCoordinates();
+        (int kx, int ky) = kingSquare.FromVisualToProgrammingCoordinates();
         var _piece = chessBoard.Board[kx, ky].Apiece;
         chessBoard.Board[kx, ky].Apiece = null;
         bool canPerformMove = false;
@@ -104,7 +104,7 @@ public class KingsSafety
             }
         }
         String kpos = kingPosition.Letter + kingPosition.Number.ToString();
-        (int kx, int ky) = kpos.FromRealToProgrammingCoordinates();
+        (int kx, int ky) = kpos.FromVisualToProgrammingCoordinates();
         var board = chessBoard.Board;
         kingBoard[1, 1] = false;
         if (kx + 1 <= 7)
@@ -190,7 +190,7 @@ public class KingsSafety
     private bool AttackingPieceCannotBeCaptured(ChessBoard chessBoard, Square attackingPiecePosition, WhoseTurn turn)
     {
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
-        (int ax, int ay) = apos.FromRealToProgrammingCoordinates();
+        (int ax, int ay) = apos.FromVisualToProgrammingCoordinates();
         for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
         {
             for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
@@ -212,9 +212,9 @@ public class KingsSafety
     private bool BetweenAttackingPieceAndKingNopieceCanBlock(ChessBoard chessBoard, Square kingPosition, Square attackingPiecePosition, WhoseTurn turn)
     {
         String kpos = kingPosition.Letter + kingPosition.Number.ToString();
-        (int kx, int ky) = kpos.FromRealToProgrammingCoordinates();
+        (int kx, int ky) = kpos.FromVisualToProgrammingCoordinates();
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
-        (int ax, int ay) = apos.FromRealToProgrammingCoordinates();
+        (int ax, int ay) = apos.FromVisualToProgrammingCoordinates();
 
         var board = chessBoard.Board;
         PieceName pieceName = board[ax, ay].Apiece!.Name;
