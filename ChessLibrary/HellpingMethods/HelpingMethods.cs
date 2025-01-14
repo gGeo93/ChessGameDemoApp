@@ -225,12 +225,12 @@ public static class HelpingMethods
         Square black = new Square();
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece?.Name == PieceName.KING)
+                if (chessBoard.Board[i, j]?.Apiece?.Name == PieceName.KING)
                 {
-                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.WHITE)
-                        white = GamingProcess.Instance.ChessBoard.Board[i, j]?.ASquare;
-                    if (GamingProcess.Instance.ChessBoard.Board[i, j]?.Apiece.Color == PieceInfo.BLACK)
-                        black = GamingProcess.Instance.ChessBoard.Board[i, j]?.ASquare;
+                    if (chessBoard.Board[i, j]?.Apiece.Color == PieceInfo.WHITE)
+                        white = chessBoard.Board[i, j]?.ASquare;
+                    if (chessBoard.Board[i, j]?.Apiece.Color == PieceInfo.BLACK)
+                        black = chessBoard.Board[i, j]?.ASquare;
                 }
         return (white!, black!);
     }

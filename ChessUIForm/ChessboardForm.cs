@@ -65,7 +65,7 @@ public partial class ChessboardForm : Form
         #endregion
     }
 
-    private void MoveInitilization(object sender, out int x, out int y/*, out ChessBoard chessBoard*/)
+    private void MoveInitilization(object sender, out int x, out int y)
     {
         ColorsRender();
 
@@ -77,7 +77,6 @@ public partial class ChessboardForm : Form
 
         CoordinatesStorage(x, y);
 
-        //chessBoard = BackChessBoard();
     }
 
     private bool SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
@@ -132,6 +131,8 @@ public partial class ChessboardForm : Form
             MoveCounterReset();
 
             Square kingPosition = GetKingSquare();
+
+            BoardColorsRefresh();
 
             KingCheckAndPossibleMate(chessBoard, kingPosition);
 
@@ -559,6 +560,8 @@ public partial class ChessboardForm : Form
         String blackKingSquare = kings.blackKing.Letter + kings.blackKing.Number.ToString();
         (int wkx, int wky) = whiteKingSquare.FromVisualToProgrammingCoordinates();
         (int bkx, int bky) = blackKingSquare.FromVisualToProgrammingCoordinates();
+        layerLogic.gameManager.WhiteKingPosition = kings.whiteKing;
+        layerLogic.gameManager.BlackKingPosition = kings.blackKing;
         layerLogic.gameManager.WhiteKingPosition.Color = kings.whiteKing.Color;
         layerLogic.gameManager.BlackKingPosition.Color = kings.blackKing.Color;
         frontBoard[wkx, wky].BackColor = layerLogic.gameManager.WhiteKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
@@ -568,6 +571,27 @@ public partial class ChessboardForm : Form
     {
         this.whoPlaysLabel.ForeColor = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? Color.White : Color.Black;
         this.whoPlaysLabel.Text = layerLogic.gameManager.WhoPlays.ToString();
+    }
+    private void BoardColorsRefresh()
+    {
+        for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
+        {
+            for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
+            {
+                if ((i + j) % 2 == 0)
+                {
+                    chessBoard.Board[i, j].ASquare.Color = SquareColor.WHITE;
+                    frontBoard[i, j].BackColor = Color.White;
+                }
+                else
+                {
+                    chessBoard.Board[i, j].ASquare.Color = SquareColor.BLACK;
+                    frontBoard[i, j].BackColor = Color.DimGray;
+                }
+
+            }
+            
+        }
     }
     private void FrontBoardImagesFill()
     {
