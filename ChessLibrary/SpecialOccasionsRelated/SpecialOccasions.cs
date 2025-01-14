@@ -50,24 +50,25 @@ public static class SpecialOccasions
     }
     public static bool KingCanCastleShort(this ChessBoard chessBoard, WhoseTurn whoPlays)
     {
-        var whoseKingIsThreatendSquare = 
+        var kingsSquares = chessBoard.GetKingsPositions();
+        var whoseKingIsThreatendSquare =
             whoPlays == WhoseTurn.White ?
-            new Square { Color = SquareColor.BLACK, Letter = 'e', Number = 1 } 
+            kingsSquares.whiteKing
             :
-            new Square { Color = SquareColor.WHITE, Letter = 'e', Number = 8 };
+            kingsSquares.blackKing;
 
         if (whoPlays == WhoseTurn.White &&
             (chessBoard.Board[7, 5].ApieceOccupySquare
-            || chessBoard.Board[7, 6].ApieceOccupySquare
+            || chessBoard.Board[7, 6].Apiece?.Name != PieceName.KING
             || chessBoard.Board[7, 7].Apiece?.Name != PieceName.ROOK
-            || chessBoard.Board[7, 7].Apiece?.Color != PieceInfo.WHITE
+            //|| chessBoard.Board[7, 7].Apiece?.Color != PieceInfo.WHITE
             ))
             return false;
         if (whoPlays == WhoseTurn.Black &&
            (chessBoard.Board[0, 5].ApieceOccupySquare
-           || chessBoard.Board[0, 6].ApieceOccupySquare
+           //|| chessBoard.Board[0, 6].ApieceOccupySquare
            || chessBoard.Board[0, 7].Apiece?.Name != PieceName.ROOK
-           || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
+           //|| chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
             return false;
         if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays, false))
@@ -81,15 +82,16 @@ public static class SpecialOccasions
     }
     public static bool KingCanCastleLong(this ChessBoard chessBoard, WhoseTurn whoPlays)
     {
+        var kingsSquares = chessBoard.GetKingsPositions();
         var whoseKingIsThreatendSquare =
-           whoPlays == WhoseTurn.White ?
-           new Square { Color = SquareColor.BLACK, Letter = 'e', Number = 1 }
-           :
-           new Square { Color = SquareColor.WHITE, Letter = 'e', Number = 8 };
+            whoPlays == WhoseTurn.White ?
+            kingsSquares.whiteKing
+            :
+            kingsSquares.blackKing;
 
         if (whoPlays == WhoseTurn.White &&
             (chessBoard.Board[7, 3].ApieceOccupySquare
-            || chessBoard.Board[7, 2].ApieceOccupySquare
+            //|| chessBoard.Board[7, 2].ApieceOccupySquare
             || chessBoard.Board[7, 1].ApieceOccupySquare
             || chessBoard.Board[7, 0].Apiece?.Name != PieceName.ROOK
             || chessBoard.Board[7, 0].Apiece?.Color != PieceInfo.WHITE
@@ -97,7 +99,7 @@ public static class SpecialOccasions
             return false;
         if (whoPlays == WhoseTurn.Black &&
            (chessBoard.Board[0, 3].ApieceOccupySquare
-           || chessBoard.Board[0, 2].ApieceOccupySquare
+           //|| chessBoard.Board[0, 2].ApieceOccupySquare
            || chessBoard.Board[0, 1].ApieceOccupySquare
            || chessBoard.Board[0, 7].Apiece?.Name != PieceName.ROOK
            || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK

@@ -43,7 +43,7 @@ public partial class ChessboardForm : Form
     {
         #region [MoveInitilization]
         int x, y;
-        MoveInitilization(sender, out x, out y/*, out chessBoard*/);
+        MoveInitilization(sender, out x, out y);
         #endregion
 
         #region [Constraints]
@@ -56,8 +56,7 @@ public partial class ChessboardForm : Form
         #endregion
 
         #region [SecondHalfOfTheMove]
-        if (SecondHalfMove(sender, x, y, chessBoard))
-            return;
+        SecondHalfMove(sender, x, y, chessBoard);
         #endregion
 
         #region[LastUpdate]
@@ -99,8 +98,6 @@ public partial class ChessboardForm : Form
             FirstFrontBoardUpdate(sender, x, y);
 
             FrontSquareColorUpdate();
-
-            chessBoard.Board[layerLogic.coordinates[0].x, layerLogic.coordinates[0].y].ApieceOccupySquare = false;
 
             bool canMoveChosenWay = CanMoveChosenWay();
             bool isThereNoObstacle = IsThereNoObstacle(chessBoard);
@@ -294,7 +291,7 @@ public partial class ChessboardForm : Form
             frontBoard[0, 0].Image = null;
             chessBoard.Board[0, 3].Apiece = chessBoard.Board[0, 0].Apiece;
             chessBoard.Board[0, 3].ApieceOccupySquare = true;
-            chessBoard.Board[0, 2].Apiece = chessBoard.Board[0, 4].Apiece;
+            chessBoard.Board[0, 2].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING };
             chessBoard.Board[0, 2].ApieceOccupySquare = true;
             chessBoard.Board[0, 4].Apiece = null;
             chessBoard.Board[0, 4].ApieceOccupySquare = false;
@@ -322,7 +319,7 @@ public partial class ChessboardForm : Form
             frontBoard[7, 0].Image = null;
             chessBoard.Board[7, 3].Apiece = chessBoard.Board[7, 0].Apiece;
             chessBoard.Board[7, 3].ApieceOccupySquare = true;
-            chessBoard.Board[7, 2].Apiece = chessBoard.Board[7, 4].Apiece;
+            chessBoard.Board[7, 2].Apiece = new King { Color = PieceInfo.WHITE, Name = PieceName.KING };
             chessBoard.Board[7, 2].ApieceOccupySquare = true;
             chessBoard.Board[7, 4].Apiece = null;
             chessBoard.Board[7, 4].ApieceOccupySquare = false;
@@ -362,7 +359,7 @@ public partial class ChessboardForm : Form
             frontBoard[0, 7].Image = null;
             chessBoard.Board[0, 5].Apiece = chessBoard.Board[0, 7].Apiece;
             chessBoard.Board[0, 5].ApieceOccupySquare = true;
-            chessBoard.Board[0, 6].Apiece = chessBoard.Board[0, 4].Apiece;
+            chessBoard.Board[0, 6].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING };
             chessBoard.Board[0, 5].ApieceOccupySquare = true;
             chessBoard.Board[0, 4].Apiece = null;
             chessBoard.Board[0, 4].ApieceOccupySquare = false;
@@ -390,7 +387,7 @@ public partial class ChessboardForm : Form
             frontBoard[7, 7].Image = null;
             chessBoard.Board[7, 5].Apiece = chessBoard.Board[7, 7].Apiece;
             chessBoard.Board[7, 5].ApieceOccupySquare = true;
-            chessBoard.Board[7, 6].Apiece = chessBoard.Board[7, 4].Apiece;
+            chessBoard.Board[7, 6].Apiece = new King { Color = PieceInfo.WHITE, Name = PieceName.KING };
             chessBoard.Board[7, 6].ApieceOccupySquare = true;
             chessBoard.Board[7, 4].Apiece = null;
             chessBoard.Board[7, 4].ApieceOccupySquare = false;
