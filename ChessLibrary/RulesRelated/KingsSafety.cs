@@ -46,9 +46,9 @@ public class KingsSafety
         int howManyChecks = 0;
         
         var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;//modification
-        if(checkForPin)
+        if (checkForPin)
             colorToPass = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
-        
+
         for (int x = 0; x < chessBoard.Board.GetLength(0); x++)
         {
             for (int y = 0; y < chessBoard.Board.GetLength(1); y++)

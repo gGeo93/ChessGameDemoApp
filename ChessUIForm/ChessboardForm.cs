@@ -13,6 +13,7 @@ public partial class ChessboardForm : Form
 {
     #region [BusinessLogicLayer]
     MiddleLayerLogic layerLogic;
+    ChessBoard chessBoard;
     int moveCounter;
     #endregion
 
@@ -29,6 +30,7 @@ public partial class ChessboardForm : Form
         frontBoard = new Button[8, 8];
         moveParts = new Button[2]; 
         layerLogic = InstancesContruction<MiddleLayerLogic>();
+        chessBoard = InstancesContruction<ChessBoard>();
         moveCounter = 0;
         layerLogic.gameManager.MoveCompletionCounter = 0;
         ColorsRender();
@@ -41,8 +43,7 @@ public partial class ChessboardForm : Form
     {
         #region [MoveInitilization]
         int x, y;
-        ChessBoard chessBoard;
-        MoveInitilization(sender, out x, out y, out chessBoard);
+        MoveInitilization(sender, out x, out y/*, out chessBoard*/);
         #endregion
 
         #region [Constraints]
@@ -64,7 +65,7 @@ public partial class ChessboardForm : Form
         #endregion
     }
 
-    private void MoveInitilization(object sender, out int x, out int y, out ChessBoard chessBoard)
+    private void MoveInitilization(object sender, out int x, out int y/*, out ChessBoard chessBoard*/)
     {
         ColorsRender();
 
@@ -76,7 +77,7 @@ public partial class ChessboardForm : Form
 
         CoordinatesStorage(x, y);
 
-        chessBoard = BackChessBoard();
+        //chessBoard = BackChessBoard();
     }
 
     private bool SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
@@ -87,8 +88,8 @@ public partial class ChessboardForm : Form
 
             (int xfrom, int yfrom) = previousSquare.FromVisualToProgrammingCoordinates();
 
-            //if (AbsolutePinCase(x, y, chessBoard, xfrom, yfrom))
-            //    return true;
+            if (AbsolutePinCase(x, y, chessBoard, xfrom, yfrom))
+                return true;
 
             ReColoringKingsSquare();
 
@@ -527,7 +528,7 @@ public partial class ChessboardForm : Form
         chessBoard.Board[xfrom, yfrom].Apiece = null;
         chessBoard.Board[xfrom, yfrom].ApieceOccupySquare = false;
 
-        var kingPosition = chessBoard.Board[xto, yto].Apiece?.Name == PieceName.KING ? chessBoard.Board[xto, yto].ASquare : layerLogic.gameManager.WhoPlays == WhoseTurn.Black ? layerLogic.gameManager.WhiteKingPosition : layerLogic.gameManager.BlackKingPosition;
+        var kingPosition = chessBoard.Board[xto, yto].Apiece?.Name == PieceName.KING ? chessBoard.Board[xto, yto].ASquare : layerLogic.gameManager.WhoPlays == WhoseTurn.Black ? layerLogic.gameManager.BlackKingPosition : layerLogic.gameManager.WhiteKingPosition;
 
         if (SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, layerLogic.gameManager.WhoPlays, true))
         {
@@ -539,7 +540,7 @@ public partial class ChessboardForm : Form
             
             return true;
         }
-        else if(chessBoard.Board[xto, yto]?.Apiece.Name != PieceName.KING)
+        else if(chessBoard.Board[xto, yto].Apiece?.Name != PieceName.KING)
         {
             chessBoard.Board[xfrom, yfrom].Apiece = chessBoard.Board[xto, yto].Apiece;
             chessBoard.Board[xfrom, yfrom].ApieceOccupySquare = true;
@@ -553,7 +554,7 @@ public partial class ChessboardForm : Form
     }
     private void ReColoringKingsSquare()
     {
-        var kings = layerLogic.chessBoard.GetKingsPositions();
+        var kings = chessBoard.GetKingsPositions();
         String whiteKingSquare = kings.whiteKing.Letter + kings.whiteKing.Number.ToString();
         String blackKingSquare = kings.blackKing.Letter + kings.blackKing.Number.ToString();
         (int wkx, int wky) = whiteKingSquare.FromVisualToProgrammingCoordinates();
