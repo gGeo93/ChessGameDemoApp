@@ -58,7 +58,7 @@ public static class SpecialOccasions
         
         if (whoPlays == WhoseTurn.White &&
             (chessBoard.Board[7, 5].ApieceOccupySquare
-            //|| chessBoard.Board[7, 6].Apiece?.Name == PieceName.KING
+            //|| chessBoard.Board[7, 6].ApieceOccupySquare
             || chessBoard.Board[7, 7].Apiece?.Name != PieceName.ROOK
             || chessBoard.Board[7, 7].Apiece?.Color != PieceInfo.WHITE
             ))

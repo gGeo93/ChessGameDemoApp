@@ -234,4 +234,17 @@ public static class HelpingMethods
                 }
         return (white!, black!);
     }
+    public static bool CanCastle(this ChessBoard chessBoard, Square from, Square to)
+    {
+        (int xFrom, int yFrom) pseudoCoorFrom;
+        (int xTo, int yTo) pseudoCoorTo;
+        from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
+
+        if (pseudoCoorTo.yTo - pseudoCoorFrom.yFrom == 2 && chessBoard.Board[7, 6].ApieceOccupySquare)
+            return false;
+        if (pseudoCoorTo.yTo - pseudoCoorFrom.yFrom == -2 && chessBoard.Board[7, 2].ApieceOccupySquare)
+            return false;
+        
+        return true;
+    }
 }

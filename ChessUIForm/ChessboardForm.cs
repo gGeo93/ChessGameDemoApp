@@ -85,11 +85,11 @@ public partial class ChessboardForm : Form
             string previousSquare = layerLogic.PreviousSquare();
 
             (int xfrom, int yfrom) = previousSquare.FromVisualToProgrammingCoordinates();
+           
+            ReColoringKingsSquare();
 
             if (AbsolutePinCase(x, y, chessBoard, xfrom, yfrom))
                 return true;
-
-            ReColoringKingsSquare();
 
             CurrentBoardRelatedInfo(x, y, chessBoard);
 
@@ -99,19 +99,19 @@ public partial class ChessboardForm : Form
 
             FrontSquareColorUpdate();
 
+            bool canCastleShort = CanCastleShort(chessBoard);
+            bool canCastleLong = CanCastleLong(chessBoard);
             bool canMoveChosenWay = CanMoveChosenWay();
             bool isThereNoObstacle = IsThereNoObstacle(chessBoard);
             bool canCutEnPass = CanCutEnPass(chessBoard);
-            bool canCastleShort = CanCastleShort(chessBoard);
-            bool canCastleLong = CanCastleLong(chessBoard);
 
+            if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
+                return true;
+            
             if (CastlingShortCase(chessBoard, canCastleShort))
                 return true;
 
             if (CastlingLongCase(chessBoard, canCastleLong))
-                return true;
-
-            if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
                 return true;
 
             if (LastMovementContraints(chessBoard, canMoveChosenWay, isThereNoObstacle))
@@ -411,7 +411,7 @@ public partial class ChessboardForm : Form
     }
 
     private bool CanCastleShort(ChessBoard chessBoard)
-    {
+    { 
         return chessBoard.KingCanCastleShort(layerLogic.gameManager.WhoPlays);
     }
 
