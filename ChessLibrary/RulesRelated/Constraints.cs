@@ -20,14 +20,14 @@ public static class Constraints
             default: return false;
         }
     }
-    public static bool ThereIsNoObstacle(this PieceName pieceName, Square from, Square to, ChessBoard chessBoard, WhoseTurn whoPlays)
+    public static bool ThereIsNoObstacle(this PieceName pieceName, Square from, Square to, BoardRelatedInfo[,] chessBoard, WhoseTurn whoPlays)
     {
         (int xFrom, int yFrom) pseudoCoorFrom;
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
 
-        PieceInfo? pieceColorInit = chessBoard.Board[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece?.Color;
-        PieceInfo? pieceColorFinal = chessBoard.Board[pseudoCoorTo.xTo, pseudoCoorTo.yTo].Apiece?.Color;
+        PieceInfo? pieceColorInit = chessBoard[pseudoCoorFrom.xFrom, pseudoCoorFrom.yFrom].Apiece?.Color;
+        PieceInfo? pieceColorFinal = chessBoard[pseudoCoorTo.xTo, pseudoCoorTo.yTo].Apiece?.Color;
 
         if (pieceColorInit == pieceColorFinal)
             return false;
@@ -58,8 +58,7 @@ public static class Constraints
 
         return chessBoard.HasNoObstacles(whoPlays, pseudoCoorFrom, pseudoCoorTo);
     }
-
-    private static bool HasNoObstacles(this ChessBoard chessBoard, WhoseTurn whoPlays, (int xFrom, int yFrom) pseudoCoorFrom, (int xTo, int yTo) pseudoCoorTo)
+    private static bool HasNoObstacles(this BoardRelatedInfo[,] chessBoard, WhoseTurn whoPlays, (int xFrom, int yFrom) pseudoCoorFrom, (int xTo, int yTo) pseudoCoorTo)
     {
         bool goStraightX = pseudoCoorTo.xTo - pseudoCoorFrom.xFrom > 0;
         bool goStraightY = pseudoCoorTo.yTo - pseudoCoorFrom.yFrom > 0;
@@ -78,7 +77,7 @@ public static class Constraints
             {
                 for (int y = pseudoCoorFrom.yFrom + 1; y < pseudoCoorTo.yTo; y++)
                 {
-                    if (chessBoard.Board[pseudoCoorFrom.xFrom, y].ApieceOccupySquare)
+                    if (chessBoard[pseudoCoorFrom.xFrom, y].ApieceOccupySquare)
                         return false;
                 }
             }
@@ -86,7 +85,7 @@ public static class Constraints
             {
                 for (int y = pseudoCoorFrom.yFrom - 1; y > pseudoCoorTo.yTo; y--)
                 {
-                    if (chessBoard.Board[pseudoCoorFrom.xFrom, y].ApieceOccupySquare)
+                    if (chessBoard[pseudoCoorFrom.xFrom, y].ApieceOccupySquare)
                         return false;
                 }
             }
@@ -97,7 +96,7 @@ public static class Constraints
             {
                 for (int x = pseudoCoorFrom.xFrom + 1; x < pseudoCoorTo.xTo; x++)
                 {
-                    if (chessBoard.Board[x, pseudoCoorFrom.yFrom].ApieceOccupySquare)
+                    if (chessBoard[x, pseudoCoorFrom.yFrom].ApieceOccupySquare)
                         return false;
                 }
             }
@@ -105,7 +104,7 @@ public static class Constraints
             {
                 for (int x = pseudoCoorFrom.xFrom - 1; x > pseudoCoorTo.xTo; x--)
                 {
-                    if (chessBoard.Board[x, pseudoCoorFrom.yFrom].ApieceOccupySquare)
+                    if (chessBoard[x, pseudoCoorFrom.yFrom].ApieceOccupySquare)
                         return false;
                 }
             }
@@ -115,7 +114,7 @@ public static class Constraints
             int y = yfromResult + 1;
             for (int x = xfromResult + 1; x < xtoResult; x++)
             {
-                 if (y < 8 && chessBoard.Board[x, y].ApieceOccupySquare)
+                 if (y < 8 && chessBoard[x, y].ApieceOccupySquare)
                     return false;
                 y++;
             }
@@ -125,7 +124,7 @@ public static class Constraints
             int x = xfromResult + 1;
             for (int y = yfromResult - 1; y > ytoResult; y--)
             {
-                if (x < 8 && chessBoard.Board[x, y].ApieceOccupySquare)
+                if (x < 8 && chessBoard[x, y].ApieceOccupySquare)
                     return false;
                 x++;
             }
@@ -135,7 +134,7 @@ public static class Constraints
             int x = xfromResult - 1;
             for (int y = yfromResult + 1; y < ytoResult; y++)
             {
-                if (x >= 0 && chessBoard.Board[x, y].ApieceOccupySquare)
+                if (x >= 0 && chessBoard[x, y].ApieceOccupySquare)
                     return false;
                 x--;
             }
@@ -145,12 +144,11 @@ public static class Constraints
             int y = yfromResult - 1;
             for (int x = xfromResult - 1; x > xtoResult; x--)
             {
-                if (y >= 0 && chessBoard.Board[x, y].ApieceOccupySquare)
+                if (y >= 0 && chessBoard[x, y].ApieceOccupySquare)
                     return false;
                 y--;
             }
         }
-
         return true;
     }
 }

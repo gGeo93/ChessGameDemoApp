@@ -48,7 +48,7 @@ public static class SpecialOccasions
         }
         return false;
     }
-    public static bool KingCanCastleShort(this ChessBoard chessBoard, WhoseTurn whoPlays)
+    public static bool KingCanCastleShort(this BoardRelatedInfo[,] chessBoard, WhoseTurn whoPlays)
     {
         var whoseKingIsThreatendSquare =
             whoPlays == WhoseTurn.White ?
@@ -57,17 +57,17 @@ public static class SpecialOccasions
             new Square { Color = SquareColor.WHITE, Letter = 'e', Number = 8 };
         
         if (whoPlays == WhoseTurn.White &&
-            (chessBoard.Board[7, 5].ApieceOccupySquare
+            (chessBoard[7, 5].ApieceOccupySquare
             //|| chessBoard.Board[7, 6].ApieceOccupySquare
-            || chessBoard.Board[7, 7].Apiece?.Name != PieceName.ROOK
-            || chessBoard.Board[7, 7].Apiece?.Color != PieceInfo.WHITE
+            || chessBoard[7, 7].Apiece?.Name != PieceName.ROOK
+            || chessBoard[7, 7].Apiece?.Color != PieceInfo.WHITE
             ))
             return false;
         if (whoPlays == WhoseTurn.Black &&
-           (chessBoard.Board[0, 5].ApieceOccupySquare
+           (chessBoard[0, 5].ApieceOccupySquare
            //|| chessBoard.Board[0, 6].ApieceOccupySquare
-           || chessBoard.Board[0, 7].Apiece?.Name != PieceName.ROOK
-           || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
+           || chessBoard[0, 7].Apiece?.Name != PieceName.ROOK
+           || chessBoard[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
             return false;
         if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays, true))
@@ -103,7 +103,7 @@ public static class SpecialOccasions
            || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
             return false;
-        if (SpecialEvents.kingIsChecked.Invoke(chessBoard, whoseKingIsThreatendSquare, whoPlays, true))
+        if (SpecialEvents.kingIsChecked.Invoke(chessBoard.Board, whoseKingIsThreatendSquare, whoPlays, true))
             return false;
         if (whoPlays == WhoseTurn.White && SpecialEvents.BlackKingHasMoved.Invoke())
             return false;

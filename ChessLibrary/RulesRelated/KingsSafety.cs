@@ -34,12 +34,12 @@ public class KingsSafety
             SpecialEvents.kingIsMate -= KingIsMate!;
     }
     private bool _doubleCheck = false;
-    private bool KingIsChecked(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn, bool checkForPin = false)
+    private bool KingIsChecked(BoardRelatedInfo[,] board, Square kingPosition, WhoseTurn turn, bool checkForPin = false)
     {
         String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromVisualToProgrammingCoordinates();
-        var _piece = chessBoard.Board[kx, ky].Apiece;
-        chessBoard.Board[kx, ky].Apiece = null;
+        var _piece = board[kx, ky].Apiece;
+        board[kx, ky].Apiece = null;
         bool canPerformMove = false;
         bool thereAreNoObstacles = false;
         int howManyChecks = 0;
@@ -48,24 +48,24 @@ public class KingsSafety
         if (checkForPin)
             colorToPass = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
 
-        for (int x = 0; x < chessBoard.Board.GetLength(0); x++)
+        for (int x = 0; x < board.GetLength(0); x++)
         {
-            for (int y = 0; y < chessBoard.Board.GetLength(1); y++)
+            for (int y = 0; y < board.GetLength(1); y++)
             {
-                Piece? piece = chessBoard.Board[x, y]?.Apiece;
+                Piece? piece = board[x, y]?.Apiece;
 
                 if (piece is null || (piece.Color == colorToPass))
                     continue;
 
                 PieceName pieceName = piece!.Name;
-                Square pSquare = chessBoard.Board[x, y].ASquare;
-                canPerformMove = pieceName.CanPerfomeThisMove(pSquare, chessBoard.Board[kx, ky].ASquare, turn, chessBoard.Board[kx, ky].Apiece?.Color);
-                thereAreNoObstacles = pieceName.ThereIsNoObstacle(pSquare, chessBoard.Board[kx, ky].ASquare, chessBoard, turn);
+                Square pSquare = board[x, y].ASquare;
+                canPerformMove = pieceName.CanPerfomeThisMove(pSquare, board[kx, ky].ASquare, turn, board[kx, ky].Apiece?.Color);
+                thereAreNoObstacles = pieceName.ThereIsNoObstacle(pSquare, board[kx, ky].ASquare, board, turn);
                 if (canPerformMove && thereAreNoObstacles)
                     howManyChecks++;
             }
         }
-        chessBoard.Board[kx, ky].Apiece = _piece;
+        board[kx, ky].Apiece = _piece;
         switch (howManyChecks)
         {
             case 0: return false;
@@ -74,23 +74,23 @@ public class KingsSafety
             default: return false;
         }
     }
-    private bool KingIsMate(ChessBoard chessBoard, Square threatedKingPosition, Square attackingPiecePosition, bool isChecked, WhoseTurn turn)
+    private bool KingIsMate(BoardRelatedInfo[,] board, Square threatedKingPosition, Square attackingPiecePosition, bool isChecked, WhoseTurn turn)
     {
         if (!isChecked)
             return false;
-        bool kingCanMove = KingMovementIsLegal(chessBoard, threatedKingPosition, turn);
+        bool kingCanMove = KingMovementIsLegal(board, threatedKingPosition, turn);
         if (!kingCanMove && _doubleCheck)
             return true;
         if (kingCanMove)
             return false;
-        if (!AttackingPieceCannotBeCaptured(chessBoard, attackingPiecePosition, turn))
+        if (!AttackingPieceCannotBeCaptured(board, attackingPiecePosition, turn))
             return false;
-        if (!BetweenAttackingPieceAndKingNopieceCanBlock(chessBoard, threatedKingPosition, attackingPiecePosition, turn))
+        if (!BetweenAttackingPieceAndKingNopieceCanBlock(board, threatedKingPosition, attackingPiecePosition, turn))
             return false;
 
         return true;
     }
-    private bool KingMovementIsLegal(ChessBoard chessBoard, Square kingPosition, WhoseTurn turn)
+    private bool KingMovementIsLegal(BoardRelatedInfo[,] chessBoard, Square kingPosition, WhoseTurn turn)
     {
         PieceInfo sameColorAsKing = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
         bool[,] kingBoard = new bool[3, 3];
@@ -104,7 +104,7 @@ public class KingsSafety
         }
         String kpos = kingPosition.Letter + kingPosition.Number.ToString();
         (int kx, int ky) = kpos.FromVisualToProgrammingCoordinates();
-        var board = chessBoard.Board;
+        var board = chessBoard;
         kingBoard[1, 1] = false;
         if (kx + 1 <= 7)
         {
@@ -186,36 +186,36 @@ public class KingsSafety
         return false;
     }
 
-    private bool AttackingPieceCannotBeCaptured(ChessBoard chessBoard, Square attackingPiecePosition, WhoseTurn turn)
+    private bool AttackingPieceCannotBeCaptured(BoardRelatedInfo[,] chessBoard, Square attackingPiecePosition, WhoseTurn turn)
     {
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
         (int ax, int ay) = apos.FromVisualToProgrammingCoordinates();
-        for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
+        for (int i = 0; i < chessBoard.GetLength(0); i++)
         {
-            for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
+            for (int j = 0; j < chessBoard.GetLength(1); j++)
             {
-                if (chessBoard.Board[i, j].Apiece == null
+                if (chessBoard[i, j].Apiece == null
                     ||
-                    chessBoard.Board[i, j].Apiece!.Name == PieceName.KING)
+                    chessBoard[i, j].Apiece!.Name == PieceName.KING)
                     continue;
 
-                PieceName pieceName = chessBoard.Board[i, j].Apiece!.Name;
+                PieceName pieceName = chessBoard[i, j].Apiece!.Name;
 
-                if (pieceName.CanPerfomeThisMove(chessBoard.Board[i, j].ASquare, attackingPiecePosition, turn, chessBoard.Board[i, j].Apiece!.Color))
-                    if (pieceName.ThereIsNoObstacle(chessBoard.Board[i, j].ASquare, attackingPiecePosition, chessBoard, turn))
+                if (pieceName.CanPerfomeThisMove(chessBoard[i, j].ASquare, attackingPiecePosition, turn, chessBoard[i, j].Apiece!.Color))
+                    if (pieceName.ThereIsNoObstacle(chessBoard[i, j].ASquare, attackingPiecePosition, chessBoard, turn))
                         return false;
             }
         }
         return true;
     }
-    private bool BetweenAttackingPieceAndKingNopieceCanBlock(ChessBoard chessBoard, Square kingPosition, Square attackingPiecePosition, WhoseTurn turn)
+    private bool BetweenAttackingPieceAndKingNopieceCanBlock(BoardRelatedInfo[,] chessBoard, Square kingPosition, Square attackingPiecePosition, WhoseTurn turn)
     {
         String kpos = kingPosition.Letter + kingPosition.Number.ToString();
         (int kx, int ky) = kpos.FromVisualToProgrammingCoordinates();
         String apos = attackingPiecePosition.Letter + attackingPiecePosition.Number.ToString();
         (int ax, int ay) = apos.FromVisualToProgrammingCoordinates();
 
-        var board = chessBoard.Board;
+        var board = chessBoard;
         PieceName pieceName = board[ax, ay].Apiece!.Name;
 
         if (pieceName == PieceName.KNIGHT)
@@ -224,9 +224,9 @@ public class KingsSafety
             return true;
         else if (pieceName == PieceName.PAWN)
         {
-            if ((ay + 1 <= 7 && chessBoard.Board[ax + 1, ay + 1].Apiece?.Name == PieceName.KING)
+            if ((ay + 1 <= 7 && chessBoard[ax + 1, ay + 1].Apiece?.Name == PieceName.KING)
                 ||
-                (ay - 1 >= 0 && chessBoard.Board[ax + 1, ay - 1].Apiece?.Name == PieceName.KING))
+                (ay - 1 >= 0 && chessBoard[ax + 1, ay - 1].Apiece?.Name == PieceName.KING))
                 return true;
         }
         else if (pieceName == PieceName.ROOK || pieceName == PieceName.QUEEN || pieceName == PieceName.BISHOP)
@@ -322,7 +322,7 @@ public class KingsSafety
                 for (int x = ax - 1; x > kx; x--)
                 {
 
-                    if (ApieceCanAccessSquare(chessBoard, turn, board, pieceInfo, x, y, ax, ay))
+                    if (ApieceCanAccessSquare(chessBoard , turn, board, pieceInfo, x, y, ax, ay))
                         return false;
                     y--;
                 }
@@ -330,7 +330,7 @@ public class KingsSafety
         }
         return true;
     }
-    private bool ApieceCanAccessSquare(ChessBoard chessBoard, WhoseTurn turn, BoardRelatedInfo[,] board, PieceInfo pieceInfo, int x, int y, int ax, int ay)
+    private bool ApieceCanAccessSquare(BoardRelatedInfo[,] chessBoard, WhoseTurn turn, BoardRelatedInfo[,] board, PieceInfo pieceInfo, int x, int y, int ax, int ay)
     {
         for (int i = 0; i < 8; i++)
         {

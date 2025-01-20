@@ -207,7 +207,7 @@ public static class HelpingMethods
                 var checkingCandidatePiece = board[i, j].Apiece;
                 chessBoard.Board[i, j].Apiece = null;
                 if (checkingCandidatePiece?.Color != pieceColorToAvoid &&
-                    SpecialEvents.kingIsChecked.Invoke(chessBoard, kingPosition, turn, false) == false)
+                    SpecialEvents.kingIsChecked.Invoke(chessBoard.Board, kingPosition, turn, false) == false)
                 {
                     chessBoard.Board[i, j].Apiece = checkingCandidatePiece;
                     chessBoard.Board[i, j].ApieceOccupySquare = checkingCandidateSquare;
@@ -246,5 +246,22 @@ public static class HelpingMethods
             return false;
         
         return true;
+    }
+    public static BoardRelatedInfo[,] Clone2DimArray(this ChessBoard chessBoard)
+    {
+        BoardRelatedInfo[,] copy = new BoardRelatedInfo[chessBoard.Board.GetLength(0), chessBoard.Board.GetLength(1)];
+        for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
+        {
+            for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
+            {
+                copy[i, j] = new BoardRelatedInfo
+                {
+                    Apiece = chessBoard.Board[i, j].Apiece,
+                    ASquare = chessBoard.Board[i, j].ASquare,
+                    ApieceOccupySquare = chessBoard.Board[i, j].ApieceOccupySquare
+                };
+            }
+        }
+        return copy;
     }
 }
