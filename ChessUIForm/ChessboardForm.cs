@@ -59,7 +59,8 @@ public partial class ChessboardForm : Form
         #endregion
 
         #region [SecondHalfOfTheMove]
-        SecondHalfMove(sender, x, y, chessBoard);
+        if (SecondHalfMove(sender, x, y, chessBoard))
+            return;
         #endregion
 
         #region[LastUpdate]
@@ -80,7 +81,7 @@ public partial class ChessboardForm : Form
         CoordinatesStorage(x, y);
     }
 
-    private void SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
+    private bool SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
     {
         if (moveCounter == 2)
         {
@@ -93,7 +94,7 @@ public partial class ChessboardForm : Form
             var copiedBoard = chessBoard.Clone2DimArray();
 
             if (AbsolutePinCase(x, y, copiedBoard, xfrom, yfrom))
-                return;
+                return true;
 
             CurrentBoardRelatedInfo(x, y, chessBoard);
 
@@ -106,16 +107,16 @@ public partial class ChessboardForm : Form
             bool canCutEnPass = CanCutEnPass(chessBoard);
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
-                return;
+                return true;
             
             if (CastlingShortCase(chessBoard, canCastleShort))
-                return;
+                return true;
 
             if (CastlingLongCase(chessBoard, canCastleLong))
-                return;
+                return true;
 
             if (LastMovementContraints(chessBoard, canMoveChosenWay, isThereNoObstacle))
-                return;
+                return true;
             
             FirstFrontBoardUpdate(sender, x, y);//
 
@@ -143,9 +144,9 @@ public partial class ChessboardForm : Form
 
             GamingProcessUpdate(chessBoard);
 
-            return;
+            return false;
         }
-        return;
+        return false;
     }
 
     private void UpdateRooksPossibleMove(ChessBoard chessBoard)
