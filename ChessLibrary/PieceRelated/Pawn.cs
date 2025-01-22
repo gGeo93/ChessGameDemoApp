@@ -14,7 +14,6 @@ public class Pawn : Piece, IMove, IPawn
 
     public Pawn(PieceInfo? pieceinfo)
     {
-        this.IsOnInitialSquare = true;
         this.pieceinfo = pieceinfo;
     }
 

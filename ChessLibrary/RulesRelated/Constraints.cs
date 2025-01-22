@@ -11,7 +11,7 @@ public static class Constraints
     {
         switch (pieceName)
         {
-            case PieceName.PAWN: return new Pawn(pieceInfo).Movement(from, to);
+            case PieceName.PAWN: return PawnInfo(from, to, whoPlays, pieceInfo);
             case PieceName.KNIGHT: return new Knight().Movement(from, to);
             case PieceName.BISHOP: return new Bishop().Movement(from, to);
             case PieceName.ROOK: return new Rook().Movement(from, to);
@@ -19,6 +19,19 @@ public static class Constraints
             case PieceName.KING: return new King().Movement(from, to);
             default: return false;
         }
+    }
+    private static bool PawnInfo(Square from, Square to, WhoseTurn whoPlays, PieceInfo? pieceInfo)
+    {
+        (int xFrom, int yFrom) pseudoCoorFrom;
+        (int xTo, int yTo) pseudoCoorTo;
+        from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
+        
+        Pawn pawn = new Pawn(pieceInfo);
+        if(pseudoCoorFrom.xFrom == 6 && pseudoCoorTo.xTo == 4 && whoPlays == WhoseTurn.White)
+            pawn.IsOnInitialSquare = true;
+        if (pseudoCoorFrom.xFrom == 1 && pseudoCoorTo.xTo == 3 && whoPlays == WhoseTurn.Black)
+            pawn.IsOnInitialSquare = true;
+        return pawn.Movement(from, to);
     }
     public static bool ThereIsNoObstacle(this PieceName pieceName, Square from, Square to, BoardRelatedInfo[,] chessBoard, WhoseTurn whoPlays)
     {
