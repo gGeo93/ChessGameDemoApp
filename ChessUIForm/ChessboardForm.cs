@@ -1,14 +1,11 @@
-﻿using ChessLibrary.BoardRelated;
-using ChessLibrary.SpecialOccasionsRelated;
+﻿using BusinessLogic;
+using ChessLibrary.BoardRelated;
+using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
 using ChessLibrary.RulesRelated;
-using ChessLibrary.EventsRelated;
-using BusinessLogic;
-using System;
-using System.Collections;
-using System.Linq;
+using ChessLibrary.SpecialOccasionsRelated;
 
 namespace ChessUIForm;
 
@@ -72,6 +69,8 @@ public partial class ChessboardForm : Form
     #region [FirstLayerEventMethods]
     private void MoveInitilization(object sender, out int x, out int y)
     {
+        BoardColorsRefresh();
+
         ColorsRender();
 
         HalfMoveCounter();
@@ -84,7 +83,9 @@ public partial class ChessboardForm : Form
     }
     private bool FirstConstraints(int x, int y, ChessBoard chessBoard)
     {
-        if (!chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1)
+        if ((!chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1) 
+            || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK)
+            || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE))
         {
             moveCounter = 0;
             return true;
@@ -150,9 +151,9 @@ public partial class ChessboardForm : Form
             if (LastMovementContraints(chessBoard, canMoveChosenWay, isThereNoObstacle))
                 return true;
             
-            FirstFrontBoardUpdate(sender, x, y);//
+            FirstFrontBoardUpdate(sender, x, y);
 
-            FrontSquareColorUpdate();//
+            FrontSquareColorUpdate();
             
             KingHasMovedChecking(x, y, chessBoard);
 
@@ -186,7 +187,6 @@ public partial class ChessboardForm : Form
         chessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
     }
     #endregion
-
     private void UpdateRooksPossibleMove(ChessBoard chessBoard)
     {
         layerLogic.RooksMovingState = chessBoard.RooksCheck(layerLogic.RooksMovingState);
