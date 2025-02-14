@@ -28,9 +28,9 @@ public class KingsSafety
     }
     ~KingsSafety()
     {
-        if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 1)
+        if (SpecialEvents.kingIsChecked.GetInvocationList().Length > 0)
             SpecialEvents.kingIsChecked -= KingIsChecked;
-        if (SpecialEvents.kingIsMate.GetInvocationList().Length > 1)
+        if (SpecialEvents.kingIsMate.GetInvocationList().Length > 0)
             SpecialEvents.kingIsMate -= KingIsMate!;
     }
     private bool _doubleCheck = false;
@@ -39,14 +39,16 @@ public class KingsSafety
         String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
         (int kx, int ky) = kingSquare.FromVisualToProgrammingCoordinates();
         var _piece = board[kx, ky].Apiece;
-        board[kx, ky].Apiece = null;
         bool canPerformMove = false;
         bool thereAreNoObstacles = false;
         int howManyChecks = 0;
         
-        var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;//modification
+        var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
         if (checkForPin)
+        {
+            board[kx, ky].Apiece = null;
             colorToPass = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
+        }
 
         for (int x = 0; x < board.GetLength(0); x++)
         {
