@@ -289,6 +289,7 @@ public partial class ChessboardForm : Form
             layerLogic.gameManager.ChessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
             SpecialEvents.pawnHasJustMovedTwice = () => (-1, -1);
             moveCounter = 0;
+            LastBackBoardUpdate(x, y);
             return true;
         }
         return false;
@@ -460,7 +461,7 @@ public partial class ChessboardForm : Form
                 Name = layerLogic.boardRelatedInfoMove[0].Apiece!.Name,
                 Color = layerLogic.boardRelatedInfoMove[0].Apiece!.Color
             },
-            ApieceOccupySquare = chessBoard.Board[x,y].ApieceOccupySquare,
+            ApieceOccupySquare = true,
             ASquare = chessBoard.Board[x, y].ASquare
         };
     }
