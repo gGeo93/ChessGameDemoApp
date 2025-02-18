@@ -44,11 +44,9 @@ public class KingsSafety
         int howManyChecks = 0;
         
         var colorToPass = turn == WhoseTurn.White ? PieceInfo.BLACK : PieceInfo.WHITE;
+        board[kx, ky].Apiece = null;
         if (checkForPin)
-        {
-            board[kx, ky].Apiece = null;
             colorToPass = turn == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK;
-        }
 
         for (int x = 0; x < board.GetLength(0); x++)
         {
