@@ -1,12 +1,10 @@
 ﻿using ChessLibrary.BoardRelated;
 using ChessLibrary.EventsRelated;
-using ChessLibrary.GamingProcessRelated;
 using ChessLibrary.HellpingMethods;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ChessLibrary.PieceRelated;
 
-public class Pawn : Piece, IMove, IPawn
+public class Pawn : Piece, IMove
 {
     public bool PawnIntentsToMoveTwice { get; set; }
     public bool IsOnInitialSquare { get; set; }
@@ -54,5 +52,46 @@ public class Pawn : Piece, IMove, IPawn
         }
 
         return false;
+    }
+
+    public static bool PawnThreatensKing(PieceInfo pieceInfo, int kx, int ky, Piece _piece, BoardRelatedInfo[,] chessBoard, Square pawnTo)
+    {
+        (int px, int py) pawnToCoordinates = (pawnTo.Letter + pawnTo.Number.ToString()).FromVisualToProgrammingCoordinates();
+        chessBoard[kx, ky].Apiece = _piece;
+        if (pieceInfo == PieceInfo.WHITE)
+        {
+            if (pawnToCoordinates.px - 1 >= 0 && pawnToCoordinates.py - 1 >= 0 && chessBoard[pawnToCoordinates.px - 1, pawnToCoordinates.py - 1].Apiece?.Name == PieceName.KING)
+            {
+                chessBoard[kx, ky].Apiece = null;
+                return true;
+            }    
+            if (pawnToCoordinates.px - 1 >= 0 && pawnToCoordinates.py + 1 <= 7 && chessBoard[pawnToCoordinates.px - 1, pawnToCoordinates.py + 1].Apiece?.Name == PieceName.KING)
+            {
+                chessBoard[kx, ky].Apiece = null;
+                return true;
+            }
+            chessBoard[kx, ky].Apiece = null;
+            return false;
+        }
+        else if (pieceInfo == PieceInfo.BLACK)
+        {
+            if (pawnToCoordinates.px + 1 <= 7 && pawnToCoordinates.py - 1 >= 0 && chessBoard[pawnToCoordinates.px + 1, pawnToCoordinates.py - 1].Apiece?.Name == PieceName.KING)
+            {
+                chessBoard[kx, ky].Apiece = null;
+                return true;
+            }
+            if (pawnToCoordinates.px + 1 <= 7 && pawnToCoordinates.py + 1 <= 7 && chessBoard[pawnToCoordinates.px + 1, pawnToCoordinates.py + 1].Apiece?.Name == PieceName.KING)
+            {
+                chessBoard[kx, ky].Apiece = null;
+                return true;
+            }
+            chessBoard[kx, ky].Apiece = null;
+            return false;
+        }
+        else
+        {
+            chessBoard[kx, ky].Apiece = null;
+            return false;
+        }
     }
 }

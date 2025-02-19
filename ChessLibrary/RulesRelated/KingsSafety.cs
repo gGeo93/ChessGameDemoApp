@@ -61,7 +61,7 @@ public class KingsSafety
                 Square pSquare = board[x, y].ASquare;
                 canPerformMove = pieceName.CanPerfomeThisMove(pSquare, board[kx, ky].ASquare, turn, board[kx, ky].Apiece?.Color);
                 thereAreNoObstacles = pieceName.ThereIsNoObstacle(pSquare, board[kx, ky].ASquare, board, turn);
-                if (canPerformMove && thereAreNoObstacles)
+                if ((canPerformMove && thereAreNoObstacles) || (pieceName == PieceName.PAWN && Pawn.PawnThreatensKing(piece.Color, kx, ky, _piece, board, pSquare)))
                     howManyChecks++;
             }
         }

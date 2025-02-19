@@ -1,4 +1,5 @@
-﻿using ChessLibrary.GamingProcessRelated;
+﻿using ChessLibrary.BoardRelated;
+using ChessLibrary.GamingProcessRelated;
 
 namespace ChessLibrary.PieceRelated;
 
