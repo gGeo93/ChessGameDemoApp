@@ -13,6 +13,7 @@ public class GamingProcess
     public Square[] Move { get; set; }
     public Square WhiteKingPosition { get; set; }
     public Square BlackKingPosition { get; set; }
+    public KingsSafety kingsSafety { get; set; }
     public GamingProcess()
     {
         Instance = this;
@@ -23,6 +24,6 @@ public class GamingProcess
         MoveCompletionCounter = 0;
         WhiteKingPosition = new Square { Color = PieceRelated.SquareColor.BLACK, Letter = 'e', Number = 1 };
         BlackKingPosition = new Square { Color = PieceRelated.SquareColor.WHITE, Letter = 'e', Number = 8 };
-        KingsSafety kingsSafety = new KingsSafety();
+        kingsSafety = new KingsSafety();
     }
 }
