@@ -58,14 +58,14 @@ public static class SpecialOccasions
         
         if (whoPlays == WhoseTurn.White &&
             (chessBoard[7, 5].ApieceOccupySquare
-            //|| chessBoard.Board[7, 6].ApieceOccupySquare
+            || chessBoard[7, 6].ApieceOccupySquare
             || chessBoard[7, 7].Apiece?.Name != PieceName.ROOK
             || chessBoard[7, 7].Apiece?.Color != PieceInfo.WHITE
             ))
             return false;
         if (whoPlays == WhoseTurn.Black &&
            (chessBoard[0, 5].ApieceOccupySquare
-           //|| chessBoard.Board[0, 6].ApieceOccupySquare
+           || chessBoard[0, 6].ApieceOccupySquare
            || chessBoard[0, 7].Apiece?.Name != PieceName.ROOK
            || chessBoard[0, 7].Apiece?.Color != PieceInfo.BLACK
            ))
@@ -89,7 +89,7 @@ public static class SpecialOccasions
 
         if (whoPlays == WhoseTurn.White &&
             (chessBoard.Board[7, 3].ApieceOccupySquare
-            //|| chessBoard.Board[7, 2].ApieceOccupySquare
+            || chessBoard.Board[7, 2].ApieceOccupySquare
             || chessBoard.Board[7, 1].ApieceOccupySquare
             || chessBoard.Board[7, 0].Apiece?.Name != PieceName.ROOK
             || chessBoard.Board[7, 0].Apiece?.Color != PieceInfo.WHITE
@@ -97,7 +97,7 @@ public static class SpecialOccasions
             return false;
         if (whoPlays == WhoseTurn.Black &&
            (chessBoard.Board[0, 3].ApieceOccupySquare
-           //|| chessBoard.Board[0, 2].ApieceOccupySquare
+           || chessBoard.Board[0, 2].ApieceOccupySquare
            || chessBoard.Board[0, 1].ApieceOccupySquare
            || chessBoard.Board[0, 7].Apiece?.Name != PieceName.ROOK
            || chessBoard.Board[0, 7].Apiece?.Color != PieceInfo.BLACK

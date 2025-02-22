@@ -66,7 +66,7 @@ public partial class ChessboardForm : Form
     }
     #endregion
 
-    #region [FirstLayerEventMethods]
+    #region [EventsMainMethods]
     private void MoveInitilization(object sender, out int x, out int y)
     {
         BoardColorsRefresh();
@@ -187,6 +187,8 @@ public partial class ChessboardForm : Form
         chessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
     }
     #endregion
+    
+    #region [EventsSubMethods]
     private void UpdateRooksPossibleMove(ChessBoard chessBoard)
     {
         layerLogic.RooksMovingState = chessBoard.RooksCheck(layerLogic.RooksMovingState);
@@ -624,4 +626,5 @@ public partial class ChessboardForm : Form
         frontBoard[7, 7] = this.h1;
     }
     private T InstancesContructor<T>() where T : class, new() => new T();
+    #endregion
 }
