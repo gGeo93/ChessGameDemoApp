@@ -22,13 +22,14 @@ public partial class ChessboardForm : Form
     Button[] moveParts;
     Color squareColor;
     #endregion
-
+    string whiteQueenPath = @"C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\PiecesImgs\WhiteQueen(1).png";
+    string blackQueenPath = @"C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\PiecesImgs\BlackQueen(1).png";
     #region [Init]
     public ChessboardForm()
     {
         InitializeComponent();
         frontBoard = new Button[8, 8];
-        moveParts = new Button[2]; 
+        moveParts = new Button[2];
         layerLogic = InstancesContructor<MiddleLayerLogic>();
         chessBoard = InstancesContructor<ChessBoard>();
         moveCounter = 0;
@@ -83,7 +84,7 @@ public partial class ChessboardForm : Form
     }
     private bool FirstConstraints(int x, int y, ChessBoard chessBoard)
     {
-        if ((!chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1) 
+        if ((!chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1)
             || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK)
             || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE))
         {
@@ -121,7 +122,7 @@ public partial class ChessboardForm : Form
             string previousSquare = layerLogic.PreviousSquare();
 
             (int xfrom, int yfrom) = previousSquare.FromVisualToProgrammingCoordinates();
-           
+
             ReColoringKingsSquare();
 
             var copiedBoard = chessBoard.Clone2DimArray();
@@ -138,10 +139,19 @@ public partial class ChessboardForm : Form
             bool canMoveChosenWay = CanMoveChosenWay();
             bool isThereNoObstacle = IsThereNoObstacle(chessBoard);
             bool canCutEnPass = CanCutEnPass(chessBoard);
+            bool isPawnPromoting = IsPawnPromoting(chessBoard, x, y);
+
+            if (isPawnPromoting)
+            {
+                //PromotionOptions(true);
+                //IsFrozenChessboard(true);
+                //return true;
+                throw new NotImplementedException("Pawn's promotion is under construction!");
+            }
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
                 return true;
-            
+
             if (CastlingShortCase(chessBoard, canCastleShort))
                 return true;
 
@@ -150,11 +160,11 @@ public partial class ChessboardForm : Form
 
             if (LastMovementContraints(chessBoard, canMoveChosenWay, isThereNoObstacle))
                 return true;
-            
+
             FirstFrontBoardUpdate(sender, x, y);
 
             FrontSquareColorUpdate();
-            
+
             KingHasMovedChecking(x, y, chessBoard);
 
             SecondFrontBoardUpdate(sender);
@@ -181,13 +191,31 @@ public partial class ChessboardForm : Form
         }
         return false;
     }
+
+    private void PromotionOptions(bool isVisible)
+    {
+        Qpr.Visible = isVisible;
+        Npr.Visible = isVisible;
+        Rpr.Visible = isVisible;
+        Bpr.Visible = isVisible;
+    }
+    private void IsFrozenChessboard(bool isDisabled)
+    {
+        for (int i = 0; i < frontBoard.GetLength(0); i++)
+        {
+            for (int j = 0; j < frontBoard.GetLength(1); j++)
+            {
+                frontBoard[i, j].Enabled = isDisabled;
+            }
+        }
+    }
     private void LastBackBoardUpdate(int x, int y)
     {
         chessBoard.Board[x, y].Apiece = layerLogic.currentBoardRelatedInfo.Apiece;
         chessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
     }
     #endregion
-    
+
     #region [EventsSubMethods]
     private void UpdateRooksPossibleMove(ChessBoard chessBoard)
     {
@@ -214,11 +242,11 @@ public partial class ChessboardForm : Form
         if (SpecialEvents.kingIsChecked.Invoke(chessBoard.Board, kingPosition, layerLogic.gameManager.WhoPlays, false))
         {
             String kingSquare = kingPosition.Letter.ToString() + kingPosition.Number.ToString();
-            
+
             (int kx, int ky) = kingSquare.FromVisualToProgrammingCoordinates();
-            
+
             (int xc, int yc) = chessBoard.ThePieceGivingCheckCoordinates(kingPosition, layerLogic.gameManager.WhoPlays);
-            
+
             frontBoard[kx, ky].BackColor =
                 SpecialEvents.kingIsMate.Invoke(chessBoard.Board, kingPosition, chessBoard.Board[xc, yc].ASquare, true, layerLogic.gameManager.WhoPlays)
                 ? Color.Red : Color.DarkOrange;
@@ -296,6 +324,10 @@ public partial class ChessboardForm : Form
         }
         return false;
     }
+    private bool IsPawnPromoting(ChessBoard chessBoard, int xposition, int yposition)
+        =>
+        (xposition == 0 || xposition == 7) && (chessBoard.Board[xposition, yposition]?.Apiece.Name == PieceName.PAWN);
+
     private bool CastlingLongCase(ChessBoard chessBoard, bool canCastleLong)
     {
         if (canCastleLong && layerLogic.boardRelatedInfoMove[1].Apiece?.Name == PieceName.KING && layerLogic.boardRelatedInfoMove[1].ASquare.Letter == 'c')
@@ -431,7 +463,7 @@ public partial class ChessboardForm : Form
         return chessBoard.KingCanCastleLong(layerLogic.gameManager.WhoPlays);
     }
     private bool CanCastleShort(ChessBoard chessBoard)
-    { 
+    {
         return chessBoard.Board.KingCanCastleShort(layerLogic.gameManager.WhoPlays);
     }
     private bool CanCutEnPass(ChessBoard chessBoard)
@@ -486,7 +518,7 @@ public partial class ChessboardForm : Form
     {
         moveCounter += 1;
     }
-    private bool PieceIsPinned(BoardRelatedInfo[,] copiedBoard,int xfrom, int yfrom, int xto, int yto)
+    private bool PieceIsPinned(BoardRelatedInfo[,] copiedBoard, int xfrom, int yfrom, int xto, int yto)
     {
         copiedBoard[xto, yto].Apiece = copiedBoard[xfrom, yfrom].Apiece;
         copiedBoard[xto, yto].ApieceOccupySquare = true;
@@ -503,19 +535,9 @@ public partial class ChessboardForm : Form
 
             copiedBoard[xto, yto].Apiece = null;
             copiedBoard[xto, yto].ApieceOccupySquare = false;
-            
+
             return true;
         }
-        //else if(copiedBoard[xto, yto].Apiece?.Name != PieceName.KING)
-        //{
-        //    copiedBoard[xfrom, yfrom].Apiece = copiedBoard[xto, yto].Apiece;
-        //    copiedBoard[xfrom, yfrom].ApieceOccupySquare = true;
-
-        //    copiedBoard[xto, yto].Apiece = null;
-        //    copiedBoard[xto, yto].ApieceOccupySquare = false;
-
-        //    return false;
-        //}
         return false;
     }
     private void ReColoringKingsSquare()
@@ -555,7 +577,7 @@ public partial class ChessboardForm : Form
                 }
 
             }
-            
+
         }
     }
     private void FrontBoardImagesFill()
@@ -625,6 +647,7 @@ public partial class ChessboardForm : Form
         frontBoard[7, 6] = this.g1;
         frontBoard[7, 7] = this.h1;
     }
+
     private T InstancesContructor<T>() where T : class, new() => new T();
     #endregion
 }

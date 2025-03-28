@@ -110,6 +110,10 @@
             label15 = new Label();
             label16 = new Label();
             whoPlaysLabel = new Label();
+            Qpr = new Button();
+            Npr = new Button();
+            Rpr = new Button();
+            Bpr = new Button();
             SuspendLayout();
             // 
             // h1
@@ -1147,12 +1151,56 @@
             whoPlaysLabel.Text = "Who Plays";
             whoPlaysLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // Qpr
+            // 
+            Qpr.Location = new Point(173, 115);
+            Qpr.Name = "Qpr";
+            Qpr.Size = new Size(36, 38);
+            Qpr.TabIndex = 81;
+            Qpr.Text = "Q";
+            Qpr.UseVisualStyleBackColor = true;
+            Qpr.Visible = false;
+            // 
+            // Npr
+            // 
+            Npr.Location = new Point(173, 159);
+            Npr.Name = "Npr";
+            Npr.Size = new Size(36, 38);
+            Npr.TabIndex = 82;
+            Npr.Text = "N";
+            Npr.UseVisualStyleBackColor = true;
+            Npr.Visible = false;
+            // 
+            // Rpr
+            // 
+            Rpr.Location = new Point(173, 203);
+            Rpr.Name = "Rpr";
+            Rpr.Size = new Size(36, 38);
+            Rpr.TabIndex = 83;
+            Rpr.Text = "R";
+            Rpr.UseVisualStyleBackColor = true;
+            Rpr.Visible = false;
+            // 
+            // Bpr
+            // 
+            Bpr.Location = new Point(173, 247);
+            Bpr.Name = "Bpr";
+            Bpr.Size = new Size(36, 38);
+            Bpr.TabIndex = 84;
+            Bpr.Text = "B";
+            Bpr.UseVisualStyleBackColor = true;
+            Bpr.Visible = false;
+            // 
             // ChessboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(800, 450);
+            Controls.Add(Bpr);
+            Controls.Add(Rpr);
+            Controls.Add(Npr);
+            Controls.Add(Qpr);
             Controls.Add(whoPlaysLabel);
             Controls.Add(label16);
             Controls.Add(label15);
@@ -1324,5 +1372,9 @@
         private Label label15;
         private Label label16;
         private Label whoPlaysLabel;
+        private Button Qpr;
+        private Button Npr;
+        private Button Rpr;
+        private Button Bpr;
     }
 }
