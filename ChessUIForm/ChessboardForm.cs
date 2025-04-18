@@ -1,4 +1,6 @@
-﻿using BusinessLogic;
+﻿using System;
+using System.Drawing;
+using BusinessLogic;
 using ChessLibrary.BoardRelated;
 using ChessLibrary.EventsRelated;
 using ChessLibrary.GamingProcessRelated;
@@ -22,8 +24,7 @@ public partial class ChessboardForm : Form
     Button[] moveParts;
     Color squareColor;
     #endregion
-    string whiteQueenPath = @"C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\PiecesImgs\WhiteQueen(1).png";
-    string blackQueenPath = @"C:\Users\USER\source\repos\ChessGameDemoApp\ChessUIForm\PiecesImgs\BlackQueen(1).png";
+
     #region [Init]
     public ChessboardForm()
     {
@@ -139,14 +140,12 @@ public partial class ChessboardForm : Form
             bool canMoveChosenWay = CanMoveChosenWay();
             bool isThereNoObstacle = IsThereNoObstacle(chessBoard);
             bool canCutEnPass = CanCutEnPass(chessBoard);
-            bool isPawnPromoting = IsPawnPromoting(chessBoard, x, y);
+            bool isPawnPromoting = IsPawnPromoting(chessBoard, xfrom, yfrom, x, y);
 
             if (isPawnPromoting)
             {
-                //PromotionOptions(true);
-                //IsFrozenChessboard(true);
-                //return true;
-                throw new NotImplementedException("Pawn's promotion is under construction!");
+                PromotionOptions(true);
+                IsFrozenChessboard(true);
             }
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
@@ -191,13 +190,50 @@ public partial class ChessboardForm : Form
         }
         return false;
     }
-
+    private void promotionBtn(object sender, EventArgs e)
+    {
+        if (layerLogic.gameManager.WhoPlays == WhoseTurn.Black)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (chessBoard.Board[0, j].Apiece?.Name == PieceName.PAWN)
+                {
+                    IsFrozenChessboard(false);
+                    frontBoard[0, j].Image = ((Button)sender).Image;
+                    break;
+                }
+            }
+        }
+        else if (layerLogic.gameManager.WhoPlays == WhoseTurn.White)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (chessBoard.Board[7, j].Apiece?.Name == PieceName.PAWN)
+                {
+                    IsFrozenChessboard(false);
+                    frontBoard[7, j].Image = ((Button)sender).Image;
+                    break;
+                }
+            }
+        }
+        PromotionOptions(false);
+    }
     private void PromotionOptions(bool isVisible)
     {
-        Qpr.Visible = isVisible;
-        Npr.Visible = isVisible;
-        Rpr.Visible = isVisible;
-        Bpr.Visible = isVisible;
+        if (wQpr.Visible != isVisible)
+        {
+            wQpr.Visible = isVisible;
+            wNpr.Visible = isVisible;
+            wRpr.Visible = isVisible;
+            wBpr.Visible = isVisible;
+        }
+        if (bQpr.Visible != isVisible)
+        {
+            bQpr.Visible = isVisible;
+            bNpr.Visible = isVisible;
+            bRpr.Visible = isVisible;
+            bBpr.Visible = isVisible;
+        }
     }
     private void IsFrozenChessboard(bool isDisabled)
     {
@@ -205,7 +241,7 @@ public partial class ChessboardForm : Form
         {
             for (int j = 0; j < frontBoard.GetLength(1); j++)
             {
-                frontBoard[i, j].Enabled = isDisabled;
+                frontBoard[i, j].Enabled = !isDisabled;
             }
         }
     }
@@ -324,9 +360,9 @@ public partial class ChessboardForm : Form
         }
         return false;
     }
-    private bool IsPawnPromoting(ChessBoard chessBoard, int xposition, int yposition)
+    private bool IsPawnPromoting(ChessBoard chessBoard, int xfromPosition, int yfromPosition, int xtoPosition, int ytoPosition)
         =>
-        (xposition == 0 || xposition == 7) && (chessBoard.Board[xposition, yposition]?.Apiece.Name == PieceName.PAWN);
+        (xtoPosition == 0 || xtoPosition == 7) && (chessBoard.Board[xfromPosition, yfromPosition]?.Apiece?.Name == PieceName.PAWN);
 
     private bool CastlingLongCase(ChessBoard chessBoard, bool canCastleLong)
     {
@@ -647,6 +683,8 @@ public partial class ChessboardForm : Form
         frontBoard[7, 6] = this.g1;
         frontBoard[7, 7] = this.h1;
     }
+
+    
 
     private T InstancesContructor<T>() where T : class, new() => new T();
     #endregion

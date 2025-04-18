@@ -110,10 +110,14 @@
             label15 = new Label();
             label16 = new Label();
             whoPlaysLabel = new Label();
-            Qpr = new Button();
-            Npr = new Button();
-            Rpr = new Button();
-            Bpr = new Button();
+            wQpr = new Button();
+            wNpr = new Button();
+            wRpr = new Button();
+            wBpr = new Button();
+            bBpr = new Button();
+            bRpr = new Button();
+            bNpr = new Button();
+            bQpr = new Button();
             SuspendLayout();
             // 
             // h1
@@ -1144,52 +1148,100 @@
             // 
             whoPlaysLabel.Anchor = AnchorStyles.Left;
             whoPlaysLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic);
-            whoPlaysLabel.Location = new Point(591, 159);
+            whoPlaysLabel.Location = new Point(657, 159);
             whoPlaysLabel.Name = "whoPlaysLabel";
             whoPlaysLabel.Size = new Size(66, 55);
             whoPlaysLabel.TabIndex = 80;
             whoPlaysLabel.Text = "Who Plays";
             whoPlaysLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // Qpr
+            // wQpr
             // 
-            Qpr.Location = new Point(173, 115);
-            Qpr.Name = "Qpr";
-            Qpr.Size = new Size(36, 38);
-            Qpr.TabIndex = 81;
-            Qpr.Text = "Q";
-            Qpr.UseVisualStyleBackColor = true;
-            Qpr.Visible = false;
+            wQpr.Image = Properties.Resources.WhiteQueen__1_;
+            wQpr.Location = new Point(173, 115);
+            wQpr.Name = "wQpr";
+            wQpr.Size = new Size(36, 38);
+            wQpr.TabIndex = 81;
+            wQpr.UseVisualStyleBackColor = true;
+            wQpr.Visible = false;
+            wQpr.Click += promotionBtn;
             // 
-            // Npr
+            // wNpr
             // 
-            Npr.Location = new Point(173, 159);
-            Npr.Name = "Npr";
-            Npr.Size = new Size(36, 38);
-            Npr.TabIndex = 82;
-            Npr.Text = "N";
-            Npr.UseVisualStyleBackColor = true;
-            Npr.Visible = false;
+            wNpr.Image = Properties.Resources.WhiteKnight__1_;
+            wNpr.Location = new Point(173, 159);
+            wNpr.Name = "wNpr";
+            wNpr.Size = new Size(36, 38);
+            wNpr.TabIndex = 82;
+            wNpr.UseVisualStyleBackColor = true;
+            wNpr.Visible = false;
+            wNpr.Click += promotionBtn;
             // 
-            // Rpr
+            // wRpr
             // 
-            Rpr.Location = new Point(173, 203);
-            Rpr.Name = "Rpr";
-            Rpr.Size = new Size(36, 38);
-            Rpr.TabIndex = 83;
-            Rpr.Text = "R";
-            Rpr.UseVisualStyleBackColor = true;
-            Rpr.Visible = false;
+            wRpr.Image = Properties.Resources.WhiteRook__1___1_;
+            wRpr.Location = new Point(173, 203);
+            wRpr.Name = "wRpr";
+            wRpr.Size = new Size(36, 38);
+            wRpr.TabIndex = 83;
+            wRpr.UseVisualStyleBackColor = true;
+            wRpr.Visible = false;
+            wRpr.Click += promotionBtn;
             // 
-            // Bpr
+            // wBpr
             // 
-            Bpr.Location = new Point(173, 247);
-            Bpr.Name = "Bpr";
-            Bpr.Size = new Size(36, 38);
-            Bpr.TabIndex = 84;
-            Bpr.Text = "B";
-            Bpr.UseVisualStyleBackColor = true;
-            Bpr.Visible = false;
+            wBpr.Image = Properties.Resources.WhiteBishop__1_;
+            wBpr.Location = new Point(173, 247);
+            wBpr.Name = "wBpr";
+            wBpr.Size = new Size(36, 38);
+            wBpr.TabIndex = 84;
+            wBpr.UseVisualStyleBackColor = true;
+            wBpr.Visible = false;
+            wBpr.Click += promotionBtn;
+            // 
+            // bBpr
+            // 
+            bBpr.Image = Properties.Resources.BlackBishop__1_;
+            bBpr.Location = new Point(581, 247);
+            bBpr.Name = "bBpr";
+            bBpr.Size = new Size(36, 38);
+            bBpr.TabIndex = 88;
+            bBpr.UseVisualStyleBackColor = true;
+            bBpr.Visible = false;
+            bBpr.Click += promotionBtn;
+            // 
+            // bRpr
+            // 
+            bRpr.Image = Properties.Resources.BlackRook__1___1_;
+            bRpr.Location = new Point(581, 203);
+            bRpr.Name = "bRpr";
+            bRpr.Size = new Size(36, 38);
+            bRpr.TabIndex = 87;
+            bRpr.UseVisualStyleBackColor = true;
+            bRpr.Visible = false;
+            bRpr.Click += promotionBtn;
+            // 
+            // bNpr
+            // 
+            bNpr.Image = Properties.Resources.BlackKnight__1_;
+            bNpr.Location = new Point(581, 159);
+            bNpr.Name = "bNpr";
+            bNpr.Size = new Size(36, 38);
+            bNpr.TabIndex = 86;
+            bNpr.UseVisualStyleBackColor = true;
+            bNpr.Visible = false;
+            bNpr.Click += promotionBtn;
+            // 
+            // bQpr
+            // 
+            bQpr.Image = Properties.Resources.BlackQueen__1_;
+            bQpr.Location = new Point(581, 115);
+            bQpr.Name = "bQpr";
+            bQpr.Size = new Size(36, 38);
+            bQpr.TabIndex = 85;
+            bQpr.UseVisualStyleBackColor = true;
+            bQpr.Visible = false;
+            bQpr.Click += promotionBtn;
             // 
             // ChessboardForm
             // 
@@ -1197,10 +1249,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(800, 450);
-            Controls.Add(Bpr);
-            Controls.Add(Rpr);
-            Controls.Add(Npr);
-            Controls.Add(Qpr);
+            Controls.Add(bBpr);
+            Controls.Add(bRpr);
+            Controls.Add(bNpr);
+            Controls.Add(bQpr);
+            Controls.Add(wBpr);
+            Controls.Add(wRpr);
+            Controls.Add(wNpr);
+            Controls.Add(wQpr);
             Controls.Add(whoPlaysLabel);
             Controls.Add(label16);
             Controls.Add(label15);
@@ -1372,9 +1428,13 @@
         private Label label15;
         private Label label16;
         private Label whoPlaysLabel;
-        private Button Qpr;
-        private Button Npr;
-        private Button Rpr;
-        private Button Bpr;
+        private Button wQpr;
+        private Button wNpr;
+        private Button wRpr;
+        private Button wBpr;
+        private Button bBpr;
+        private Button bRpr;
+        private Button bNpr;
+        private Button bQpr;
     }
 }

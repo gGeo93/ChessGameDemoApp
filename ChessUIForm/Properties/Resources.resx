@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="WhiteQueen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\WhiteQueen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhiteBishop (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\WhiteBishop (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhiteRook (1) (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\WhiteRook (1) (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhiteKnight (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\WhiteKnight (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackQueen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\BlackQueen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackKnight (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\BlackKnight (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackRook (1) (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\BlackRook (1) (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackBishop (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\PiecesImgs\BlackBishop (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
