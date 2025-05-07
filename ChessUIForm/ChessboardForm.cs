@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Linq;
 using BusinessLogic;
 using ChessLibrary.BoardRelated;
 using ChessLibrary.EventsRelated;
@@ -17,12 +17,15 @@ public partial class ChessboardForm : Form
     MiddleLayerLogic layerLogic;
     ChessBoard chessBoard;
     int moveCounter;
+    int xp;
+    int yp;
     #endregion
 
     #region [UIFields]
     Button[,] frontBoard;
     Button[] moveParts;
     Color squareColor;
+    private Func<int, int ,Button> OnPawnPromotion;
     #endregion
 
     #region [Init]
@@ -31,6 +34,8 @@ public partial class ChessboardForm : Form
         InitializeComponent();
         frontBoard = new Button[8, 8];
         moveParts = new Button[2];
+        xp = -1;
+        yp = -1;
         layerLogic = InstancesContructor<MiddleLayerLogic>();
         chessBoard = InstancesContructor<ChessBoard>();
         moveCounter = 0;
@@ -47,6 +52,13 @@ public partial class ChessboardForm : Form
         int x, y;
         MoveInitilization(sender, out x, out y);
         #endregion
+        
+        if (OnPawnPromotion is not null)
+        {
+            sender = OnPawnPromotion.Invoke(x, y);
+            OnPawnPromotion = null!;
+            moveCounter = 2;
+        }
 
         #region [Constraints]
         if (FirstConstraints(x, y, chessBoard))
@@ -146,6 +158,7 @@ public partial class ChessboardForm : Form
             {
                 PromotionOptions(true);
                 IsFrozenChessboard(true);
+                OnPawnPromotion += (x, y) => { xp = x; yp = y; return ((Button)sender); };        
             }
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
@@ -194,45 +207,92 @@ public partial class ChessboardForm : Form
     {
         if (layerLogic.gameManager.WhoPlays == WhoseTurn.Black)
         {
+            layerLogic.gameManager.WhoPlays = WhoseTurn.White;
             for (int j = 0; j < 8; j++)
             {
                 if (chessBoard.Board[0, j].Apiece?.Name == PieceName.PAWN)
                 {
                     IsFrozenChessboard(false);
                     frontBoard[0, j].Image = ((Button)sender).Image;
+                    layerLogic.currentBoardRelatedInfo.Apiece = PromotesTo(sender);
+                    LastBackBoardUpdate(0, j);
+                    Square kingPosition = GetKingSquare();
+                    BoardColorsRefresh();
+                    KingCheckAndPossibleMate(chessBoard, kingPosition);
+                    moveCounter = 0;
+                    OnPawnPromotion = null;
+                    layerLogic.gameManager.WhoPlays = WhoseTurn.Black;
                     break;
                 }
             }
         }
         else if (layerLogic.gameManager.WhoPlays == WhoseTurn.White)
         {
+            layerLogic.gameManager.WhoPlays = WhoseTurn.Black;
             for (int j = 0; j < 8; j++)
             {
                 if (chessBoard.Board[7, j].Apiece?.Name == PieceName.PAWN)
                 {
                     IsFrozenChessboard(false);
                     frontBoard[7, j].Image = ((Button)sender).Image;
+                    layerLogic.currentBoardRelatedInfo.Apiece = PromotesTo(sender);
+                    LastBackBoardUpdate(7, j);
+                    moveCounter = 2;
+                    Square kingPosition = GetKingSquare();
+                    BoardColorsRefresh();
+                    KingCheckAndPossibleMate(chessBoard, kingPosition);
+                    moveCounter = 0;
+                    OnPawnPromotion = null;
+                    layerLogic.gameManager.WhoPlays = WhoseTurn.White;
                     break;
                 }
             }
         }
         PromotionOptions(false);
     }
+
+    private Piece? PromotesTo(object sender)
+    {
+        if (layerLogic.gameManager.WhoPlays == WhoseTurn.White)
+        {
+            switch (((Button)sender).Name)
+            {
+                case "wQpr": return new Piece { Color = PieceInfo.WHITE, Name = PieceName.QUEEN };
+                case "wNpr": return new Piece { Color = PieceInfo.WHITE, Name = PieceName.KNIGHT };
+                case "wRpr": return new Piece { Color = PieceInfo.WHITE, Name = PieceName.ROOK };
+                case "wBpr": return new Piece { Color = PieceInfo.WHITE, Name = PieceName.BISHOP };
+                default: return null;
+            }
+        }
+        else if (layerLogic.gameManager.WhoPlays == WhoseTurn.Black)
+        {
+            switch (((Button)sender).Name)
+            {
+                case "bQpr": return new Piece { Color = PieceInfo.BLACK, Name = PieceName.QUEEN };
+                case "bNpr": return new Piece { Color = PieceInfo.BLACK, Name = PieceName.KNIGHT };
+                case "bRpr": return new Piece { Color = PieceInfo.BLACK, Name = PieceName.ROOK };
+                case "bBpr": return new Piece { Color = PieceInfo.BLACK, Name = PieceName.BISHOP };
+                default: return null;
+            }
+        }
+        return null;
+    }
+
     private void PromotionOptions(bool isVisible)
     {
-        if (wQpr.Visible != isVisible)
+        if(layerLogic.gameManager.WhoPlays == WhoseTurn.White)
         {
-            wQpr.Visible = isVisible;
-            wNpr.Visible = isVisible;
-            wRpr.Visible = isVisible;
-            wBpr.Visible = isVisible;
+            wQpr.Visible = !wQpr.Visible;
+            wNpr.Visible = !wNpr.Visible;
+            wRpr.Visible = !wRpr.Visible;
+            wBpr.Visible = !wBpr.Visible;
         }
-        if (bQpr.Visible != isVisible)
+        if (layerLogic.gameManager.WhoPlays == WhoseTurn.Black)
         {
-            bQpr.Visible = isVisible;
-            bNpr.Visible = isVisible;
-            bRpr.Visible = isVisible;
-            bBpr.Visible = isVisible;
+            bQpr.Visible = !bQpr.Visible;
+            bNpr.Visible = !bNpr.Visible;
+            bRpr.Visible = !bRpr.Visible;
+            bBpr.Visible = !bBpr.Visible;
         }
     }
     private void IsFrozenChessboard(bool isDisabled)
@@ -683,9 +743,6 @@ public partial class ChessboardForm : Form
         frontBoard[7, 6] = this.g1;
         frontBoard[7, 7] = this.h1;
     }
-
-    
-
     private T InstancesContructor<T>() where T : class, new() => new T();
     #endregion
 }
