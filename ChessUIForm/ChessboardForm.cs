@@ -8,6 +8,7 @@ using ChessLibrary.HellpingMethods;
 using ChessLibrary.PieceRelated;
 using ChessLibrary.RulesRelated;
 using ChessLibrary.SpecialOccasionsRelated;
+using ChessUIForm.FrontLib;
 
 namespace ChessUIForm;
 
@@ -15,33 +16,35 @@ public partial class ChessboardForm : Form
 {
     #region [BusinessLogicLayer]
     MiddleLayerLogic layerLogic;
-    ChessBoard chessBoard;
-    int moveCounter;
-    int xp;
-    int yp;
     #endregion
 
     #region [UIFields]
-    Button[,] frontBoard;
-    Button[] moveParts;
-    Color squareColor;
-    private Func<int, int ,Button> OnPawnPromotion;
+    FrontLogic frontLogic;
     #endregion
 
     #region [Init]
     public ChessboardForm()
     {
         InitializeComponent();
-        frontBoard = new Button[8, 8];
-        moveParts = new Button[2];
-        xp = -1;
-        yp = -1;
-        layerLogic = InstancesContructor<MiddleLayerLogic>();
-        chessBoard = InstancesContructor<ChessBoard>();
-        moveCounter = 0;
-        layerLogic.gameManager.MoveCompletionCounter = 0;
+        InitializeUI();
+        InitializeBack();
         ColorsRender();
         FrontBoardImagesFill();
+    }
+    private void InitializeBack()
+    {
+        layerLogic = InstancesContructor<MiddleLayerLogic>();
+        layerLogic.chessBoard = new ChessBoard();
+        layerLogic.moveCounter = 0;
+        layerLogic.gameManager.MoveCompletionCounter = 0;
+        layerLogic.xpromotion = -1;
+        layerLogic.ypromotion = -1;
+    }
+    private void InitializeUI()
+    {
+        frontLogic = InstancesContructor<FrontLogic>();
+        frontLogic.frontBoard = new Button[8, 8];
+        frontLogic.moveParts = new Button[2];
     }
     #endregion
 
@@ -52,25 +55,18 @@ public partial class ChessboardForm : Form
         int x, y;
         MoveInitilization(sender, out x, out y);
         #endregion
-        
-        if (OnPawnPromotion is not null)
-        {
-            sender = OnPawnPromotion.Invoke(x, y);
-            OnPawnPromotion = null!;
-            moveCounter = 2;
-        }
 
         #region [Constraints]
-        if (FirstConstraints(x, y, chessBoard))
+        if (FirstConstraints(x, y, layerLogic.chessBoard))
             return;
         #endregion
 
         #region [FirstHalfOfTheMove]
-        FirstHalfMove(sender, x, y, chessBoard);
+        FirstHalfMove(sender, x, y, layerLogic.chessBoard);
         #endregion
 
         #region [SecondHalfOfTheMove]
-        if (SecondHalfMove(sender, x, y, chessBoard))
+        if (SecondHalfMove(sender, x, y, layerLogic.chessBoard))
             return;
         #endregion
 
@@ -94,21 +90,23 @@ public partial class ChessboardForm : Form
         (x, y) = square.FromVisualToProgrammingCoordinates();
 
         CoordinatesStorage(x, y);
+
+        PromotionScenario(sender, x, y);
     }
     private bool FirstConstraints(int x, int y, ChessBoard chessBoard)
     {
-        if ((!chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1)
-            || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK)
-            || (moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE))
+        if ((!chessBoard.Board[x, y].ApieceOccupySquare && layerLogic.moveCounter == 1)
+            || (layerLogic.moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.White && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.BLACK)
+            || (layerLogic.moveCounter == 1 && layerLogic.gameManager.WhoPlays == WhoseTurn.Black && chessBoard.Board[x, y].Apiece?.Color == PieceInfo.WHITE))
         {
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
     }
     private void FirstHalfMove(object sender, int x, int y, ChessBoard chessBoard)
     {
-        if (chessBoard.Board[x, y].ApieceOccupySquare && moveCounter == 1)
+        if (chessBoard.Board[x, y].ApieceOccupySquare && layerLogic.moveCounter == 1)
         {
             layerLogic.currentBoardRelatedInfo = new BoardRelatedInfo()
             {
@@ -121,16 +119,16 @@ public partial class ChessboardForm : Form
                 ASquare = chessBoard.Board[x, y].ASquare,
             };
             layerLogic.boardRelatedInfoMove[0] = layerLogic.currentBoardRelatedInfo;
-            if (moveParts[1] != null)
-                frontBoard[x, y].Image = null;
-            moveParts[0] = ((Button)sender);
-            squareColor = moveParts[0].BackColor;
-            moveParts[0].BackColor = Color.Brown;
+            if (frontLogic.moveParts[1] != null)
+                frontLogic.frontBoard[x, y].Image = null;
+            frontLogic.moveParts[0] = ((Button)sender);
+            frontLogic.squareColor = frontLogic.moveParts[0].BackColor;
+            frontLogic.moveParts[0].BackColor = Color.Brown;
         }
     }
     private bool SecondHalfMove(object sender, int x, int y, ChessBoard chessBoard)
     {
-        if (moveCounter == 2)
+        if (layerLogic.moveCounter == 2)
         {
             string previousSquare = layerLogic.PreviousSquare();
 
@@ -158,7 +156,7 @@ public partial class ChessboardForm : Form
             {
                 PromotionOptions(true);
                 IsFrozenChessboard(true);
-                OnPawnPromotion += (x, y) => { xp = x; yp = y; return ((Button)sender); };        
+                frontLogic.OnPawnPromotion += (x, y) => { layerLogic.xpromotion = x; layerLogic.ypromotion = y; return ((Button)sender); };        
             }
 
             if (EnPassentCase(sender, x, y, chessBoard, canCutEnPass))
@@ -210,17 +208,17 @@ public partial class ChessboardForm : Form
             layerLogic.gameManager.WhoPlays = WhoseTurn.White;
             for (int j = 0; j < 8; j++)
             {
-                if (chessBoard.Board[0, j].Apiece?.Name == PieceName.PAWN)
+                if (layerLogic.chessBoard.Board[0, j].Apiece?.Name == PieceName.PAWN)
                 {
                     IsFrozenChessboard(false);
-                    frontBoard[0, j].Image = ((Button)sender).Image;
+                    frontLogic.frontBoard[0, j].Image = ((Button)sender).Image;
                     layerLogic.currentBoardRelatedInfo.Apiece = PromotesTo(sender);
                     LastBackBoardUpdate(0, j);
                     Square kingPosition = GetKingSquare();
                     BoardColorsRefresh();
-                    KingCheckAndPossibleMate(chessBoard, kingPosition);
-                    moveCounter = 0;
-                    OnPawnPromotion = null;
+                    KingCheckAndPossibleMate(layerLogic.chessBoard, kingPosition);
+                    layerLogic.moveCounter = 0;
+                    frontLogic.OnPawnPromotion = null;
                     layerLogic.gameManager.WhoPlays = WhoseTurn.Black;
                     break;
                 }
@@ -231,24 +229,34 @@ public partial class ChessboardForm : Form
             layerLogic.gameManager.WhoPlays = WhoseTurn.Black;
             for (int j = 0; j < 8; j++)
             {
-                if (chessBoard.Board[7, j].Apiece?.Name == PieceName.PAWN)
+                if (layerLogic.chessBoard.Board[7, j].Apiece?.Name == PieceName.PAWN)
                 {
                     IsFrozenChessboard(false);
-                    frontBoard[7, j].Image = ((Button)sender).Image;
+                    frontLogic.frontBoard[7, j].Image = ((Button)sender).Image;
                     layerLogic.currentBoardRelatedInfo.Apiece = PromotesTo(sender);
                     LastBackBoardUpdate(7, j);
-                    moveCounter = 2;
+                    layerLogic.moveCounter = 2;
                     Square kingPosition = GetKingSquare();
                     BoardColorsRefresh();
-                    KingCheckAndPossibleMate(chessBoard, kingPosition);
-                    moveCounter = 0;
-                    OnPawnPromotion = null;
+                    KingCheckAndPossibleMate(layerLogic.chessBoard, kingPosition);
+                    layerLogic.moveCounter = 0;
+                    frontLogic.OnPawnPromotion = null;
                     layerLogic.gameManager.WhoPlays = WhoseTurn.White;
                     break;
                 }
             }
         }
         PromotionOptions(false);
+    }
+    private object PromotionScenario(object sender, int x, int y)
+    {
+        if (frontLogic.OnPawnPromotion is not null)
+        {
+            sender = frontLogic.OnPawnPromotion.Invoke(x, y);
+            frontLogic.OnPawnPromotion = null!;
+            layerLogic.moveCounter = 2;
+        }
+        return sender;
     }
 
     private Piece? PromotesTo(object sender)
@@ -297,18 +305,18 @@ public partial class ChessboardForm : Form
     }
     private void IsFrozenChessboard(bool isDisabled)
     {
-        for (int i = 0; i < frontBoard.GetLength(0); i++)
+        for (int i = 0; i < frontLogic.frontBoard.GetLength(0); i++)
         {
-            for (int j = 0; j < frontBoard.GetLength(1); j++)
+            for (int j = 0; j < frontLogic.frontBoard.GetLength(1); j++)
             {
-                frontBoard[i, j].Enabled = !isDisabled;
+                frontLogic.frontBoard[i, j].Enabled = !isDisabled;
             }
         }
     }
     private void LastBackBoardUpdate(int x, int y)
     {
-        chessBoard.Board[x, y].Apiece = layerLogic.currentBoardRelatedInfo.Apiece;
-        chessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
+        layerLogic.chessBoard.Board[x, y].Apiece = layerLogic.currentBoardRelatedInfo.Apiece;
+        layerLogic.chessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
     }
     #endregion
 
@@ -323,7 +331,7 @@ public partial class ChessboardForm : Form
 
         ColorsRender();
 
-        moveParts = new Button[2];
+        frontLogic.moveParts = new Button[2];
     }
     private void GamingProcessUpdate(ChessBoard chessBoard)
     {
@@ -343,7 +351,7 @@ public partial class ChessboardForm : Form
 
             (int xc, int yc) = chessBoard.ThePieceGivingCheckCoordinates(kingPosition, layerLogic.gameManager.WhoPlays);
 
-            frontBoard[kx, ky].BackColor =
+            frontLogic.frontBoard[kx, ky].BackColor =
                 SpecialEvents.kingIsMate.Invoke(chessBoard.Board, kingPosition, chessBoard.Board[xc, yc].ASquare, true, layerLogic.gameManager.WhoPlays)
                 ? Color.Red : Color.DarkOrange;
         }
@@ -354,11 +362,11 @@ public partial class ChessboardForm : Form
     }
     private void MoveCounterReset()
     {
-        moveCounter = 0;
+        layerLogic.moveCounter = 0;
     }
     private void ClearPreiviousPressedSquare()
     {
-        moveParts[0].Image = null;
+        frontLogic.moveParts[0].Image = null;
     }
     private void BackBoardUpdate(int x, int y, ChessBoard chessBoard)
     {
@@ -370,7 +378,7 @@ public partial class ChessboardForm : Form
     }
     private void SecondFrontBoardUpdate(object sender)
     {
-        ((Button)sender).Image = moveParts[0].Image;
+        ((Button)sender).Image = frontLogic.moveParts[0].Image;
     }
     private void KingHasMovedChecking(int x, int y, ChessBoard chessBoard)
     {
@@ -385,8 +393,8 @@ public partial class ChessboardForm : Form
         {
             chessBoard.Board[layerLogic.coordinates[0].x, layerLogic.coordinates[0].y].ApieceOccupySquare = true;
             chessBoard.Board[layerLogic.coordinates[0].x, layerLogic.coordinates[0].y].Apiece = layerLogic.boardRelatedInfoMove[0].Apiece;
-            moveCounter = 0;
-            moveParts = new Button[2];
+            layerLogic.moveCounter = 0;
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
@@ -398,23 +406,23 @@ public partial class ChessboardForm : Form
     {
         if (canCutEnPass)
         {
-            ((Button)sender).Image = moveParts[0].Image;
+            ((Button)sender).Image = frontLogic.moveParts[0].Image;
             chessBoard.Board[x, y].ApieceOccupySquare = true;
             chessBoard.Board[layerLogic.coordinates[0].x, layerLogic.coordinates[0].y].ApieceOccupySquare = false;
             chessBoard.Board[layerLogic.coordinates[0].x, layerLogic.coordinates[0].y].Apiece = null;
-            moveParts[0].Image = null;
-            frontBoard[layerLogic.gameManager.WhoPlays == WhoseTurn.White ? x + 1 : x - 1, y].Image = null;
-            moveCounter = 0;
+            frontLogic.moveParts[0].Image = null;
+            frontLogic.frontBoard[layerLogic.gameManager.WhoPlays == WhoseTurn.White ? x + 1 : x - 1, y].Image = null;
+            layerLogic.moveCounter = 0;
             layerLogic.gameManager.WhoPlays = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
-            moveParts = new Button[2];
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
             layerLogic.gameManager.ChessBoard.Board[x, y].Apiece = layerLogic.currentBoardRelatedInfo.Apiece;
             layerLogic.gameManager.ChessBoard.Board[x, y].ASquare = layerLogic.currentBoardRelatedInfo.ASquare;
             SpecialEvents.pawnHasJustMovedTwice = () => (-1, -1);
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             LastBackBoardUpdate(x, y);
             return true;
         }
@@ -439,10 +447,10 @@ public partial class ChessboardForm : Form
     {
         if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8 && layerLogic.RooksMovingState[0])
         {
-            frontBoard[0, 2].Image = frontBoard[0, 4].Image;
-            frontBoard[0, 4].Image = null;
-            frontBoard[0, 3].Image = frontBoard[0, 0].Image;
-            frontBoard[0, 0].Image = null;
+            frontLogic.frontBoard[0, 2].Image = frontLogic.frontBoard[0, 4].Image;
+            frontLogic.frontBoard[0, 4].Image = null;
+            frontLogic.frontBoard[0, 3].Image = frontLogic.frontBoard[0, 0].Image;
+            frontLogic.frontBoard[0, 0].Image = null;
             chessBoard.Board[0, 3].Apiece = chessBoard.Board[0, 0].Apiece;
             chessBoard.Board[0, 3].ApieceOccupySquare = true;
             chessBoard.Board[0, 2].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING };
@@ -453,11 +461,11 @@ public partial class ChessboardForm : Form
             chessBoard.Board[0, 0].ApieceOccupySquare = false;
             layerLogic.gameManager.WhoPlays = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
-            moveParts = new Button[2];
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
@@ -466,10 +474,10 @@ public partial class ChessboardForm : Form
     {
         if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1 && layerLogic.RooksMovingState[2])
         {
-            frontBoard[7, 2].Image = frontBoard[7, 4].Image;
-            frontBoard[7, 4].Image = null;
-            frontBoard[7, 3].Image = frontBoard[7, 0].Image;
-            frontBoard[7, 0].Image = null;
+            frontLogic.frontBoard[7, 2].Image = frontLogic.frontBoard[7, 4].Image;
+            frontLogic.frontBoard[7, 4].Image = null;
+            frontLogic.frontBoard[7, 3].Image = frontLogic.frontBoard[7, 0].Image;
+            frontLogic.frontBoard[7, 0].Image = null;
             chessBoard.Board[7, 3].Apiece = chessBoard.Board[7, 0].Apiece;
             chessBoard.Board[7, 3].ApieceOccupySquare = true;
             chessBoard.Board[7, 2].Apiece = new King { Color = PieceInfo.WHITE, Name = PieceName.KING };
@@ -480,11 +488,11 @@ public partial class ChessboardForm : Form
             chessBoard.Board[7, 0].ApieceOccupySquare = false;
             layerLogic.gameManager.WhoPlays = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
-            moveParts = new Button[2];
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
@@ -504,10 +512,10 @@ public partial class ChessboardForm : Form
     {
         if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 8 && layerLogic.RooksMovingState[1])
         {
-            frontBoard[0, 6].Image = frontBoard[0, 4].Image;
-            frontBoard[0, 4].Image = null;
-            frontBoard[0, 5].Image = frontBoard[0, 7].Image;
-            frontBoard[0, 7].Image = null;
+            frontLogic.frontBoard[0, 6].Image = frontLogic.frontBoard[0, 4].Image;
+            frontLogic.frontBoard[0, 4].Image = null;
+            frontLogic.frontBoard[0, 5].Image = frontLogic.frontBoard[0, 7].Image;
+            frontLogic.frontBoard[0, 7].Image = null;
             chessBoard.Board[0, 5].Apiece = chessBoard.Board[0, 7].Apiece;
             chessBoard.Board[0, 5].ApieceOccupySquare = true;
             chessBoard.Board[0, 6].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING };
@@ -518,11 +526,11 @@ public partial class ChessboardForm : Form
             chessBoard.Board[0, 7].ApieceOccupySquare = false;
             layerLogic.gameManager.WhoPlays = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
-            moveParts = new Button[2];
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
@@ -531,10 +539,10 @@ public partial class ChessboardForm : Form
     {
         if (layerLogic.boardRelatedInfoMove[1].ASquare.Number == 1 && layerLogic.RooksMovingState[3])
         {
-            frontBoard[7, 6].Image = frontBoard[7, 4].Image;
-            frontBoard[7, 4].Image = null;
-            frontBoard[7, 5].Image = frontBoard[7, 7].Image;
-            frontBoard[7, 7].Image = null;
+            frontLogic.frontBoard[7, 6].Image = frontLogic.frontBoard[7, 4].Image;
+            frontLogic.frontBoard[7, 4].Image = null;
+            frontLogic.frontBoard[7, 5].Image = frontLogic.frontBoard[7, 7].Image;
+            frontLogic.frontBoard[7, 7].Image = null;
             chessBoard.Board[7, 5].Apiece = chessBoard.Board[7, 7].Apiece;
             chessBoard.Board[7, 5].ApieceOccupySquare = true;
             chessBoard.Board[7, 6].Apiece = new King { Color = PieceInfo.WHITE, Name = PieceName.KING };
@@ -545,11 +553,11 @@ public partial class ChessboardForm : Form
             chessBoard.Board[7, 7].ApieceOccupySquare = false;
             layerLogic.gameManager.WhoPlays = layerLogic.gameManager.WhoPlays == WhoseTurn.White ? WhoseTurn.Black : WhoseTurn.White;
             ColorsRender();
-            moveParts = new Button[2];
+            frontLogic.moveParts = new Button[2];
             layerLogic.boardRelatedInfoMove = new BoardRelatedInfo[2];
             layerLogic.gameManager.Move = new Square[2];
             layerLogic.coordinates = new (int x, int y)[2];
-            moveCounter = 0;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
@@ -576,11 +584,11 @@ public partial class ChessboardForm : Form
     }
     private void FrontSquareColorUpdate()
     {
-        moveParts[0].BackColor = squareColor;
+        frontLogic.moveParts[0].BackColor = frontLogic.squareColor;
     }
     private void FirstFrontBoardUpdate(object sender, int x, int y)
     {
-        frontBoard[x, y] = ((Button)sender);
+        frontLogic. frontBoard[x, y] = ((Button)sender);
     }
     private void CurrentBoardRelatedInfo(int x, int y, ChessBoard chessBoard)
     {
@@ -599,20 +607,20 @@ public partial class ChessboardForm : Form
     {
         if (PieceIsPinned(copiedBoard, xfrom, yfrom, x, y))
         {
-            frontBoard[xfrom, yfrom].BackColor = copiedBoard[xfrom, yfrom].ASquare.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
-            moveCounter = 0;
+            frontLogic.frontBoard[xfrom, yfrom].BackColor = copiedBoard[xfrom, yfrom].ASquare.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
+            layerLogic.moveCounter = 0;
             return true;
         }
         return false;
     }
     private void CoordinatesStorage(int x, int y)
     {
-        layerLogic.coordinates[moveCounter - 1] = (x, y);
+        layerLogic.coordinates[layerLogic.moveCounter - 1] = (x, y);
     }
     private string SquarePressed(object sender) => ((Button)sender).Name;
     private void HalfMoveCounter()
     {
-        moveCounter += 1;
+        layerLogic.moveCounter += 1;
     }
     private bool PieceIsPinned(BoardRelatedInfo[,] copiedBoard, int xfrom, int yfrom, int xto, int yto)
     {
@@ -638,7 +646,7 @@ public partial class ChessboardForm : Form
     }
     private void ReColoringKingsSquare()
     {
-        var kings = chessBoard.GetKingsPositions();
+        var kings = layerLogic.chessBoard.GetKingsPositions();
         String whiteKingSquare = kings.whiteKing.Letter + kings.whiteKing.Number.ToString();
         String blackKingSquare = kings.blackKing.Letter + kings.blackKing.Number.ToString();
         (int wkx, int wky) = whiteKingSquare.FromVisualToProgrammingCoordinates();
@@ -647,8 +655,8 @@ public partial class ChessboardForm : Form
         layerLogic.gameManager.BlackKingPosition = kings.blackKing;
         layerLogic.gameManager.WhiteKingPosition.Color = kings.whiteKing.Color;
         layerLogic.gameManager.BlackKingPosition.Color = kings.blackKing.Color;
-        frontBoard[wkx, wky].BackColor = layerLogic.gameManager.WhiteKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
-        frontBoard[bkx, bky].BackColor = layerLogic.gameManager.BlackKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
+        frontLogic.frontBoard[wkx, wky].BackColor = layerLogic.gameManager.WhiteKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
+        frontLogic.frontBoard[bkx, bky].BackColor = layerLogic.gameManager.BlackKingPosition.Color == SquareColor.WHITE ? Color.White : Color.DimGray;
     }
     private void ColorsRender()
     {
@@ -657,19 +665,19 @@ public partial class ChessboardForm : Form
     }
     private void BoardColorsRefresh()
     {
-        for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
+        for (int i = 0; i < layerLogic.chessBoard.Board.GetLength(0); i++)
         {
-            for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
+            for (int j = 0; j < layerLogic.chessBoard.Board.GetLength(1); j++)
             {
                 if ((i + j) % 2 == 0)
                 {
-                    chessBoard.Board[i, j].ASquare.Color = SquareColor.WHITE;
-                    frontBoard[i, j].BackColor = Color.White;
+                    layerLogic.chessBoard.Board[i, j].ASquare.Color = SquareColor.WHITE;
+                    frontLogic.frontBoard[i, j].BackColor = Color.White;
                 }
                 else
                 {
-                    chessBoard.Board[i, j].ASquare.Color = SquareColor.BLACK;
-                    frontBoard[i, j].BackColor = Color.DimGray;
+                    layerLogic.chessBoard.Board[i, j].ASquare.Color = SquareColor.BLACK;
+                    frontLogic.frontBoard[i, j].BackColor = Color.DimGray;
                 }
 
             }
@@ -678,70 +686,70 @@ public partial class ChessboardForm : Form
     }
     private void FrontBoardImagesFill()
     {
-        frontBoard[0, 0] = this.a8;
-        frontBoard[0, 1] = this.b8;
-        frontBoard[0, 2] = this.c8;
-        frontBoard[0, 3] = this.d8;
-        frontBoard[0, 4] = this.e8;
-        frontBoard[0, 5] = this.f8;
-        frontBoard[0, 6] = this.g8;
-        frontBoard[0, 7] = this.h8;
-        frontBoard[1, 0] = this.a7;
-        frontBoard[1, 1] = this.b7;
-        frontBoard[1, 2] = this.c7;
-        frontBoard[1, 3] = this.d7;
-        frontBoard[1, 4] = this.e7;
-        frontBoard[1, 5] = this.f7;
-        frontBoard[1, 6] = this.g7;
-        frontBoard[1, 7] = this.h7;
-        frontBoard[2, 0] = this.a6;
-        frontBoard[2, 1] = this.b6;
-        frontBoard[2, 2] = this.c6;
-        frontBoard[2, 3] = this.d6;
-        frontBoard[2, 4] = this.e6;
-        frontBoard[2, 5] = this.f6;
-        frontBoard[2, 6] = this.g6;
-        frontBoard[2, 7] = this.h6;
-        frontBoard[3, 0] = this.a5;
-        frontBoard[3, 1] = this.b5;
-        frontBoard[3, 2] = this.c5;
-        frontBoard[3, 3] = this.d5;
-        frontBoard[3, 4] = this.e5;
-        frontBoard[3, 5] = this.f5;
-        frontBoard[3, 6] = this.g5;
-        frontBoard[3, 7] = this.h5;
-        frontBoard[4, 0] = this.a4;
-        frontBoard[4, 1] = this.b4;
-        frontBoard[4, 2] = this.c4;
-        frontBoard[4, 3] = this.d4;
-        frontBoard[4, 4] = this.e4;
-        frontBoard[4, 5] = this.f4;
-        frontBoard[4, 6] = this.g4;
-        frontBoard[4, 7] = this.h4;
-        frontBoard[5, 0] = this.a3;
-        frontBoard[5, 1] = this.b3;
-        frontBoard[5, 2] = this.c3;
-        frontBoard[5, 3] = this.d3;
-        frontBoard[5, 4] = this.e3;
-        frontBoard[5, 5] = this.f3;
-        frontBoard[5, 6] = this.g3;
-        frontBoard[5, 7] = this.h3;
-        frontBoard[6, 0] = this.a2;
-        frontBoard[6, 1] = this.b2;
-        frontBoard[6, 2] = this.c2;
-        frontBoard[6, 3] = this.d2;
-        frontBoard[6, 4] = this.e2;
-        frontBoard[6, 5] = this.f2;
-        frontBoard[6, 6] = this.g2;
-        frontBoard[6, 7] = this.h2;
-        frontBoard[7, 0] = this.a1;
-        frontBoard[7, 1] = this.b1;
-        frontBoard[7, 2] = this.c1;
-        frontBoard[7, 3] = this.d1;
-        frontBoard[7, 4] = this.e1;
-        frontBoard[7, 5] = this.f1;
-        frontBoard[7, 6] = this.g1;
-        frontBoard[7, 7] = this.h1;
+        frontLogic.frontBoard[0, 0] = this.a8;
+        frontLogic.frontBoard[0, 1] = this.b8;
+        frontLogic.frontBoard[0, 2] = this.c8;
+        frontLogic.frontBoard[0, 3] = this.d8;
+        frontLogic.frontBoard[0, 4] = this.e8;
+        frontLogic.frontBoard[0, 5] = this.f8;
+        frontLogic.frontBoard[0, 6] = this.g8;
+        frontLogic.frontBoard[0, 7] = this.h8;
+        frontLogic.frontBoard[1, 0] = this.a7;
+        frontLogic.frontBoard[1, 1] = this.b7;
+        frontLogic.frontBoard[1, 2] = this.c7;
+        frontLogic.frontBoard[1, 3] = this.d7;
+        frontLogic.frontBoard[1, 4] = this.e7;
+        frontLogic.frontBoard[1, 5] = this.f7;
+        frontLogic.frontBoard[1, 6] = this.g7;
+        frontLogic.frontBoard[1, 7] = this.h7;
+        frontLogic.frontBoard[2, 0] = this.a6;
+        frontLogic.frontBoard[2, 1] = this.b6;
+        frontLogic.frontBoard[2, 2] = this.c6;
+        frontLogic.frontBoard[2, 3] = this.d6;
+        frontLogic.frontBoard[2, 4] = this.e6;
+        frontLogic.frontBoard[2, 5] = this.f6;
+        frontLogic.frontBoard[2, 6] = this.g6;
+        frontLogic.frontBoard[2, 7] = this.h6;
+        frontLogic.frontBoard[3, 0] = this.a5;
+        frontLogic.frontBoard[3, 1] = this.b5;
+        frontLogic.frontBoard[3, 2] = this.c5;
+        frontLogic.frontBoard[3, 3] = this.d5;
+        frontLogic.frontBoard[3, 4] = this.e5;
+        frontLogic.frontBoard[3, 5] = this.f5;
+        frontLogic.frontBoard[3, 6] = this.g5;
+        frontLogic.frontBoard[3, 7] = this.h5;
+        frontLogic.frontBoard[4, 0] = this.a4;
+        frontLogic.frontBoard[4, 1] = this.b4;
+        frontLogic.frontBoard[4, 2] = this.c4;
+        frontLogic.frontBoard[4, 3] = this.d4;
+        frontLogic.frontBoard[4, 4] = this.e4;
+        frontLogic.frontBoard[4, 5] = this.f4;
+        frontLogic.frontBoard[4, 6] = this.g4;
+        frontLogic.frontBoard[4, 7] = this.h4;
+        frontLogic.frontBoard[5, 0] = this.a3;
+        frontLogic.frontBoard[5, 1] = this.b3;
+        frontLogic.frontBoard[5, 2] = this.c3;
+        frontLogic.frontBoard[5, 3] = this.d3;
+        frontLogic.frontBoard[5, 4] = this.e3;
+        frontLogic.frontBoard[5, 5] = this.f3;
+        frontLogic.frontBoard[5, 6] = this.g3;
+        frontLogic.frontBoard[5, 7] = this.h3;
+        frontLogic.frontBoard[6, 0] = this.a2;
+        frontLogic.frontBoard[6, 1] = this.b2;
+        frontLogic.frontBoard[6, 2] = this.c2;
+        frontLogic.frontBoard[6, 3] = this.d2;
+        frontLogic.frontBoard[6, 4] = this.e2;
+        frontLogic.frontBoard[6, 5] = this.f2;
+        frontLogic.frontBoard[6, 6] = this.g2;
+        frontLogic.frontBoard[6, 7] = this.h2;
+        frontLogic.frontBoard[7, 0] = this.a1;
+        frontLogic.frontBoard[7, 1] = this.b1;
+        frontLogic.frontBoard[7, 2] = this.c1;
+        frontLogic.frontBoard[7, 3] = this.d1;
+        frontLogic.frontBoard[7, 4] = this.e1;
+        frontLogic.frontBoard[7, 5] = this.f1;
+        frontLogic.frontBoard[7, 6] = this.g1;
+        frontLogic.frontBoard[7, 7] = this.h1;
     }
     private T InstancesContructor<T>() where T : class, new() => new T();
     #endregion

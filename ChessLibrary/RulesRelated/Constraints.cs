@@ -26,7 +26,14 @@ public static class Constraints
         (int xTo, int yTo) pseudoCoorTo;
         from.InternalCoordinatesOperation(to, out pseudoCoorFrom, out pseudoCoorTo);
         
+        if(
+            (whoPlays == WhoseTurn.White && pseudoCoorTo.xTo >= pseudoCoorFrom.xFrom)
+            ||
+            whoPlays == WhoseTurn.Black && pseudoCoorTo.xTo <= pseudoCoorFrom.xFrom)
+            return false;
+        
         Pawn pawn = new Pawn(whoPlays == WhoseTurn.White ? PieceInfo.WHITE : PieceInfo.BLACK);
+        
         if(pseudoCoorFrom.xFrom == 6 && pseudoCoorTo.xTo == 4 && whoPlays == WhoseTurn.White)
             pawn.IsOnInitialSquare = true;
         if (pseudoCoorFrom.xFrom == 1 && pseudoCoorTo.xTo == 3 && whoPlays == WhoseTurn.Black)

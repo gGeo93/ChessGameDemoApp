@@ -12,6 +12,9 @@ public class MiddleLayerLogic
     public ChessBoard chessBoard { get; set; }
     public bool[] RooksMovingState { get; set; }
     public (int x, int y)[] coordinates { get; set; }
+    public int moveCounter { get; set; }
+    public int xpromotion { get; set; }
+    public int ypromotion { get; set; }
     public MiddleLayerLogic()
     {
         gameManager = new GamingProcess();
