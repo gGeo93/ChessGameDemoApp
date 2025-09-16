@@ -10,3 +10,15 @@ C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\refint
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.pdb
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ref\ChessLibrary.dll
 C:\Users\USER\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.sourcelink.json
+E:\source\repos\ChessGameDemoApp\ChessLibrary\bin\Debug\net8.0\ChessLibrary.deps.json
+E:\source\repos\ChessGameDemoApp\ChessLibrary\bin\Debug\net8.0\ChessLibrary.dll
+E:\source\repos\ChessGameDemoApp\ChessLibrary\bin\Debug\net8.0\ChessLibrary.pdb
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.GeneratedMSBuildEditorConfig.editorconfig
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.AssemblyInfoInputs.cache
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.AssemblyInfo.cs
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.csproj.CoreCompileInputs.cache
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.sourcelink.json
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.dll
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\refint\ChessLibrary.dll
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ChessLibrary.pdb
+E:\source\repos\ChessGameDemoApp\ChessLibrary\obj\Debug\net8.0\ref\ChessLibrary.dll

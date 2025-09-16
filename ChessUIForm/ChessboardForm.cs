@@ -518,7 +518,7 @@ public partial class ChessboardForm : Form
             frontLogic.frontBoard[0, 7].Image = null;
             chessBoard.Board[0, 5].Apiece = chessBoard.Board[0, 7].Apiece;
             chessBoard.Board[0, 5].ApieceOccupySquare = true;
-            chessBoard.Board[0, 6].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING };
+            chessBoard.Board[0, 6].Apiece = new King { Color = PieceInfo.BLACK, Name = PieceName.KING, IsStillOnBoard = true};
             chessBoard.Board[0, 5].ApieceOccupySquare = true;
             chessBoard.Board[0, 4].Apiece = null;
             chessBoard.Board[0, 4].ApieceOccupySquare = false;

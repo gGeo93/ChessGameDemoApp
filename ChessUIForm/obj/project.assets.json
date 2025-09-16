@@ -52,11 +52,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessUIForm.csproj",
+      "projectUniqueName": "E:\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessUIForm.csproj",
       "projectName": "ChessUIForm",
-      "projectPath": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessUIForm.csproj",
+      "projectPath": "E:\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\ChessUIForm.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\obj\\",
+      "outputPath": "E:\\source\\repos\\ChessGameDemoApp\\ChessUIForm\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -71,18 +71,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\BusinessLogic.csproj"
+            "E:\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\BusinessLogic.csproj": {
+              "projectPath": "E:\\source\\repos\\ChessGameDemoApp\\BusinessLogic\\BusinessLogic.csproj"
             },
-            "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\ChessLibrary.csproj": {
-              "projectPath": "C:\\Users\\USER\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\ChessLibrary.csproj"
+            "E:\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\ChessLibrary.csproj": {
+              "projectPath": "E:\\source\\repos\\ChessGameDemoApp\\ChessLibrary\\ChessLibrary.csproj"
             }
           }
         }
@@ -95,8 +94,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      }
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -112,12 +112,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.100-rc.1.24452.12, 9.0.100-rc.1.24452.12]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -126,7 +120,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.1.24452.12/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
